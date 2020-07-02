@@ -1,0 +1,1 @@
+export const baseUrl = 'https://graffito.pt/directus/public/jc20/items'

@@ -3,6 +3,7 @@ import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 import { Offline, Online } from 'react-detect-offline'
 import Dexie from 'dexie'
 import Header from './components/Header';
+import Home from './views/Home'
 import Main from './views/Main'
 import About from './views/About'
 import './tailwind.generated.css';
@@ -19,6 +20,9 @@ function App() {
               <Main db={new Dexie('JC20')} />
             </Online>
             <Offline>Ops, parece que está offline</Offline>
+          </Route>
+          <Route path="/home">
+            <Home />
           </Route>
           <Route path="/about">
             <About />

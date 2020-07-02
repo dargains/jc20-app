@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import {
-  useLocation
-} from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import Axios from 'axios';
+import { baseUrl } from '../api'
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -9,6 +9,7 @@ function useQuery() {
 
 const Main = ({ db }) => {
   const [name, setName] = useState('')
+  const [corretores, setCorretores] = useState([])
   const qs = useQuery().get('c')
 
   useEffect(
@@ -28,6 +29,8 @@ const Main = ({ db }) => {
         // log any errors
         console.log(e.stack || e)
       })
+
+      Axios(`${baseUrl}/corretores`).then(response => { console.log(response.data.data); setCorretores(response.data.data) })
 
       // close the database connection if form is unmounted or the
       // database connection changes
@@ -51,6 +54,9 @@ const Main = ({ db }) => {
       <p>Nome do corretor</p>
       <input type="text" onChange={handleSetName} value={name} />
       <button onClick={handleClick}>click</button>
+      <ul>
+        {corretores.map(item => <li key={item.nome}>{item.nome} da {item.empresa}</li>)}
+      </ul>
     </div>
   )
 }
