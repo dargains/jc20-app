@@ -7,9 +7,8 @@ function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-const Home = ({ db }) => {
+const Home = () => {
   const [user, setUser] = useState({ name: '', email: '' })
-  const [refererId, setRefererId] = useState(undefined)
   const [title, setTitle] = useState('')
   const [subtitle, setSubtitle] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
@@ -22,38 +21,21 @@ const Home = ({ db }) => {
   }
   const submit = async () => {
     setErrorMessage('')
-    const agentName = await db.appData.get('refererId')
-    if (agentName) console.log(agentName)
-    Axios.post(`${baseUrl}/clients`, { ...user, agent_id: refererId.value }).then(response => {
+    const agentId = qs
+    Axios.post(`${baseUrl}/clients`, { ...user, agent_id: agentId }).then(response => {
       history.push('/about')
     }).catch(error => {
       setErrorMessage(error.response.data.error.message)
     })
   }
+
   useEffect(() => {
-    if (!db) return;
-    db.transaction('rw', db.appData, async () => {
-      // get the first and last name from the data
-      const refererId = await db.appData.get('refererId')
-      if (!refererId) await db.appData.add({ id: 'refererId', value: qs || '' })
-      else if (!refererId.value && qs) await db.appData.put({ id: 'refererId', value: qs })
-      const newRefererId = await db.appData.get('refererId')
-      setRefererId(newRefererId)
-
-    }).catch(e => {
-      // log any errors
-      console.log(e.stack || e)
-    })
-
     Axios(`${baseUrl}/home`).then(response => {
       const content = response.data.data[0];
       setTitle(content.title)
       setSubtitle(content.subtitle)
     })
-
-    // close the database connection if form is unmounted or the database connection changes
-    return () => db.close()
-  }, [db, qs])
+  }, [])
   return (
     <div>
       <h1>{title}</h1>
