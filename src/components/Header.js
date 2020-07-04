@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'
 
 const Header = () => {
   return (
-    <div>
+    <header className="container mx-auto py-4">
       <p className="text-xl">header</p>
-      <Link to="/">main</Link>
-      <Link to="/home">home</Link>
-    </div>
+      <Link className="mx-2 text-blue-400" to="/">main</Link>
+      <Link className="mx-2 text-blue-400" to="/home">home</Link>
+    </header>
   )
 }
 
