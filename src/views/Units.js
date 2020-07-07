@@ -1,13 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
 import { baseUrl } from '../api'
+import db from '../db'
 
 const Units = () => {
   const [units, setUnits] = useState([])
   useEffect(() => {
-    Axios(`${baseUrl}/units`).then(response => {
-      setUnits(response.data.data)
-    })
+    if (!db) return;
+    if (navigator.onLine) {
+      console.log('is online. fetching...')
+      Axios(`${baseUrl}/units`).then(response => {
+        const onlineUnits = response.data.data
+        setUnits(onlineUnits)
+        onlineUnits.forEach(unit => {
+          db.table('units').put({ ...unit })
+        })
+      })
+
+    } else {
+      db.table('units').toArray().then(dbUnits => {
+        if (!dbUnits) console.log('nao tem units na db')
+        else setUnits(dbUnits)
+      })
+
+    }
+
     return () => {
 
     }
