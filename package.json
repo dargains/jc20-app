@@ -2,6 +2,7 @@
   "name": "jc20-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://jc20.graffito.pt",
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^2.3.0",
     "@testing-library/jest-dom": "^4.2.4",
@@ -22,7 +23,7 @@
   "scripts": {
     "build:tailwind": "postcss src/tailwind.css -o src/tailwind.generated.css",
     "watch:tailwind": "postcss -w src/tailwind.css -o src/tailwind.generated.css",
-    "start": "run-p watch:tailwind start:react",
+    "start": "set HTTPS=true && run-p watch:tailwind start:react",
     "start:react": "react-scripts start",
     "prebuild": "npm run build:tailwind",
     "build": "react-scripts build",
