@@ -2,6 +2,8 @@ import React from 'react';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 import { Offline, Online } from 'react-detect-offline'
 import './tailwind.generated.css';
+
+// views
 import Header from './components/Header';
 import Home from './views/Home'
 import Main from './views/Main'
@@ -14,7 +16,6 @@ function App() {
       <Router>
         <Header />
         <div className="container py-6">
-
           <Switch>
             <Route exact path="/">
               <Online>

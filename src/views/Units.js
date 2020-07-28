@@ -7,7 +7,6 @@ const Units = () => {
   const [units, setUnits] = useState([])
   useEffect(() => {
     if (!db) return;
-    alert(window.navigator.onLine)
     if (window.navigator.onLine) {
       console.log('is online. fetching...')
       Axios(`${baseUrl}/units`).then(response => {
