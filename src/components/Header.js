@@ -17,6 +17,7 @@ const Header = () => {
         <Link className="mx-2 text-blue-400" to="/">main</Link>
         <Link className="mx-2 text-blue-400" to="/home">home</Link>
         <Link className="mx-2 text-blue-400" to="/units">units</Link>
+        <Link className="mx-2 text-blue-400" to="/share">share</Link>
       </nav>
       <div>
         <p>
