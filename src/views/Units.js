@@ -6,9 +6,8 @@ import db from '../db'
 const Units = () => {
   const [units, setUnits] = useState([])
   useEffect(() => {
-    if (!db) return;
     if (window.navigator.onLine) {
-      console.log('is online. fetching...')
+      console.log('Online. Fetching from CMS...')
       Axios(`${baseUrl}/units`).then(response => {
         const onlineUnits = response.data.data
         setUnits(onlineUnits)
@@ -18,6 +17,7 @@ const Units = () => {
       })
 
     } else {
+      console.log('Offline. Fetching from Local DB...')
       db.table('units').toArray().then(dbUnits => {
         if (!dbUnits) console.log('nao tem units na db')
         else setUnits(dbUnits)

@@ -15,19 +15,32 @@ const Home = () => {
 
   useEffect(() => {
     if (!Object.keys(content).length) {
-      Axios(`${baseUrl}/home?fields=*.*`).then(response => {
-        const allCopy = response.data.data[0];
-        setContent(allCopy)
-        const copy = allCopy.translations.find(translation => translation.language === state.language)
-        setCopy(copy)
-      })
+      if (window.navigator.onLine) {
+        Axios(`${baseUrl}/home?fields=*.*`).then(response => {
+          const allCopy = response.data.data[0];
+          setContent(allCopy)
+          db.content.put({ page: 'Home', content: allCopy })
+          changeCopy(allCopy)
+        })
+      } else {
+        db.content.get('Home').then(contentDB => {
+          setContent(contentDB.content)
+          changeCopy(contentDB.content)
+        })
+      }
     } else {
-      setCopy(content.translations.find(translation => translation.language === state.language))
+      changeCopy(content)
     }
-    db.user.get(1).then(user => {
+    db.user.toArray().then(users => {
+      const user = users[0]
       setUser({ ...user })
     })
   }, [state.language, content])
+
+  const changeCopy = all => {
+    const copy = all.translations.find(translation => translation.language === state.language)
+    setCopy(copy)
+  }
 
   const handleChange = e => {
     let { id, value } = e.target;
@@ -38,7 +51,9 @@ const Home = () => {
     setErrorMessage('')
     console.log(user)
     Axios.post(`${baseUrl}/users`, { ...user }).then(response => {
-      db.user.put({ ...user })
+      const dbUser = user;
+      dbUser.id = response.data.data.id
+      db.user.put({ ...dbUser })
       history.push('/about')
     }).catch(error => {
       setErrorMessage(error.response.data.error.message)
