@@ -8,7 +8,7 @@ const Units = () => {
   useEffect(() => {
     if (window.navigator.onLine) {
       console.log('Online. Fetching from CMS...')
-      Axios(`${baseUrl}/units`).then(response => {
+      Axios(`${baseUrl}/units?fields=*.*`).then(response => {
         const onlineUnits = response.data.data
         setUnits(onlineUnits)
         onlineUnits.forEach(unit => {
@@ -33,7 +33,10 @@ const Units = () => {
     <div>
       {units.map(unit => <article key={unit.id}>
         <p>Price: {unit.price}</p>
-        <p>Status: {unit.status}</p>
+        <p>Status: {unit.status === 'available' ? 'disponível' : 'não disponível'}</p>
+        <figure className="w-1/3">
+          <img src={unit.image.data.full_url} />
+        </figure>
       </article>)}
     </div>
   )
