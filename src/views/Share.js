@@ -13,18 +13,49 @@ const Share = () => {
 
   const submit = async () => {
     // setErrorMessage('')
-    db.user.toArray().then(users => {
-      const user = users[0]
-      Axios(`${baseUrl}/users/${user.id}`).then(response => {
-        const share = response.data.data.shares || {}
-        share[person.name] = person.email
-        Axios.patch(`${baseUrl}/users/${user.id}`, { shares: share }).then(response => {
-          console.log(response)
-        }).catch(error => {
-          // setErrorMessage(error.response.data.error.message)
-        })
+
+
+    const users = await db.user.toArray()
+    const data = {
+      user_id: users[0].id,
+      name: person.name,
+      email: person.email,
+      phone: person.phone
+    }
+    Axios.post(`${baseUrl}/clients`, data).then(response => {
+      console.log(response)
+      Axios.post('https://graffito.pt/directus/public/jc20/auth/authenticate', {
+        email: 'andre.dargains@gmail.com',
+        password: '123qwe'
+      }).then(response => {
+        const headers = {
+          Authorization: `Bearer ${response.data.data.token}`
+        }
+        const data = {
+          "to": { "email": 'andre.dargains@gmail.com', "name": 'contact email' },
+          "subject": "Contact message",
+          "body": "{{name}} from {{email}} has sent the following message: {{message}}",
+          "type": "html",
+          "data": {
+            "name": 'token.name',
+            "email": 'token.email',
+            "message": 'token.message'
+          }
+        }
+        Axios.post(`https://graffito.pt/directus/public/jc20/mail`, data, { headers })
       })
     })
+  }
+
+  const share = () => {
+    navigator
+      .share({
+        title: document.title,
+        text: 'Hello World',
+        url: window.location.href
+      })
+      .then(() => console.log('Successful share! 🎉'))
+      .catch(err => console.error(err));
   }
 
   return (
@@ -36,6 +67,7 @@ const Share = () => {
       <label htmlFor="email">Email</label><br />
       <input type="email" value={person.email} id="email" onChange={handleChange} /><br />
       <button onClick={submit} className="py-2 px-4 border rounded bg-gray-700 text-gray-200 cursor-pointer">submit</button>
+      <button onClick={share} className="py-2 px-4 border rounded bg-gray-700 text-gray-200 cursor-pointer">share</button>
 
     </div>
   )
