@@ -30,9 +30,9 @@ const HeaderBase = ({ children, name, handleClick }) => {
   )
 }
 
-export const Menu = () => {
+export const Menu = ({ handleClick }) => {
   return (
-    <HeaderBase name="menu">
+    <HeaderBase name="menu" handleClick={handleClick} >
       <SVGBase name="menu">
         Menu
     </SVGBase>

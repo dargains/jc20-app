@@ -5,6 +5,7 @@ import db from './db';
 import './tailwind.generated.css';
 
 // views
+import Menu from './components/Menu';
 import Header from './components/Header';
 import Home from './views/Home'
 import Main from './views/Main'
@@ -19,6 +20,7 @@ function App() {
         db &&
         <Router>
           <Header />
+          <Menu />
           <div className="container py-6">
             <Switch>
               <Route exact path="/">
