@@ -21,6 +21,7 @@ const initialState = {
     }
   ],
   language: "pt",
+  menuIsOpen: false,
   loading: false,
   error: null
 };
@@ -28,16 +29,11 @@ const initialState = {
 const reducer = (state, action) => {
   const { type, payload } = action
   switch (type) {
-    case "ADD_CONTACT":
+    case "TOGGLE_MENU":
+      const newState = !state.menuIsOpen
       return {
-        contacts: [...state.contacts, payload]
-      };
-    case "DEL_CONTACT":
-      return {
-        contacts: state.contacts.filter(
-          contact => contact.id !== payload
-        )
-      };
+        menuIsOpen: newState
+      }
     case "CHANGE_LANGUAGE":
       return {
         language: payload
