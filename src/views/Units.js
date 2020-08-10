@@ -35,7 +35,7 @@ const Units = () => {
         <p>Price: {unit.price}</p>
         <p>Status: {unit.status === 'available' ? 'disponível' : 'não disponível'}</p>
         <figure className="w-1/3">
-          <img src={unit.image.data.full_url} />
+          <img src={unit.image.data.full_url} alt={unit.title} />
         </figure>
       </article>)}
     </div>
