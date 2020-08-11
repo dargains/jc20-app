@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 import { Offline, Online } from 'react-detect-offline'
 import db from './db';
-import './tailwind.generated.css';
+import './tailwind.generated.css'
 
 // views
 import Menu from './components/Menu';
@@ -12,6 +12,7 @@ import Main from './views/Main'
 import About from './views/About'
 import Units from './views/Units';
 import Share from './views/Share';
+import RouteContainer from './RouteContainer';
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
         <Router>
           <Header />
           <Menu />
-          <div className="container py-6">
+          <RouteContainer>
             <Switch>
               <Route exact path="/">
                 <Online>
@@ -42,7 +43,7 @@ function App() {
                 <Share />
               </Route>
             </Switch>
-          </div>
+          </RouteContainer>
         </Router>
       }
     </div>
