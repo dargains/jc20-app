@@ -6,7 +6,8 @@ const RouteContainer = (props) => {
   const location = useLocation()
   const [store, dispatch] = useContext(AppContext)
   useEffect(() => {
-    dispatch({ type: 'TOGGLE_MENU' })
+    console.log(location)
+    dispatch({ type: 'CLOSE_MENU' })
     return () => {
 
     }

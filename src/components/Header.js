@@ -21,10 +21,10 @@ const Header = () => {
         <Icon.User />
         <div>
           <Conditional if={state.language === 'pt'}>
-            <Icon.Lang lang={state.language} handleClick={() => { handleToggleLang('en') }} />
+            <Icon.Lang lang={state.language} handleClick={() => handleToggleLang('en')} />
           </Conditional>
           <Conditional if={state.language === 'en'}>
-            <Icon.Lang lang={state.language} handleClick={() => { handleToggleLang('pt') }} />
+            <Icon.Lang lang={state.language} handleClick={() => handleToggleLang('pt')} />
           </Conditional>
         </div>
         <Link className="mx-2 text-white" to="/home">home</Link>

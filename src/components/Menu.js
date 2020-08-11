@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import cx from "classnames"
+import Icon from './Icon'
 import { AppContext } from '../store.js';
 
 const links = [
@@ -14,8 +15,8 @@ const links = [
 
 const MenuItem = ({ link, label, color }) => {
   return (
-    <Link to={link} className={cx('w-full px-8 flex flex-1 items-center justify-between ', `bg-green0${color}`)} style={{ boxShadow: 'box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);' }}>
-      <div>ICONE</div>
+    <Link to={link} className={cx('w-full px-8 flex flex-1 items-center justify-between ', `bg-green0${color}`)} style={{ boxShadow: 'box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16)' }}>
+      <Icon.Sofa width={56} viewbox="0 0 56 56" />
       <p className="text-white text-2xl font-light">{label}</p>
     </Link>
   )
@@ -29,7 +30,7 @@ const Menu = () => {
       'w-full flex flex-col fixed top-0 left-0 transition-transform duration-200 transform',
       {
         'translate-x-0': state.menuIsOpen,
-        'translate-x-full': state.menuIsOpen
+        'translate-x-full': !state.menuIsOpen
       }
     )} style={{ height: 'calc(100vh - 61px' }}>
       {links.map((link, index) => <MenuItem {...link} color={links.length - index - 1} key={link.link} />)}
