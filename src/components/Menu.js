@@ -5,18 +5,18 @@ import Icon from './Icon'
 import { AppContext } from '../store.js';
 
 const links = [
-  { label: 'Apartamentos', link: '/units' },
-  { label: 'Galeria', link: '/gallery' },
-  { label: 'Obra', link: '/status' },
-  { label: 'Saldanha', link: '/lifestyle' },
-  { label: 'Sobre nós', link: '/about' },
-  { label: 'Contatos', link: '/contact' }
+  { label: 'Apartamentos', link: '/units', icon: 'Sofa' },
+  { label: 'Galeria', link: '/gallery', icon: 'Art' },
+  { label: 'Obra', link: '/status', icon: 'Building' },
+  { label: 'Saldanha', link: '/lifestyle', icon: 'Drinks' },
+  { label: 'Sobre nós', link: '/about', icon: 'RC' },
+  { label: 'Contatos', link: '/contact', icon: 'Contact' }
 ]
 
-const MenuItem = ({ link, label, color }) => {
+const MenuItem = ({ link, label, icon, color }) => {
   return (
     <Link to={link} className={cx('w-full px-8 flex flex-1 items-center justify-between ', `bg-green0${color}`)} style={{ boxShadow: 'box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16)' }}>
-      <Icon.Sofa width={56} viewbox="0 0 56 56" />
+      <Icon.Complex type={icon} />
       <p className="text-white text-2xl font-light">{label}</p>
     </Link>
   )
