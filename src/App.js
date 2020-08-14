@@ -7,6 +7,7 @@ import './tailwind.generated.css'
 // views
 import Menu from './components/Menu';
 import Header from './components/Header';
+import Intro from './views/Intro';
 import Home from './views/Home'
 import Main from './views/Main'
 import About from './views/About'
@@ -22,6 +23,7 @@ function App() {
         <Router>
           <Header />
           <Menu />
+          <Intro />
           <RouteContainer>
             <Switch>
               <Route exact path="/">

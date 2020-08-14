@@ -21,6 +21,18 @@ module.exports = {
         gren06: '#778a88',
         green: '#278735',
         red: '#fe0a01'
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: 0 },
+          '30%': { opacity: 1 },
+          '70%': { opacity: 1 },
+          '100%': { opacity: 0 },
+        }
+      },
+      animation: {
+        fadeIn: 'fadeIn 4s ease-in-out',
+        fadeIn2: 'fadeIn 4s ease-in-out 4s',
       }
     },
   },
