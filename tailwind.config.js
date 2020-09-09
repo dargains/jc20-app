@@ -10,6 +10,10 @@ module.exports = {
     container: {
       center: true
     },
+    fontFamily: {
+      display: ['Oswald', 'sans-serif'],
+      body: ['Roboto', 'sans-serif']
+    },
     extend: {
       colors: {
         green00: '#012b25',
@@ -23,16 +27,26 @@ module.exports = {
         red: '#fe0a01'
       },
       keyframes: {
-        fadeIn: {
+        fadeInOut: {
           '0%': { opacity: 0 },
           '30%': { opacity: 1 },
           '70%': { opacity: 1 },
           '100%': { opacity: 0 },
+        },
+        fadeIn: {
+          from: { opacity: 0 },
+          to: { opacity: 1 }
+        },
+        fadeOut: {
+          from: { opacity: 1 },
+          to: { opacity: 0 }
         }
       },
       animation: {
-        fadeIn: 'fadeIn 4s ease-in-out',
-        fadeIn2: 'fadeIn 4s ease-in-out 4s',
+        fadeInOut: 'fadeInOut 2s ease-in-out',
+        fadeInOut2: 'fadeInOut 2s ease-in-out 2s',
+        fadeIn: 'fadeIn 1s ease-in-out',
+        fadeOut: 'fadeOut 1s ease-in-out'
       }
     },
   },
