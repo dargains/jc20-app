@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Main = ({ db }) => {
+const Main = () => {
 
   return (
     <div>

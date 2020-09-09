@@ -12,7 +12,7 @@ const RouteContainer = (props) => {
     }
   }, [location])
   return (
-    <main className="container py-6">
+    <main className="container">
       {props.children}
     </main>
   )

@@ -27,7 +27,7 @@ const Menu = () => {
 
   return (
     <div className={cx('menu',
-      'w-full flex flex-col fixed top-0 left-0 transition-transform duration-200 transform',
+      'w-full flex flex-col fixed top-0 left-0 transition-transform duration-200 transform z-10',
       {
         'translate-x-0': state.menuIsOpen,
         'translate-x-full': !state.menuIsOpen
