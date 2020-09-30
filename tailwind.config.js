@@ -26,6 +26,12 @@ module.exports = {
         green: '#278735',
         red: '#fe0a01'
       },
+      fontSize: {
+        '2xs': '0.5rem'
+      },
+      borderRadius: {
+        'xl': '50px'
+      },
       keyframes: {
         fadeInOut: {
           '0%': { opacity: 0 },
