@@ -10,9 +10,9 @@ const RouteContainer = (props) => {
     return () => {
 
     }
-  }, [location])
+  }, [dispatch, location])
   return (
-    <main className="container">
+    <main>
       {props.children}
     </main>
   )
