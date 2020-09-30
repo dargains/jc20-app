@@ -28,58 +28,95 @@ const Unit = () => {
   }, [id])
   return (
     <Conditional if={unit.title} render={() => <section>
-      <header>
-      <p className="title">
-        Apartamento {unit.title}
-      </p>
-      <p className="availability">
-        {unit.available}
-      </p>
-      <figure className="w-4/5 mx-auto">
-        <img src={unit.floorplan.data.full_url} alt="planta"/>
-      </figure>
-      <InfoGrid className="bg-gray-300">
-        <article className="flex items-center justify-center bg-white">
-          <div className='flex flex-col items-center w-16'>
-            <Icon.User />
-            <small className="block mt-2 text-xs text-center">área bruta total</small>
-          </div>
-          <p className="text-lg light">{unit.indoors_area + unit.outdoors_area} <small className="text-xs">m<sup>2</sup></small></p>
-        </article>
-        <article className="flex items-center justify-center bg-white">
-          <div className='flex flex-col items-center w-16'>
-            <Icon.User />
-            <small className="block mt-2 text-xs text-center">área interna</small>
-          </div>
-          <p className="text-lg light">{unit.indoors_area} <small className="text-xs">m<sup>2</sup></small></p>
-        </article>
-        <article className="flex items-center justify-center bg-white">
-          <div className='flex flex-col items-center w-16'>
-            <Icon.User />
-            <small className="block mt-2 text-xs text-center">área externa</small>
-          </div>
-          <p className="text-lg light">{unit.outdoors_area} <small className="text-xs">m<sup>2</sup></small></p>
-        </article>
-        <article className="flex items-center justify-center bg-white">
-          <div className='flex flex-col items-center w-16'>
-            <Icon.User />
-            <small className="block mt-2 text-xs text-center">quartos</small>
-          </div>
-          <p className="text-lg light">{unit.bedrooms}</p>
-        </article>
-        <article className="flex items-center justify-center bg-white">
-          <div className='flex flex-col items-center w-16'>
-            <Icon.User />
-            <small className="block mt-2 text-xs text-center">i.s.</small>
-          </div>
-          <p className="text-lg light">{unit.bathrooms}</p>
-        </article>
-      </InfoGrid>
-      </header>
+      <Mask />
+      <div className="wrapper pt-6">
+        <header className="mb-12">
+          <p className="title font-light text-xl uppercase mb-2">
+            <span className="text-green">Apartamento</span> {unit.title}
+          </p>
+          <span className={cx(
+            "text-xs py-1 px-2 border rounded-xl",
+            {
+
+            }
+            )}>
+            {unit.status}
+          </span>
+        </header>
+        <figure className="w-4/5 mx-auto">
+          <img src={unit.floorplan.data.full_url} alt="planta"/>
+        </figure>
+        <p className="text-center text-xs text-green06 my-2">Av. João Crisóstomo</p>
+        <div className="bg-gray-300 rounded-xl flex items-center justify-between py-4 px-12">
+          <Icon.Share fill={'#333'} />
+          <Icon.Share fill={'#333'} />
+          <Icon.Search fill={'#333'} />
+        </div>
+        <InfoGrid className="bg-gray-300 mt-8">
+          <article className="flex items-center justify-between p-4 bg-white">
+            <div className='flex flex-col items-center w-12'>
+              <Icon.User />
+              <small className="block mt-1 text-2xs text-center">área bruta total</small>
+            </div>
+            <p className="text-lg font-light w-16 text-center">{unit.indoors_area + unit.outdoors_area} <small className="text-xs">m<sup>2</sup></small></p>
+          </article>
+          <article className="flex items-center justify-between p-4 bg-white">
+            <div className='flex flex-col items-center w-12'>
+              <Icon.User />
+              <small className="block mt-1 text-2xs text-center">área interna</small>
+            </div>
+            <p className="text-lg font-light w-16 text-center">{unit.indoors_area} <small className="text-xs">m<sup>2</sup></small></p>
+          </article>
+          <article className="flex items-center justify-between p-4 bg-white">
+            <div className='flex flex-col items-center w-12'>
+              <Icon.User />
+              <small className="block mt-1 text-2xs text-center">área externa</small>
+            </div>
+            <p className="text-lg font-light w-16 text-center">{unit.outdoors_area} <small className="text-xs">m<sup>2</sup></small></p>
+          </article>
+          <article className="flex items-center justify-between p-4 bg-white">
+            <div className='flex flex-col items-center w-12'>
+              <Icon.User />
+              <small className="block mt-1 text-2xs text-center">quartos</small>
+            </div>
+            <p className="text-lg font-light w-16 text-center">{unit.bedrooms}</p>
+          </article>
+          <article className="flex items-center justify-between p-4 bg-white">
+            <div className='flex flex-col items-center w-12'>
+              <Icon.User />
+              <small className="block mt-1 text-2xs text-center">i.s.</small>
+            </div>
+            <p className="text-lg font-light w-16 text-center">{unit.bathrooms}</p>
+          </article>
+          <article className="flex items-center justify-between p-4 bg-white">
+            <div className='flex flex-col items-center w-12'>
+              <Icon.User />
+              <small className="block mt-1 text-2xs text-center">suites</small>
+            </div>
+            <p className="text-lg font-light w-16 text-center">{unit.suites}</p>
+          </article>
+          <article className="flex items-center justify-between p-4 bg-white">
+            <div className='flex flex-col items-center w-12'>
+              <Icon.User />
+              <small className="block mt-1 text-2xs text-center">lugares</small>
+            </div>
+            <p className="text-lg font-light w-16 text-center">{unit.parking_spots}</p>
+          </article>
+        </InfoGrid>
+      </div>
     </section>} />
     
   )
 }
+
+const Mask = styled.div`
+  width: 100%;
+  height: 400px;
+  background-image: linear-gradient(to bottom, #d3d7d6, #ffffff);
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+`
 
 const InfoGrid = styled.div`
   display: grid;
@@ -88,6 +125,9 @@ const InfoGrid = styled.div`
   gap: 1px;
   svg {
     fill: gray;
+  }
+  article:first-of-type {
+    grid-row: span 2;
   }
 `
 
