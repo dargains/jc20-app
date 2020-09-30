@@ -4,12 +4,12 @@ import RouteContainer from './RouteContainer';
 import './tailwind.generated.css'
 
 // views
-import Intro from './views/Intro';
+// import Intro from './views/Intro';
 import SignUp from './views/SignUp'
 import Home from './views/Home'
-import Main from './views/Main'
 import About from './views/About'
 import Units from './views/Units';
+import Unit from './views/Unit';
 import Share from './views/Share';
 
 // components
@@ -37,6 +37,9 @@ function App() {
             </Route>
             <Route path="/units">
               <Units />
+            </Route>
+            <Route path="/unit/:id">
+              <Unit />
             </Route>
             <Route path="/share">
               <Share />
