@@ -4,6 +4,15 @@ import { AppContext } from '../store.js';
 import Icon from './Icon'
 import Conditional from './Conditional.js';
 
+const HeaderIcon = ({ children, name, handleClick }) => {
+  return (
+    <div onClick={handleClick} className="flex flex-col items-center justify-center text-white text-sm">
+      {children}
+      {name}
+    </div>
+  )
+}
+
 const Header = () => {
   const [state, dispatch] = useContext(AppContext);
 
@@ -14,20 +23,30 @@ const Header = () => {
     dispatch({ type: 'TOGGLE_MENU' })
   }
   return (
-    <header className="container py-2 bg-green00 fixed bottom-0 z-10">
-      <nav className="flex w-full items-center justify-between px-4">
-        <Icon.Menu handleClick={toggleMenu} />
-        <Link className="mx-2 text-white" to="/share"><Icon.Share /></Link>
-        <Icon.User />
+    <header className="py-2 bg-green00 fixed bottom-0 z-10 w-screen">
+      <nav className="container flex w-full items-center justify-between px-4">
+        <HeaderIcon name="menu" handleClick={toggleMenu}>
+          <Icon.Menu />
+        </HeaderIcon>
+        <HeaderIcon name="share">
+          <Link className="mx-2 text-white" to="/share"><Icon.Share /></Link>
+        </HeaderIcon>
+        <HeaderIcon name="user">
+          <Icon.User />
+        </HeaderIcon>
         <div>
-          <Conditional if={state.language === 'pt'}>
-            <Icon.Lang lang={state.language} handleClick={() => handleToggleLang('en')} />
-          </Conditional>
-          <Conditional if={state.language === 'en'}>
-            <Icon.Lang lang={state.language} handleClick={() => handleToggleLang('pt')} />
-          </Conditional>
+            <Conditional if={state.language === 'pt'}>
+              <HeaderIcon name="idioma" handleClick={() => handleToggleLang('en')} >
+                <Icon.Lang lang={state.language} />
+              </HeaderIcon>
+            </Conditional>
+            <Conditional if={state.language === 'en'}>
+              <HeaderIcon name="idioma" handleClick={() => handleToggleLang('pt')} >
+                <Icon.Lang lang={state.language}/>
+              </HeaderIcon>
+            </Conditional>
         </div>
-        <Link className="mx-2 text-white" to="/home">home</Link>
+        <Link className="mx-2 text-white" to="/home">contact</Link>
       </nav>
     </header>
   )
