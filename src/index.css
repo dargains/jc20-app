@@ -2,6 +2,12 @@
 
 * {
   position: relative;
+  box-sizing: border-box;
+  position: relative;
+}
+img {
+  display: block;
+  width: 100%;
 }
 h1,h2,h3,h4 {
   font-weight: 400;

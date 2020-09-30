@@ -22,7 +22,7 @@ module.exports = {
         green03: '#32524d',
         green04: '#4a6662',
         green05: '#5d7572',
-        gren06: '#778a88',
+        green06: '#778a88',
         green: '#278735',
         red: '#fe0a01'
       },
