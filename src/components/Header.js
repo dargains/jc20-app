@@ -29,24 +29,26 @@ const Header = () => {
           <Icon.Menu />
         </HeaderIcon>
         <HeaderIcon name="share">
-          <Link className="mx-2 text-white" to="/share"><Icon.Share /></Link>
+          <Link className="mx-2" to="/share"><Icon.Share /></Link>
         </HeaderIcon>
         <HeaderIcon name="user">
           <Icon.User />
         </HeaderIcon>
         <div>
-            <Conditional if={state.language === 'pt'}>
-              <HeaderIcon name="idioma" handleClick={() => handleToggleLang('en')} >
-                <Icon.Lang lang={state.language} />
-              </HeaderIcon>
-            </Conditional>
-            <Conditional if={state.language === 'en'}>
-              <HeaderIcon name="idioma" handleClick={() => handleToggleLang('pt')} >
-                <Icon.Lang lang={state.language}/>
-              </HeaderIcon>
-            </Conditional>
+          <Conditional if={state.language === 'pt'}>
+            <HeaderIcon name="idioma" handleClick={() => handleToggleLang('en')} >
+              <Icon.Lang lang={state.language} />
+            </HeaderIcon>
+          </Conditional>
+          <Conditional if={state.language === 'en'}>
+            <HeaderIcon name="idioma" handleClick={() => handleToggleLang('pt')} >
+              <Icon.Lang lang={state.language}/>
+            </HeaderIcon>
+          </Conditional>
         </div>
-        <Link className="mx-2 text-white" to="/home">contact</Link>
+        <HeaderIcon name="contatos">
+        <Link className="mx-2 text-white" to="/contacts"><Icon.Contato /></Link>
+        </HeaderIcon>
       </nav>
     </header>
   )
