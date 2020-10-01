@@ -47,7 +47,7 @@ const Header = () => {
           </Conditional>
         </div>
         <HeaderIcon name="contatos">
-        <Link className="mx-2 text-white" to="/contacts"><Icon.Contato /></Link>
+        <Link className="mx-2 text-white" to="/contacts"><Icon.Contact /></Link>
         </HeaderIcon>
       </nav>
     </header>
