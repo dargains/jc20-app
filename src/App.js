@@ -11,6 +11,7 @@ import About from './views/About'
 import Units from './views/Units';
 import Unit from './views/Unit';
 import Share from './views/Share';
+import Contacts from './views/Contacts';
 
 // components
 import Menu from './components/Menu';
@@ -43,6 +44,9 @@ function App() {
             </Route>
             <Route path="/share">
               <Share />
+            </Route>
+            <Route path="/contacts">
+              <Contacts />
             </Route>
           </Switch>
         </RouteContainer>
