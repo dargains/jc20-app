@@ -15,7 +15,7 @@ const links = [
 
 const MenuItem = ({ link, label, icon, color }) => {
   return (
-    <Link to={link} className={cx('w-full px-8 flex flex-1 items-center justify-between ', `bg-green0${color}`)} style={{ boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.16)', zIndex: color }}>
+    <Link to={link} className={cx('w-full px-8 flex flex-1 items-center justify-between ', `bg-green0${color} text-white`)} style={{ boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.16)', zIndex: color }}>
       {icon}
       <p className="text-white text-3xl font-hairline">{label}</p>
     </Link>
