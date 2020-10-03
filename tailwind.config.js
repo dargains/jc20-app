@@ -1,3 +1,5 @@
+const { colors } = require('tailwindcss/defaultTheme')
+
 module.exports = {
   theme: {
     screens: {
@@ -24,13 +26,21 @@ module.exports = {
         green05: '#5d7572',
         green06: '#778a88',
         green: '#278735',
-        red: '#fe0a01'
+        red: '#fe0a01',
+        black: '#060606',
+        gray: {
+          ...colors.gray,
+          600: '#777575',
+        }
       },
       fontSize: {
         '2xs': '0.5rem'
       },
       borderRadius: {
         'xl': '50px'
+      },
+      minWidth: {
+        175: '175px'
       },
       keyframes: {
         fadeInOut: {
