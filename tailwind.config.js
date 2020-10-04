@@ -42,6 +42,9 @@ module.exports = {
       minWidth: {
         175: '175px'
       },
+      opacity: {
+        90: 90
+      },
       keyframes: {
         fadeInOut: {
           '0%': { opacity: 0 },
