@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom'
 import { AppContext } from '../store.js';
 import Icon from './Icon'
 import Conditional from './Conditional.js';
+import whatsappImage from '../assets/images/whatsapp.png'
 
 const HeaderIcon = ({ children, name, handleClick }) => {
   return (
-    <div onClick={handleClick} className="flex flex-col items-center justify-center text-white text-sm">
+    <div onClick={handleClick} className="flex flex-col items-center justify-center w-12 text-white text-xs">
       {children}
       {name}
     </div>
@@ -23,7 +24,7 @@ const Header = () => {
     dispatch({ type: 'TOGGLE_MENU' })
   }
   return (
-    <header className="py-2 bg-green00 fixed bottom-0 z-10 w-screen">
+    <header className="py-2 bg-green00 fixed bottom-0 z-20 w-screen">
       <nav className="container flex w-full items-center justify-between px-4">
         <HeaderIcon name="menu" handleClick={toggleMenu}>
           <Icon.Menu />
@@ -46,9 +47,11 @@ const Header = () => {
             </HeaderIcon>
           </Conditional>
         </div>
-        <HeaderIcon name="contatos">
-        <Link className="mx-2 text-white" to="/contacts"><Icon.Contact /></Link>
-        </HeaderIcon>
+        <Link to="/contacts" className="w-12 h-10">
+          <div className="absolute w-32 h-32" style={{top: -60, left: -40}}>
+            <img src={whatsappImage} alt="Whatsapp"/>
+          </div>
+        </Link>
       </nav>
     </header>
   )
