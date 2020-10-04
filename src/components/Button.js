@@ -2,16 +2,17 @@ import React from 'react'
 import cx from "classnames"
 import styled from 'styled-components'
 
-const Button = ({text, type, icon, iconDirection}) => {
+const Button = ({text, type, icon, iconDirection, handleClick, className}) => {
   return (
-    <button className={cx(
-      "button min-w-175 h-10 px-1 rounded-xl border flex items-center justify-between transition-all duration-200",
+    <button onClick={handleClick} className={cx(
+      "button min-w-175 h-10 px-1 mx-auto rounded-xl border flex items-center justify-between transition-all duration-200",
       {
         "bg-white hover:bg-green00 text-green00 hover:text-white border-green00": type === 'primary',
         "hover:bg-white text-white hover:text-green00 border-white": type === 'secondary',
         "bg-gray-600 hover:bg-gray-900 text-white border-gray-600 hover:border-gray-900": type === 'tertiary',
         "flex-row-reverse": iconDirection === 'right'
-      }
+      },
+      className
     )}>
       {icon && <Chevron className={cx(
         "rounded-full bg-green00 text-white w-8 h-8 transform",
