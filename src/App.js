@@ -13,6 +13,7 @@ import Unit from './views/Unit';
 import Share from './views/Share';
 import Contacts from './views/Contacts';
 import Gallery from './views/Gallery';
+import Status from './views/Status';
 
 // components
 import Menu from './components/Menu';
@@ -48,6 +49,9 @@ function App() {
             </Route>
             <Route path="/gallery">
               <Gallery />
+            </Route>
+            <Route path="/status">
+              <Status />
             </Route>
             <Route path="/contacts">
               <Contacts />

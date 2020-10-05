@@ -5,7 +5,8 @@ db.version(1).stores({
   copy: '++id, value',
   user: 'id, name, email, agent',
   units: 'id',
-  content: 'page, content'
+  content: 'page, content',
+  status: '++id, label, status'
 })
 
 export default db;
