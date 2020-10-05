@@ -22,13 +22,14 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
+    "react-slidedown": "^2.4.5",
     "styled-components": "^5.2.0",
     "tailwindcss": "^1.8.10"
   },
   "scripts": {
     "build:tailwind": "postcss src/tailwind.css -o src/tailwind.generated.css",
     "watch:tailwind": "postcss -w src/tailwind.css -o src/tailwind.generated.css",
-    "start": "set HTTPS=true && run-p watch:tailwind start:react",
+    "start": "HTTPS=true run-p watch:tailwind start:react",
     "start:react": "react-scripts start",
     "prebuild": "npm run build:tailwind",
     "build": "react-scripts build",
