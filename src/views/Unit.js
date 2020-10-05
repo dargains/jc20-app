@@ -8,6 +8,7 @@ import db from '../db'
 import Icon from '../components/Icon';
 import Button from '../components/Button';
 import ImageOverlay from '../components/ImageOverlay';
+import StatusTag from '../components/StatusTag'
 
 const Unit = () => {
   let {id} = useParams();
@@ -29,18 +30,6 @@ const Unit = () => {
 
     }
   }, [id])
-  const getStatus = status => {
-    switch(status) {
-      case 'available':
-        return 'disponível'
-      case 'reserved':
-        return 'reservado'
-      case 'not_available':
-        return 'vendido'
-      default:
-        return ''
-    }
-  }
   const changeView = () => {
     setShowFloor(!showFloor)
     window.scrollTo({top:0, behavior: 'smooth'})
@@ -56,16 +45,7 @@ const Unit = () => {
             <p className="title font-light text-xl uppercase mb-2">
               <span className="text-green">Apartamento</span> {unit.title}
             </p>
-            <span className={cx(
-              "text-xs py-1 px-4 border rounded-xl border-green01",
-              {
-                '': unit.status === 'available',
-                'bg-green06': unit.status === 'reserved',
-                'bg-green01 text-white': unit.status === 'not_available'
-              }
-              )}>
-              {getStatus(unit.status)}
-            </span>
+            <StatusTag status={unit.status} />
           </header>
         </div>
         
