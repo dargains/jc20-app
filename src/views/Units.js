@@ -7,6 +7,7 @@ import cx from 'classnames'
 import { baseUrl } from '../api'
 import db from '../db'
 import StatusTag from '../components/StatusTag'
+import fachada from '../assets/images/fachada.jpg'
 
 const getHeight = index => {
   switch(index) {
@@ -75,7 +76,7 @@ const Units = () => {
           : <p className="text-2xl text-white uppercase font-display font-medium">Escolha o seu <span className="text-green font-light">apartamento</span></p>
         }
       </div>
-      <Building className="building px-6 grid my-6 mx-auto" ref={ref}>
+      <Building className="building px-6 grid py-6" ref={ref} style={{backgroundImage: `url(${fachada})`}}>
         {units.map((unit, index) => 
           <AptImage key={unit.id}  index={index} onClick={() => selectUnit(unit)}>
             <img src={unit.thumbnail.data.full_url} alt={unit.title} />
@@ -90,6 +91,10 @@ const Building = styled.div`
   grid-template-columns: 1.2fr repeat(4, 1fr);
   justify-items: center;
   max-width: 730px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 670px;
   figure:nth-child(1) {
     grid-column: span 2;
     justify-self: right;
