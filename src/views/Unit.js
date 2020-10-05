@@ -154,7 +154,7 @@ const Unit = () => {
           </div>
         </div>
       </div>
-      <ImageOverlay className={cx("transition-opacity opacity-0 duration-200 pointer-events-none", {"opacity-100 pointer-events-auto": showImage})} src={unit.floorplan.data.full_url} alt={`Planta - Apartamento ${unit.title}`} handleClose={() => {setShowImage(false)}}/>
+      <ImageOverlay src={unit.floorplan.data.full_url} alt={`Planta - Apartamento ${unit.title}`} showImage={showImage} handleClose={() => {setShowImage(false)}}/>
     </section>}
     </>
   )
