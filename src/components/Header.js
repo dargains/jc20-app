@@ -24,7 +24,7 @@ const Header = () => {
     dispatch({ type: 'TOGGLE_MENU' })
   }
   return (
-    <header className="py-2 bg-green00 fixed bottom-0 z-20 w-screen">
+    <header className="py-2 bg-green08 fixed bottom-0 z-20 w-screen">
       <nav className="container flex w-full items-center justify-between px-4">
         <HeaderIcon name="menu" handleClick={toggleMenu}>
           <Icon.Menu />

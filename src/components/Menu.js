@@ -33,7 +33,7 @@ const Menu = () => {
         'translate-x-full': !state.menuIsOpen
       }
     )} style={{ height: 'calc(100vh - 58px' }}>
-      {links.map((link, index) => <MenuItem {...link} color={links.length - index - 1} key={link.link} />)}
+      {links.map((link, index) => <MenuItem {...link} color={index + 2} key={link.link} />)}
     </div>
   )
 }
