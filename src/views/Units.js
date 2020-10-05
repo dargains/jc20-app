@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
+import useOnClickOutside from '../outsideHook'
 import { useHistory } from "react-router-dom";
 import Axios from 'axios'
 import styled from 'styled-components'
 import cx from 'classnames'
 import { baseUrl } from '../api'
 import db from '../db'
+import StatusTag from '../components/StatusTag'
 
 const getHeight = index => {
   switch(index) {
@@ -23,6 +25,9 @@ const getHeight = index => {
 const Units = () => {
   let history = useHistory();
   const [units, setUnits] = useState([])
+  const [unit, setUnit] = useState({})
+  const ref = useRef()
+  useOnClickOutside(ref, () => setUnit({}));
   useEffect(() => {
     if (window.navigator.onLine) {
       console.log('Online. Fetching from CMS...')
@@ -47,15 +52,32 @@ const Units = () => {
 
     }
   }, [])
+  const selectUnit = selectedUnit => {
+    if (unit === selectedUnit) goToUnit(unit.id)
+    setUnit(selectedUnit)
+    
+  }
   const goToUnit = id => {
     history.push(`/unit/${id}`)
   }
   return (
     <section className={cx('apartments', 'bg-cover bg-no-repeat bg-center w-full h-screen')}>
-      <p className="text-3xl bg-gray-500" style={{ height: 100 }}>Escolha o seu apartamento</p>
-      <Building className="building px-6 grid my-6 mx-auto">
+      <div className="h-24 bg-green07 flex items-center justify-between px-4">
+        {
+          unit.title
+          ? <div className="w-full flex items-center justify-between">
+              <p className="font-display text-white uppercase text-3xl">T{unit.bedrooms} <span className="text-green">{unit.extra}</span></p>
+              <div className="text-center text-white">
+                <p className="uppercase mb-2">Apartamento <span className="text-green">{unit.title}</span></p>
+                <StatusTag status={unit.status} />
+              </div>
+            </div>
+          : <p className="text-2xl text-white uppercase font-display font-medium">Escolha o seu <span className="text-green font-light">apartamento</span></p>
+        }
+      </div>
+      <Building className="building px-6 grid my-6 mx-auto" ref={ref}>
         {units.map((unit, index) => 
-          <AptImage key={unit.id}  index={index} onClick={() => goToUnit(unit.id)}>
+          <AptImage key={unit.id}  index={index} onClick={() => selectUnit(unit)}>
             <img src={unit.thumbnail.data.full_url} alt={unit.title} />
           </AptImage>)}
       </Building>
