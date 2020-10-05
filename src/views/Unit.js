@@ -10,6 +10,7 @@ import Button from '../components/Button';
 import ImageOverlay from '../components/ImageOverlay';
 import StatusTag from '../components/StatusTag'
 import Accordion from '../components/Accordion';
+import Mask from '../components/Mask';
 
 const Unit = () => {
   let {id} = useParams();
@@ -158,15 +159,6 @@ const Unit = () => {
     </>
   )
 }
-
-const Mask = styled.div`
-  width: 100%;
-  height: 400px;
-  background-image: linear-gradient(to bottom, #d3d7d6, #ffffff);
-  pointer-events: none;
-  position: absolute;
-  top: 0;
-`
 
 const InfoGrid = styled.div`
   display: grid;
