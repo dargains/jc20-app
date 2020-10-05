@@ -16,11 +16,11 @@ const StatusTag = ({status}) => {
   }
   return (
   <span className={cx(
-    "text-xs py-1 px-4 border rounded-xl border-green01",
+    "text-xs py-1 px-4 border rounded-xl border-green07",
     {
       '': status === 'available',
-      'bg-green06': status === 'reserved',
-      'bg-green01 text-white': status === 'not_available'
+      'bg-green01': status === 'reserved',
+      'bg-green07 text-white': status === 'not_available'
     }
     )}>
     {getStatus(status)}

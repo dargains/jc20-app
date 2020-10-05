@@ -9,6 +9,7 @@ import Icon from '../components/Icon';
 import Button from '../components/Button';
 import ImageOverlay from '../components/ImageOverlay';
 import StatusTag from '../components/StatusTag'
+import Accordion from '../components/Accordion';
 
 const Unit = () => {
   let {id} = useParams();
@@ -34,20 +35,42 @@ const Unit = () => {
     setShowFloor(!showFloor)
     window.scrollTo({top:0, behavior: 'smooth'})
   }
+  const handleShare = async event => {
+    if (navigator.canShare) {
+      try {
+        await navigator.share({
+          title: document.title,
+          url: document.location.href
+        })
+        console.log('share successful')
+      } catch(err) {
+        console.log(err)
+      }
+      
+    } else {
+      alert('nein')
+    }
+  }
   return (
     <>
     {unit.title && <section>
       <Mask />
       <div className="pt-6 overflow-hidden">
         {/* HEADER */}
-        <div className="wrapper">
-          <header className="mb-12">
-            <p className="title font-light text-xl uppercase mb-2">
-              <span className="text-green">Apartamento</span> {unit.title}
-            </p>
-            <StatusTag status={unit.status} />
-          </header>
-        </div>
+        <header className="mb-12">
+          <div className="wrapper flex items-center justify-between">
+            <div>
+              <p className="title font-light text-xl uppercase mb-2">
+                <span className="text-green">Apartamento</span> {unit.title}
+              </p>
+              <StatusTag status={unit.status} />
+            </div>
+            <div className="text-center text-green08 text-xl">
+              <p>T{unit.bedrooms}</p>
+              <p>{unit.extra}</p>
+            </div>
+          </div>
+        </header>
         
         <div className={cx(
           'flex transform transition-all duration-200',
@@ -62,7 +85,7 @@ const Unit = () => {
             <p className="text-center text-xs text-gray-600 mt-2 mb-6">Av. João Crisóstomo</p>
             <div className="bg-gray-400 rounded-xl flex items-center justify-between py-3 px-12">
               {unit.info_file && <a href={unit.info_file.data.full_url} title="info file" download><Icon.Download className="text-green00" /></a>}
-              <Icon.Share className="text-green00" />
+              <Icon.Share className="text-green00" handleClick={handleShare}/>
               <Icon.Search className="text-green00" handleClick={() => {setShowImage(true)}} />
             </div>
             <InfoGrid className="bg-gray-300 mt-8">
@@ -121,9 +144,10 @@ const Unit = () => {
           
           {/* INFO */}
           <div className="wrapper">
-            <p>Mapa de Acabamentos</p>
+            <p className="p-4 text-lg text-green05 bg-gray-400 text-center mb-6 -ml-4 -mr-4">Mapa de Acabamentos</p>
             <div>
-              accordions
+              <Accordion header="Sala" content={[{local: 'Piso', material: 'Madeira carvalho  com 10mm de espessura, dimensão da régua 0,30 x 1,30m acabamento a óleo invisível'},{local: 'Parede', material: 'Madeira carvalho  com 10mm de espessura, dimensão da régua 0,30 x 1,30m acabamento a óleo invisível'}]}/>
+              <Accordion header="Sala" content={[{local: 'Piso', material: 'Madeira carvalho  com 10mm de espessura, dimensão da régua 0,30 x 1,30m acabamento a óleo invisível'},{local: 'Parede', material: 'Madeira carvalho  com 10mm de espessura, dimensão da régua 0,30 x 1,30m acabamento a óleo invisível'}]}/>
             </div>
             <Button text="planta" type="primary" icon iconDirection="left" handleClick={changeView} className="mt-8" />
           </div>
