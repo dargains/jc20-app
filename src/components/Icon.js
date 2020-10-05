@@ -1,19 +1,23 @@
 import React from 'react'
+import cx from 'classnames'
 
 const SVGBase = ({
   name,
   children,
   fill = "currentColor",
   height = 24,
-  viewbox = "0 0 24 24"
+  viewbox = "0 0 24 24",
+  handleClick,
+  className
 }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       height={height}
       viewBox={viewbox}
-      className={`icon icon--${name}`}
+      className={cx(`icon icon--${name}`, className)}
       fill={fill}
+      onClick={handleClick}
     >
       {children}
     </svg>
@@ -92,6 +96,17 @@ const Click = props => {
           <path d="M13.207 56.5h-.029a1.054 1.054 0 0 0-1.025 1.081v.843a.3.3 0 1 1-.608 0V56.87a1 1 0 1 0-2 0v1.65a.3.3 0 0 1-.608 0v-2.1a1.052 1.052 0 0 0-1.016-1.088H7.89a1.018 1.018 0 0 0-1 1.042v2.368a.3.3 0 0 1-.608 0v-2.3-.023-5.433a1.065 1.065 0 0 0-1.015-1.1 1.065 1.065 0 0 0-1.016 1.1L4.248 59.9a.3.3 0 0 1-.539.193L2.644 58.8a1.62 1.62 0 0 0-1.144-.6 1.586 1.586 0 0 0-1.191.427l-.009.002-.211.171 3.69 7.091a3.273 3.273 0 0 0 2.874 1.82h4.265a3.44 3.44 0 0 0 3.3-3.553v-2.439-4.132a1.051 1.051 0 0 0-1.011-1.087zm0 0" transform="translate(0 -47.715)"/>
           <path d="M48.9 3.377a.3.3 0 0 0 .3-.3 2.453 2.453 0 1 1 4.906 0 .3.3 0 0 0 .608 0 3.061 3.061 0 1 0-6.123 0 .3.3 0 0 0 .309.3zm0 0" transform="translate(-46.396)"/>
         </g>
+      </g>
+    </SVGBase>
+  )
+}
+
+const Close = props => {
+  return (
+    <SVGBase name="user" {...props}>
+      <g transform="translate(0.707 0.707)">
+        <line x2="19" y2="19" fill="none" stroke="currentColor" strokeWidth="2"/>
+        <line y1="19" x2="19" fill="none" stroke="currentColor" strokeWidth="2"/>
       </g>
     </SVGBase>
   )
@@ -372,6 +387,33 @@ const User = props => {
   )
 }
 
+const Whatsapp = props => {
+  return (
+    <SVGBase name="user" {...props} width="146.199" height="144.452" viewBox="0 0 146.199 144.452">
+      <defs>
+        <filter id="Caminho_842" x="0" y="0" width="146.199" height="144.452" filterUnits="userSpaceOnUse">
+          <feOffset dy="-6" input="SourceAlpha"/>
+          <feGaussianBlur stdDeviation="13.5" result="blur"/>
+          <feFlood floodOpacity="0.161"/>
+          <feComposite operator="in" in2="blur"/>
+          <feComposite in="SourceGraphic"/>
+        </filter>
+      </defs>
+      <g transform="translate(-354.384 -213.617)">
+        <g transform="matrix(1, 0, 0, 1, 354.38, 213.62)" filter="url(#Caminho_842)">
+          <path d="M427.484,260.117c-17.976,0-32.6,14.234-32.6,31.728a30.967,30.967,0,0,0,5.078,17l-5.011,13.3a1.032,1.032,0,0,0,.24,1.1,1.1,1.1,0,0,0,.78.321,1.119,1.119,0,0,0,.343-.054l14.182-4.6a33.171,33.171,0,0,0,16.987,4.65,32.694,32.694,0,0,0,30.847-21.456,30.423,30.423,0,0,0,1.752-10.269C460.083,274.348,445.455,260.117,427.484,260.117Z" transform="translate(-354.38 -213.62)" fill="#fff"/>
+        </g>
+        <g transform="translate(411.023 275.26)">
+          <g transform="translate(0 0)">
+            <path id="Caminho_841" dataName="Caminho 841" d="M447.461,290.063A19.472,19.472,0,0,1,443.205,289a4.2,4.2,0,0,0-4.408.941l-1.482,1.473a24.477,24.477,0,0,1-8.155-8.137l1.483-1.481a4.178,4.178,0,0,0,.94-4.4,19.4,19.4,0,0,1-1.062-4.259,4.144,4.144,0,0,0-4.165-3.584h-4.779c-.124,0-.25.005-.368.018a4.169,4.169,0,0,0-3.783,4.522l0,.021a32.549,32.549,0,0,0,5.038,14.208,32.2,32.2,0,0,0,9.854,9.838,32.731,32.731,0,0,0,14.2,5.034c.129.012.257.017.39.017a4.175,4.175,0,0,0,4.16-4.184v-4.757A4.173,4.173,0,0,0,447.461,290.063Z" transform="translate(-417.41 -269.561)" fill="#012b25"/>
+          </g>
+        </g>
+      </g>
+    </SVGBase>
+  )
+}
+
+
 
 
 
@@ -381,6 +423,7 @@ export default {
   Bedroom,
   Car,
   Click,
+  Close,
   Construction,
   Contact,
   Download,
@@ -399,5 +442,6 @@ export default {
   Share,
   Suite,
   ThreeSixty,
-  User
+  User,
+  Whatsapp
 }
