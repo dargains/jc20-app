@@ -8,7 +8,8 @@ const SVGBase = ({
   height = 24,
   viewbox = "0 0 24 24",
   handleClick,
-  className
+  className,
+  style
 }) => {
   return (
     <svg
@@ -18,6 +19,7 @@ const SVGBase = ({
       className={cx(`icon icon--${name}`, className)}
       fill={fill}
       onClick={handleClick}
+      style={style}
     >
       {children}
     </svg>
