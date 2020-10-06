@@ -39,10 +39,10 @@ const Header = () => {
         <HeaderIcon name="menu" handleClick={toggleMenu}>
           <Icon.Menu />
         </HeaderIcon>
-        <HeaderIcon name="share">
+        <HeaderIcon name="partilha">
           <Link className="mx-2" to="/share"><Icon.Share /></Link>
         </HeaderIcon>
-        <HeaderIcon name="user">
+        <HeaderIcon name="perfil">
           <Icon.User />
         </HeaderIcon>
         <div>
