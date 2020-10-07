@@ -145,10 +145,10 @@ const Unit = () => {
           
           {/* INFO */}
           <div className="wrapper">
-            <p className="p-4 text-lg text-green05 bg-gray-400 text-center mb-6 -ml-4 -mr-4">Mapa de Acabamentos</p>
+            <p className="p-4 text-lg text-green05 bg-gray-400 text-center mb-6 -ml-6 -mr-6">Mapa de Acabamentos</p>
             <div>
-              <Accordion header="Sala" content={[{local: 'Piso', material: 'Madeira carvalho  com 10mm de espessura, dimensão da régua 0,30 x 1,30m acabamento a óleo invisível'},{local: 'Parede', material: 'Madeira carvalho  com 10mm de espessura, dimensão da régua 0,30 x 1,30m acabamento a óleo invisível'}]}/>
-              <Accordion header="Sala" content={[{local: 'Piso', material: 'Madeira carvalho  com 10mm de espessura, dimensão da régua 0,30 x 1,30m acabamento a óleo invisível'},{local: 'Parede', material: 'Madeira carvalho  com 10mm de espessura, dimensão da régua 0,30 x 1,30m acabamento a óleo invisível'}]}/>
+              {unit.finishes.map(({title, itens}) => <Accordion key={title} header={title} content={itens}/>)}
+              
             </div>
             <Button text="planta" type="primary" icon iconDirection="left" handleClick={changeView} className="mt-8" />
           </div>

@@ -21,8 +21,8 @@ const Accordion = ({header, content}) => {
               <tbody>
               {content.map((item, index) =>
                 <tr key={index} className="items-center text-gray-600">
-                  <td className="text-center p-4">{item.local}</td>
-                  <td className="text-sm p-4">{item.material}</td>
+                  <td className="text-center p-4">{item.title}</td>
+                  <td className="text-sm p-4">{item.description}</td>
                 </tr>
               )}
               </tbody>
