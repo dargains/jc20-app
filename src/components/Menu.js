@@ -10,7 +10,7 @@ const links = [
   { label: 'Obra', link: '/status', icon: <Icon.Construction height={40}/> },
   { label: 'Saldanha', link: '/lifestyle', icon: <Icon.Drink height={40}/> },
   { label: 'Sobre nós', link: '/about', icon: <Icon.RC height={40}/> },
-  { label: 'Contatos', link: '/contact', icon: <Icon.Contact height={40}/> }
+  { label: 'Contatos', link: '/contacts', icon: <Icon.Contact height={40}/> }
 ]
 
 const MenuItem = ({ link, label, icon, color }) => {
