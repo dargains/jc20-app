@@ -6,7 +6,6 @@ import styled from 'styled-components'
 import cx from 'classnames'
 import { baseUrl } from '../api'
 import db from '../db'
-import StatusTag from '../components/StatusTag'
 import fachada from '../assets/images/fachada.jpg'
 
 const getHeight = index => {
@@ -20,6 +19,18 @@ const getHeight = index => {
       return 73
     default:
       return 150
+  }
+}
+const getStatus = status => {
+  switch(status) {
+    case 'available':
+      return 'disponível'
+    case 'reserved':
+      return 'reservado'
+    case 'not_available':
+      return 'vendido'
+    default:
+      return ''
   }
 }
 
@@ -66,11 +77,18 @@ const Units = () => {
       <div className="h-24 bg-green07 flex items-center justify-between px-4">
         {
           unit.title
-          ? <div className="w-full flex items-center justify-between">
+          ? <div className={cx("w-full flex items-center justify-between",{'opacity-50': unit.status !== 'available'})}>
               <p className="font-display text-white uppercase text-3xl">T{unit.bedrooms} <span className="text-green">{unit.extra}</span></p>
               <div className="text-center text-white">
                 <p className="uppercase mb-2">Apartamento <span className="text-green">{unit.title}</span></p>
-                <StatusTag status={unit.status} />
+                  <span className={cx(
+                    "text-xs py-1 px-4 border rounded-xl border-white text-white",
+                    {
+                      'bg-green01 border-green01 text-green07': unit.status === 'reserved'
+                    }
+                    )}>
+                    {getStatus(unit.status)}
+                  </span>
               </div>
             </div>
           : <p className="text-2xl text-white uppercase font-display font-medium">Escolha o seu <span className="text-green font-light">apartamento</span></p>
