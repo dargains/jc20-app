@@ -6,6 +6,7 @@ import { Carousel } from "react-responsive-carousel";
 import Axios from "axios";
 import db from "../db";
 import { baseUrl } from "../api";
+import ImageOverlay from "../components/ImageOverlay";
 
 const StatusItem = ({ label, status }) => {
   const [barStatus, setBarStatus] = useState(0);
@@ -31,10 +32,15 @@ const StatusItem = ({ label, status }) => {
   );
 };
 
-const Slide = (image) => {
+const Slide = ({handleClick, ...image}) => {
   const slide = image.directus_files_id;
   return (
-    <div className="flex-1 flex flex-col">
+    <div
+      className="flex-1 flex flex-col"
+      onClick={() =>
+        handleClick({ src: slide.data.full_url, alt: slide.title })
+      }
+    >
       <img className="h-64" src={slide.data.full_url} alt={slide.title} />
       <div
         className="mt-12 text-left text-green08 px-6"
@@ -48,6 +54,8 @@ const Status = () => {
   const [items, setItems] = useState([]);
   const [images, setImages] = useState([]);
   const [showPhotos, setShowPhotos] = useState(false);
+  const [showImage, setShowImage] = useState(false);
+  const [selectedImage, setSelectedImage] = useState({});
   useEffect(() => {
     if (window.navigator.onLine) {
       console.log("Online. Fetching from CMS...");
@@ -128,7 +136,15 @@ const Status = () => {
                 dynamicHeight
               >
                 {images.map((image) => (
-                  <Slide key={image.id} {...image} />
+                  <Slide
+                    key={image.id}
+                    {...image}
+                    handleClick={({src,alt}) => {
+                      console.log(image);
+                      setShowImage(true);
+                      setSelectedImage({ src, alt });
+                    }}
+                  />
                 ))}
               </Carousel>
             )}
@@ -143,6 +159,14 @@ const Status = () => {
           />
         </div>
       </div>
+      <ImageOverlay
+        src={selectedImage.src}
+        alt={selectedImage.alt}
+        showImage={showImage}
+        handleClose={() => {
+          setShowImage(false);
+        }}
+      />
     </section>
   );
 };
