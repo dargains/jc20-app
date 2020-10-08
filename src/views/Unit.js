@@ -56,7 +56,7 @@ const Unit = () => {
     <>
     {unit.title && <section>
       <Mask />
-      <div className="pt-6 overflow-hidden">
+      <div className="py-6 overflow-hidden">
         {/* HEADER */}
         <header className="mb-12">
           <div className="wrapper flex items-center justify-between">
