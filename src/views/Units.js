@@ -98,27 +98,29 @@ const Units = () => {
           </div>
         ) : (
           <p className="text-2xl text-white uppercase font-display font-medium">
-            Escolha o seu{" "}
-            <span className="text-green font-light">apartamento</span>
+            Escolha o seu <span className="text-green font-light">apartamento</span>
           </p>
         )}
       </div>
-      <Building
-        className="grid"
-        style={{ padding: "10% 8% 8%", backgroundImage: `url(${fachada})` }}
-      >
-        {units.map((unit, index) => (
-          <AptImage
-            key={unit.id}
-            index={index}
-            ref={ref}
-            onClick={() => selectUnit(unit)}
-            className="apt"
-          >
-            <img src={unit.thumbnail.data.full_url} alt={unit.title} />
-          </AptImage>
-        ))}
-      </Building>
+      {
+        !!units.length && 
+        <Building
+          className="grid"
+          style={{ padding: "10% 8% 8%", backgroundImage: `url(${fachada})` }}
+        >
+          {units.map((unit, index) => (
+            <AptImage
+              key={unit.id}
+              index={index}
+              ref={ref}
+              onClick={() => selectUnit(unit)}
+              className="apt"
+            >
+              <img src={unit.thumbnail.data.full_url} alt={unit.title} />
+            </AptImage>
+          ))}
+        </Building>
+      }
       {/* <button
         className="mt-4 p-2 bg-green text-white"
         onClick={() => db.delete()}
