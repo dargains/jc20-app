@@ -12,11 +12,31 @@ import StatusTag from '../components/StatusTag'
 import Accordion from '../components/Accordion';
 import Mask from '../components/Mask';
 
+const ContentItens = ({content}) => {
+  return (
+    <div
+      className="bg-white rounded-lg rounded-t-none"
+      style={{ boxShadow: "0 3px 6px 0 rgba(0, 0, 0, 0.16)" }}
+    >
+      <Table>
+        <tbody>
+          {content.map((item, index) => (
+            <tr key={index} className="items-center text-gray-600">
+              <td className="text-center p-4">{item.title}</td>
+              <td className="text-sm p-4">{item.description}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </div>
+  );
+};
+
 const Unit = () => {
   let {id} = useParams();
   const [unit, setUnit] = useState({})
   const [showImage, setShowImage] = useState(false)
-  const [showFloor, setShowFloor] = useState(true)
+  const [showFloor, setShowFloor] = useState(false)
   useEffect(() => {
       db.table('units').get(id, dbUnit => {
         console.log(id, dbUnit);
@@ -54,110 +74,194 @@ const Unit = () => {
   }
   return (
     <>
-    {unit.title && <section>
-      <Mask />
-      <div className="py-6 overflow-hidden">
-        {/* HEADER */}
-        <header className="mb-12">
-          <div className="wrapper flex items-center justify-between">
-            <div>
-              <p className="title font-light text-xl uppercase mb-2">
-                <span className="text-green">Apartamento</span> {unit.title}
-              </p>
-              <StatusTag status={unit.status} />
-            </div>
-            <div className="text-center text-green08 text-xl">
-              <p>T{unit.bedrooms}</p>
-              <p>{unit.extra}</p>
-            </div>
-          </div>
-        </header>
-        
-        <div className={cx(
-          'flex transform transition-all duration-200',
-          {'-translate-x-1/2': !showFloor}
-        )} style={{width: '200vw'}}>
+      {unit.title && (
+        <section>
+          <Mask />
+          <div className="py-6 overflow-hidden">
+            {/* HEADER */}
+            <header className="mb-12">
+              <div className="wrapper flex items-center justify-between">
+                <div>
+                  <p className="title font-light text-xl uppercase mb-2">
+                    <span className="text-green">Apartamento</span> {unit.title}
+                  </p>
+                  <StatusTag status={unit.status} />
+                </div>
+                <div className="text-center text-green08 text-xl">
+                  <p>T{unit.bedrooms}</p>
+                  <p>{unit.extra}</p>
+                </div>
+              </div>
+            </header>
 
-          {/* PLANTA */}
-          <div className="wrapper">
-            <figure>
-              <img src={unit.floorplan.data.full_url} alt="planta"/>
-            </figure>
-            <p className="text-center text-xs text-gray-600 mt-2 mb-6">Av. João Crisóstomo</p>
-            <div className="bg-gray-400 rounded-xl flex items-center justify-between py-3 px-12">
-              {unit.info_file && <a href={unit.info_file.data.full_url} title="info file" download><Icon.Download className="text-green00" /></a>}
-              <Icon.Share className="text-green00" handleClick={handleShare}/>
-              <Icon.Search className="text-green00" handleClick={() => {setShowImage(true)}} />
+            <div
+              className={cx("flex transform transition-all duration-200", {
+                "-translate-x-1/2": !showFloor,
+              })}
+              style={{ width: "200vw" }}
+            >
+              {/* PLANTA */}
+              <div className="wrapper">
+                <figure>
+                  <img src={unit.floorplan.data.full_url} alt="planta" />
+                </figure>
+                <p className="text-center text-xs text-gray-600 mt-2 mb-6">
+                  Av. João Crisóstomo
+                </p>
+                <div className="bg-gray-400 rounded-xl flex items-center justify-between py-3 px-12">
+                  {unit.info_file && (
+                    <a
+                      href={unit.info_file.data.full_url}
+                      title="info file"
+                      download
+                    >
+                      <Icon.Download className="text-green00" />
+                    </a>
+                  )}
+                  <Icon.Share
+                    className="text-green00"
+                    handleClick={handleShare}
+                  />
+                  <Icon.Search
+                    className="text-green00"
+                    handleClick={() => {
+                      setShowImage(true);
+                    }}
+                  />
+                </div>
+                <InfoGrid className="bg-gray-300 mt-8">
+                  <article className="flex items-center justify-between p-4 bg-white">
+                    <div className="flex flex-col items-center w-12">
+                      <Icon.Area className="text-green00 h-8" />
+                      <small className="block mt-1 text-2xs text-center">
+                        área bruta total
+                      </small>
+                    </div>
+                    <p className="text-lg font-light flex-1 text-center">
+                      {unit.indoors_area + unit.outdoors_area}{" "}
+                      <small className="text-xs">
+                        m<sup>2</sup>
+                      </small>
+                    </p>
+                  </article>
+                  <article className="flex items-center justify-between p-4 bg-white">
+                    <div className="flex flex-col items-center w-12">
+                      <Icon.Interna className="text-green00 h-8" />
+                      <small className="block mt-1 text-2xs text-center">
+                        área interna
+                      </small>
+                    </div>
+                    <p className="text-lg font-light flex-1 text-center">
+                      {unit.indoors_area}{" "}
+                      <small className="text-xs">
+                        m<sup>2</sup>
+                      </small>
+                    </p>
+                  </article>
+                  <article className="flex items-center justify-between p-4 bg-white">
+                    <div className="flex flex-col items-center w-12">
+                      <Icon.Externa className="text-green00 h-8" />
+                      <small className="block mt-1 text-2xs text-center">
+                        área externa
+                      </small>
+                    </div>
+                    <p className="text-lg font-light flex-1 text-center">
+                      {unit.outdoors_area}{" "}
+                      <small className="text-xs">
+                        m<sup>2</sup>
+                      </small>
+                    </p>
+                  </article>
+                  <article className="flex items-center justify-between p-4 bg-white">
+                    <div className="flex flex-col items-center w-12">
+                      <Icon.Bedroom className="text-green00 h-8" />
+                      <small className="block mt-1 text-2xs text-center">
+                        quartos
+                      </small>
+                    </div>
+                    <p className="text-lg font-light flex-1 text-center">
+                      {unit.bedrooms}
+                    </p>
+                  </article>
+                  <article className="flex items-center justify-between p-4 bg-white">
+                    <div className="flex flex-col items-center w-12">
+                      <Icon.Bathroom className="text-green00 h-8" />
+                      <small className="block mt-1 text-2xs text-center">
+                        i.s.
+                      </small>
+                    </div>
+                    <p className="text-lg font-light flex-1 text-center">
+                      {unit.bathrooms}
+                    </p>
+                  </article>
+                  <article className="flex items-center justify-between p-4 bg-white">
+                    <div className="flex flex-col items-center w-12">
+                      <Icon.Suite className="text-green00 h-8" />
+                      <small className="block mt-1 text-2xs text-center">
+                        suites
+                      </small>
+                    </div>
+                    <p className="text-lg font-light flex-1 text-center">
+                      {unit.suites}
+                    </p>
+                  </article>
+                  <article className="flex items-center justify-between p-4 bg-white">
+                    <div className="flex flex-col items-center w-12">
+                      <Icon.Car className="text-green00 h-8" />
+                      <small className="block mt-1 text-2xs text-center">
+                        lugares
+                      </small>
+                    </div>
+                    <p className="text-lg font-light flex-1 text-center">
+                      {unit.parking_spots}
+                    </p>
+                  </article>
+                </InfoGrid>
+                <Button
+                  text="acabamentos"
+                  type="primary"
+                  icon
+                  iconDirection="right"
+                  handleClick={changeView}
+                  className="mt-8"
+                />
+              </div>
+
+              {/* INFO */}
+              <div className="wrapper">
+                <p className="p-4 text-lg text-green05 bg-gray-400 text-center mb-6 -ml-6 -mr-6">
+                  Mapa de Acabamentos
+                </p>
+                <div>
+                  {unit.finishes.map(({ title, itens }) => (
+                    <Accordion key={title} header={title}>
+                      <ContentItens content={itens} />
+                    </Accordion>
+                  ))}
+                </div>
+                <Button
+                  text="planta"
+                  type="primary"
+                  icon
+                  iconDirection="left"
+                  handleClick={changeView}
+                  className="mt-8"
+                />
+              </div>
             </div>
-            <InfoGrid className="bg-gray-300 mt-8">
-              <article className="flex items-center justify-between p-4 bg-white">
-                <div className='flex flex-col items-center w-12'>
-                  <Icon.Area className="text-green00 h-8" />
-                  <small className="block mt-1 text-2xs text-center">área bruta total</small>
-                </div>
-                <p className="text-lg font-light flex-1 text-center">{unit.indoors_area + unit.outdoors_area} <small className="text-xs">m<sup>2</sup></small></p>
-              </article>
-              <article className="flex items-center justify-between p-4 bg-white">
-                <div className='flex flex-col items-center w-12'>
-                  <Icon.Interna className="text-green00 h-8" />
-                  <small className="block mt-1 text-2xs text-center">área interna</small>
-                </div>
-                <p className="text-lg font-light flex-1 text-center">{unit.indoors_area} <small className="text-xs">m<sup>2</sup></small></p>
-              </article>
-              <article className="flex items-center justify-between p-4 bg-white">
-                <div className='flex flex-col items-center w-12'>
-                  <Icon.Externa className="text-green00 h-8" />
-                  <small className="block mt-1 text-2xs text-center">área externa</small>
-                </div>
-                <p className="text-lg font-light flex-1 text-center">{unit.outdoors_area} <small className="text-xs">m<sup>2</sup></small></p>
-              </article>
-              <article className="flex items-center justify-between p-4 bg-white">
-                <div className='flex flex-col items-center w-12'>
-                  <Icon.Bedroom className="text-green00 h-8" />
-                  <small className="block mt-1 text-2xs text-center">quartos</small>
-                </div>
-                <p className="text-lg font-light flex-1 text-center">{unit.bedrooms}</p>
-              </article>
-              <article className="flex items-center justify-between p-4 bg-white">
-                <div className='flex flex-col items-center w-12'>
-                  <Icon.Bathroom className="text-green00 h-8" />
-                  <small className="block mt-1 text-2xs text-center">i.s.</small>
-                </div>
-                <p className="text-lg font-light flex-1 text-center">{unit.bathrooms}</p>
-              </article>
-              <article className="flex items-center justify-between p-4 bg-white">
-                <div className='flex flex-col items-center w-12'>
-                  <Icon.Suite className="text-green00 h-8" />
-                  <small className="block mt-1 text-2xs text-center">suites</small>
-                </div>
-                <p className="text-lg font-light flex-1 text-center">{unit.suites}</p>
-              </article>
-              <article className="flex items-center justify-between p-4 bg-white">
-                <div className='flex flex-col items-center w-12'>
-                  <Icon.Car className="text-green00 h-8" />
-                  <small className="block mt-1 text-2xs text-center">lugares</small>
-                </div>
-                <p className="text-lg font-light flex-1 text-center">{unit.parking_spots}</p>
-              </article>
-            </InfoGrid>
-            <Button text="acabamentos" type="primary" icon iconDirection="right" handleClick={changeView} className="mt-8" />
           </div>
-          
-          {/* INFO */}
-          <div className="wrapper">
-            <p className="p-4 text-lg text-green05 bg-gray-400 text-center mb-6 -ml-6 -mr-6">Mapa de Acabamentos</p>
-            <div>
-              {unit.finishes.map(({title, itens}) => <Accordion key={title} header={title} content={itens}/>)}
-              
-            </div>
-            <Button text="planta" type="primary" icon iconDirection="left" handleClick={changeView} className="mt-8" />
-          </div>
-        </div>
-      </div>
-      <ImageOverlay src={unit.floorplan.data.full_url} alt={`Planta - Apartamento ${unit.title}`} showImage={showImage} handleClose={() => {setShowImage(false)}}/>
-    </section>}
+          <ImageOverlay
+            src={unit.floorplan.data.full_url}
+            alt={`Planta - Apartamento ${unit.title}`}
+            showImage={showImage}
+            handleClose={() => {
+              setShowImage(false);
+            }}
+          />
+        </section>
+      )}
     </>
-  )
+  );
 }
 
 const InfoGrid = styled.div`
@@ -167,6 +271,27 @@ const InfoGrid = styled.div`
   gap: 1px;
   article:first-of-type {
     grid-row: span 2;
+  }
+`
+const Table = styled.table`
+  border-collapse: collapse;
+  td,
+  th {
+    border: 1px solid #f7f7f7;
+  }
+  tr:first-child th {
+    border-top: 0;
+  }
+  tr:last-child td {
+    border-bottom: 0;
+  }
+  tr td:first-child,
+  tr th:first-child {
+    border-left: 0;
+  }
+  tr td:last-child,
+  tr th:last-child {
+    border-right: 0;
   }
 `
 
