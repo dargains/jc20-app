@@ -7,7 +7,7 @@ const Button = ({text, type, icon, iconDirection, handleClick, className}) => {
     <button onClick={handleClick} className={cx(
       "button min-w-175 h-10 px-1 mx-auto rounded-xl border flex items-center justify-between transition-all duration-200",
       {
-        "bg-white hover:bg-green08 text-green08 hover:text-white border-green08": type === 'primary',
+        "hover:bg-green08 text-green08 hover:text-white border-green08": type === 'primary',
         "hover:bg-white text-white hover:text-green08 border-white": type === 'secondary',
         "bg-gray-600 hover:bg-gray-900 text-white border-gray-600 hover:border-gray-900": type === 'tertiary',
         "flex-row-reverse": iconDirection === 'right'
