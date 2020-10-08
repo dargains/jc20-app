@@ -47,7 +47,7 @@ const Slide = (image) => {
 const Status = () => {
   const [items, setItems] = useState([]);
   const [images, setImages] = useState([]);
-  const [showPhotos, setShowPhotos] = useState(true);
+  const [showPhotos, setShowPhotos] = useState(false);
   useEffect(() => {
     if (window.navigator.onLine) {
       console.log("Online. Fetching from CMS...");
@@ -80,7 +80,6 @@ const Status = () => {
           else setImages(dbImages);
         });
     }
-
     return () => {};
   }, []);
   const changeView = () => {
@@ -89,7 +88,7 @@ const Status = () => {
   };
 
   return (
-    <section className="pt-6 overflow-hidden">
+    <section className="py-6 overflow-hidden">
       <Mask />
       <div className="wrapper">
         <h1 className=" font-display text-4xl font-semibold w-2/3 mb-8">
@@ -119,18 +118,20 @@ const Status = () => {
         </div>
         <div className="wrapper w-screen">
           <div className="-mx-6">
-            <Carousel
-              showThumbs={false}
-              showArrows={false}
-              showStatus={false}
-              swipeable={true}
-              emulateTouch={true}
-              swipeScrollTolerance={1}
-            >
-              {images.map((image) => (
-                <Slide key={image.id} {...image} />
-              ))}
-            </Carousel>
+            {!!images.length && (
+              <Carousel
+                showThumbs={false}
+                showArrows={false}
+                showStatus={false}
+                swipeable
+                emulateTouch
+                dynamicHeight
+              >
+                {images.map((image) => (
+                  <Slide key={image.id} {...image} />
+                ))}
+              </Carousel>
+            )}
           </div>
           <Button
             text="status"
