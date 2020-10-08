@@ -7,9 +7,9 @@ import Button from './Button'
 import Conditional from './Conditional.js';
 import whatsappImage from '../assets/images/whatsapp.png'
 
-const HeaderIcon = ({ children, name, handleClick }) => {
+const HeaderIcon = ({ children, name, handleClick, className }) => {
   return (
-    <div onClick={handleClick} className="flex flex-col items-center justify-center w-12 text-white text-xs">
+    <div onClick={handleClick} className={cx("flex flex-col items-center justify-center w-12 text-white text-xs", className)}>
       {children}
       {name}
     </div>
@@ -24,7 +24,7 @@ const Header = () => {
     dispatch({ type: 'CHANGE_LANGUAGE', payload: lang })
   }
   const toggleMenu = () => {
-    dispatch({ type: 'TOGGLE_MENU' })
+    dispatch({ type: 'TOGGLE_MENU', payload: true })
   }
   const handleContact = () => {
     if (window.innerWidth < 768) {
@@ -36,7 +36,7 @@ const Header = () => {
   return (
     <header className="bg-green08 fixed bottom-0 z-20 w-screen">
       <nav className="container py-2 bg-green08 flex w-full items-center z-20 justify-between px-4">
-        <HeaderIcon name="menu" handleClick={toggleMenu}>
+        <HeaderIcon name="menu" handleClick={toggleMenu} className={cx({"opacity-50": state.menuIsOpen})}>
           <Icon.Menu />
         </HeaderIcon>
         <HeaderIcon name="partilha">

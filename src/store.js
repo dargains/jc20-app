@@ -18,7 +18,7 @@ const reducer = (state, action) => {
         menuIsOpen: false
       }
     case "TOGGLE_MENU":
-      const newState = !state.menuIsOpen
+      const newState = payload || !state.menuIsOpen
       return {
         ...state,
         menuIsOpen: newState
