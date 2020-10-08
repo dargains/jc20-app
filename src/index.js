@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'react-slidedown/lib/slidedown.css'
+import 'react-slidedown/lib/slidedown.css';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import './index.css';
 import App from './App';
 import { AppContextProvider } from './store.js';

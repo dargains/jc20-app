@@ -8,7 +8,10 @@ img {
   display: block;
   width: 100%;
 }
-h1,h2,h3,h4 {
+h1,
+h2,
+h3,
+h4 {
   font-weight: 400;
   text-transform: uppercase;
 }
@@ -17,7 +20,7 @@ body {
   font-weight: 300;
 }
 main {
-  padding-bottom: 100px;
+  padding-bottom: 58px;
 }
 .wrapper {
   width: 100%;
@@ -30,9 +33,33 @@ main {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate3d(-50%, -50%,0);
+  transform: translate3d(-50%, -50%, 0);
 }
 .react-slidedown {
-  transition-duration: .3s;
+  transition-duration: 0.3s;
   transition-timing-function: ease-in-out;
+}
+.carousel.carousel-slider {
+  /* padding-bottom: 40px; */
+}
+.carousel .slide .img,
+.carousel img {
+  object-fit: contain;
+  /* height: 100%; */
+}
+.carousel .slide {
+  /* max-height: 300px; */
+  flex: 1;
+  background-color: transparent;
+}
+.carousel .control-dots {
+  bottom: auto;
+  top: 16rem;
+}
+.carousel .control-dots .dot {
+  background-color: #32524d;
+  box-shadow: none;
+  margin: 0 4px;
+  width: 6px;
+  height: 6px;
 }
