@@ -13,6 +13,7 @@ import Unit from './views/Unit';
 import Share from './views/Share';
 import Contacts from './views/Contacts';
 import Email from './views/Email';
+import Phone from './views/Phone';
 import Gallery from './views/Gallery';
 import Status from './views/Status';
 
@@ -56,6 +57,9 @@ function App() {
             </Route>
             <Route path="/contacts/email">
               <Email />
+            </Route>
+            <Route path="/contacts/phone">
+              <Phone />
             </Route>
             <Route path="/contacts">
               <Contacts />

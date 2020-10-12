@@ -13,8 +13,12 @@ h4 {
   font-weight: 400;
   text-transform: uppercase;
 }
-input::placeholder {
-  color: currentColor;
+::placeholder {
+  color: currentColor !important;
+  opacity: 1;
+}
+option:first {
+  color: #999;
 }
 textarea {
   resize: none !important;

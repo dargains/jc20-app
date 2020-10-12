@@ -3,13 +3,12 @@ import cx from 'classnames'
 import { useForm } from "react-hook-form";
 import styled from 'styled-components';
 import Button from '../components/Button'
-import Icon from '../components/Icon'
 import Inputbox from '../components/Inputbox';
 import { Link } from 'react-router-dom';
 import SocialMedia from '../components/SocialMedia';
 
 const Email = () => {
-  const [emailSent, setEmailSent] = useState(true)
+  const [emailSent, setEmailSent] = useState(false)
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = data => {
     console.log(data);
@@ -60,6 +59,7 @@ const Email = () => {
                 color="white"
                 placeholder="e-mail"
                 name="email"
+                error={errors.email}
                 register={register({required: true})}
                 required={true}
               />
@@ -70,6 +70,7 @@ const Email = () => {
                 color="white"
                 placeholder="assunto"
                 name="subject"
+                error={errors.subject}
                 register={register({required: true})}
                 required={true}
               />
@@ -80,6 +81,7 @@ const Email = () => {
                 placeholder="assunto"
                 name="text"
                 rows="5"
+                error={errors.text}
                 ref={register({required: true})}
                 className={cx(
                   "border-b bg-transparent w-full py-1 mt-6 text-white border-white",
@@ -90,7 +92,7 @@ const Email = () => {
               />
               {errors.text && <ErrorMessage>Este campo é obrigatório</ErrorMessage>}
 
-              <Button text="enviar" type="secondary" className="mt-12" />
+              <Button text="enviar" type="secondary" className="mt-10" />
             </form>
           </div>
       }

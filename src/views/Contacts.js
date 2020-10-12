@@ -24,9 +24,9 @@ const Contacts = () => {
           <Button type="primary" text="e-mail" className="my-8"/>
         </Link>
         <Button type="primary" text="whatsapp" className="my-8"/>
-        <a href="tel:555pizza">
+        <Link to="/contacts/phone">
           <Button type="primary" text="ligação" className="my-8"/>
-        </a>
+        </Link>
           <SocialMedia color="green" size="sm" />
       </div>
     </section>
