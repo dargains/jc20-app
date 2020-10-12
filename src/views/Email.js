@@ -6,13 +6,41 @@ import Button from '../components/Button'
 import Inputbox from '../components/Inputbox';
 import { Link } from 'react-router-dom';
 import SocialMedia from '../components/SocialMedia';
+import Axios from 'axios';
+import { projectUrl } from '../api';
 
 const Email = () => {
+  const [emailMessage, setEmailMessage] = useState('')
   const [emailSent, setEmailSent] = useState(false)
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = data => {
-    console.log(data);
-    setEmailSent(true)
+
+  const onSubmit = async ({name, email, subject, text}) => {
+    const body = {
+      "to": [
+        "andre.dargains@gmail.com"
+      ],
+      "subject": "[JC20] Contato",
+      "body": "{{name}} ({{email}}) tem a seguinte questão:<br>{{subject}}<br>{{text}}",
+      "type": "html",
+      "data": {
+        name,
+        email,
+        subject,
+        text
+      }
+    }
+    try {
+      const response = await Axios.post(`${projectUrl}/auth/authenticate`, {
+        email: 'andre.dargains@gmail.com',
+        password: '123qwe'
+      })
+      const { token } = response.data.data
+      const mail = await Axios.post(`${projectUrl}/mail`, body, { headers: { Authorization: `bearer ${token}` } })
+      console.log(mail);
+      setEmailSent(true)
+    } catch (error) {
+      setEmailMessage(error.response.data.error.message)
+    }
   }
   return (
     <section className="bg-green04 py-6">
@@ -91,7 +119,7 @@ const Email = () => {
                 )}
               />
               {errors.text && <ErrorMessage>Este campo é obrigatório</ErrorMessage>}
-
+              <p className="text-red mt-4 text-xs">{emailMessage}</p>
               <Button text="enviar" type="secondary" className="mt-10" />
             </form>
           </div>
