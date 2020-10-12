@@ -36,7 +36,7 @@ const Unit = () => {
   let {id} = useParams();
   const [unit, setUnit] = useState({})
   const [showImage, setShowImage] = useState(false)
-  const [showFloor, setShowFloor] = useState(false)
+  const [showFloor, setShowFloor] = useState(true)
   useEffect(() => {
       db.table('units').get(id, dbUnit => {
         console.log(id, dbUnit);
