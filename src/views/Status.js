@@ -99,7 +99,7 @@ const Status = () => {
     <section className="py-6 overflow-hidden">
       <Mask />
       <div className="wrapper">
-        <h1 className=" font-display text-4xl font-semibold w-2/3 mb-8">
+        <h1 className="font-display text-4xl font-semibold w-2/3 mb-8">
           Acompanhe a obra do <br/><span className="text-green">Avenida Living</span>
         </h1>
       </div>

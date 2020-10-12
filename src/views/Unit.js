@@ -101,7 +101,7 @@ const Unit = () => {
               style={{ width: "200vw" }}
             >
               {/* PLANTA */}
-              <div className="wrapper">
+              <div className="wrapper w-screen">
                 <figure>
                   <img src={unit.floorplan.data.full_url} alt="planta" />
                 </figure>
@@ -228,7 +228,7 @@ const Unit = () => {
               </div>
 
               {/* INFO */}
-              <div className="wrapper">
+              <div className="wrapper w-screen">
                 <p className="p-4 text-lg text-green05 bg-gray-400 text-center mb-6 -ml-6 -mr-6">
                   Mapa de Acabamentos
                 </p>
