@@ -1,12 +1,22 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-@import 'tailwindcss/screens';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import "tailwindcss/screens";
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@300;500&family=Roboto:wght@100;300;400;700&display=swap");
 
+.wrapper {
+  @apply w-full px-6 mx-auto;
+  max-width: 600px;
+}
+@media screen and (min-width: 768px) {
+  .wrapper {
+    max-width: 1000px;
+  }
+}
 
 @responsive {
   .aspect-ratio {
-    @apply block relative w-full bg-red;
+    @apply block relative w-full;
   }
 
   .aspect-ratio-1\:1 {
@@ -31,13 +41,40 @@
     height: 100%;
   }
 }
-
 .aspect-ratio img,
 .aspect-ratio .aspect-ratio-child {
   @apply absolute top-0 left-0 w-full h-full object-cover;
 }
 
+.absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
 
-.font-body {
-  font-family: "Roboto", sans-serif;
+.react-slidedown {
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+}
+.carousel .slide .img,
+.carousel img {
+  object-fit: contain;
+  /* height: 100%; */
+}
+.carousel .slide {
+  /* max-height: 300px; */
+  flex: 1;
+  background-color: transparent;
+}
+.carousel .control-dots {
+  bottom: auto;
+  top: 16rem;
+}
+.carousel .control-dots .dot {
+  background-color: #32524d;
+  box-shadow: none;
+  margin: 0 4px;
+  width: 6px;
+  height: 6px;
 }

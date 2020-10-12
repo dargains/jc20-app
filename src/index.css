@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@300;500&family=Roboto:wght@100;300;400;700&display=swap");
-
 * {
   position: relative;
   box-sizing: border-box;
@@ -15,6 +13,12 @@ h4 {
   font-weight: 400;
   text-transform: uppercase;
 }
+input::placeholder {
+  color: currentColor;
+}
+textarea {
+  resize: none !important;
+}
 body {
   font-family: Roboto, sans-serif;
   font-weight: 300;
@@ -26,52 +30,6 @@ main {
 section {
   min-height: 100vh;
 }
-.wrapper {
-  width: 100%;
-  max-width: 600px;
-  padding: 0 1.5rem;
-  margin: 0 auto;
-}
-@media screen and (min-width: 768px) {
-  .wrapper {
-    max-width: 1000px;
-  }
-}
-
-.absolute-center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate3d(-50%, -50%, 0);
-}
-.react-slidedown {
-  transition-duration: 0.3s;
-  transition-timing-function: ease-in-out;
-}
-.carousel.carousel-slider {
-  /* padding-bottom: 40px; */
-}
-.carousel .slide .img,
-.carousel img {
-  object-fit: contain;
-  /* height: 100%; */
-}
-.carousel .slide {
-  /* max-height: 300px; */
-  flex: 1;
-  background-color: transparent;
-}
-.carousel .control-dots {
-  bottom: auto;
-  top: 16rem;
-}
-.carousel .control-dots .dot {
-  background-color: #32524d;
-  box-shadow: none;
-  margin: 0 4px;
-  width: 6px;
-  height: 6px;
-}
-input::placeholder {
-  color: currentColor;
+.font-body {
+  font-family: "Roboto", sans-serif;
 }

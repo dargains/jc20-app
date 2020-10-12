@@ -1,7 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
 import Mask from '../components/Mask'
 import Button from '../components/Button'
-import Icon from '../components/Icon'
+import SocialMedia from '../components/SocialMedia'
 
 const Contacts = () => {
   return (
@@ -18,30 +20,14 @@ const Contacts = () => {
           Escolhe o meio mais conveniente para si: 
         </p>
 
-        <a href="mailto:cenas@cenas.com">
+        <Link to="/contacts/email">
           <Button type="primary" text="e-mail" className="my-8"/>
-        </a>
+        </Link>
         <Button type="primary" text="whatsapp" className="my-8"/>
         <a href="tel:555pizza">
           <Button type="primary" text="ligação" className="my-8"/>
         </a>
-
-        <div className="w-full text-center text-green07">
-          <p className="text-xs mb-4">
-            siga-nos em:
-          </p>
-          <div className="flex items-center justify-between mx-auto w-40">
-            <a href="https://facebook.com/jc20" target="_blank" rel="noopener noreferrer">
-              <Icon.Facebook height={32}/>
-            </a>
-            <a href="https://instagram.com/jc20" target="_blank" rel="noopener noreferrer">
-              <Icon.Instagram height={32}/>
-            </a>
-            <a href="https://linkedin.com/jc20" target="_blank" rel="noopener noreferrer">
-              <Icon.Linkedin height={32}/>
-            </a>
-          </div>
-        </div>
+          <SocialMedia color="green" size="sm" />
       </div>
     </section>
   )
