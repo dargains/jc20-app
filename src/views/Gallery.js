@@ -7,7 +7,7 @@ const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState({})
   const images = [
     {
-      src: require("../assets/images/fachada01.jpg"),
+      src: require("../assets/images/cam-01-fachada.jpg"),
       alt: 'fachada'
     },
     {
@@ -63,7 +63,7 @@ const Gallery = () => {
       <Mask />
       <div className="wrapper">
         <h1 className=" font-display text-4xl font-semibold w-2/3 mb-8">
-          <span className="text-green">Avenida Living</span> na primeira linha do requinte
+          <span className="text-green">Avenida Living</span><br/> na primeira linha do requinte
         </h1>
         <div className="grid grid-cols-2 gap-2">
           {images.map(image => <img key={image.src} src={image.src} alt={image.alt} className={image.className} onClick={() => {setShowImage(true); setSelectedImage(image)}} />)}
