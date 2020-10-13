@@ -16,6 +16,7 @@ import Email from './views/Email';
 import Phone from './views/Phone';
 import Gallery from './views/Gallery';
 import Status from './views/Status';
+import Lifestyle from './views/Lifestyle';
 
 // components
 import Menu from './components/Menu';
@@ -63,6 +64,9 @@ function App() {
             </Route>
             <Route path="/contacts">
               <Contacts />
+            </Route>
+            <Route path="/lifestyle">
+              <Lifestyle />
             </Route>
           </Switch>
         </RouteContainer>

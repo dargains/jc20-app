@@ -234,7 +234,7 @@ const Unit = () => {
                 </p>
                 <div>
                   {unit.finishes.map(({ title, itens }) => (
-                    <Accordion key={title} header={title}>
+                    <Accordion key={title} header={title} color="green">
                       <ContentItens content={itens} />
                     </Accordion>
                   ))}

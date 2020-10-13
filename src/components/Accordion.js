@@ -10,7 +10,7 @@ function MyDropdown(props) {
   );
 }
 
-const Accordion = ({header, children, inverted}) => {
+const Accordion = ({header, children, color}) => {
   const [open, setOpen] = useState(false)
   return (
     <article>
@@ -18,8 +18,8 @@ const Accordion = ({header, children, inverted}) => {
         className={cx(
           "flex items-center justify-between py-1 pr-2 mt-3 border-b",
           {
-            "text-green08 border-green08": !inverted,
-            "border-white text-white": inverted
+            "text-green08 border-green08": color === 'green',
+            "border-white text-white": color === 'white'
           }
         )}
         onClick={() => setOpen(!open)}
@@ -37,7 +37,7 @@ const Accordion = ({header, children, inverted}) => {
           <path
             d="M5,0l5,6H0Z"
             transform="translate(10 6) rotate(180)"
-            fill={inverted ? "#FFFFFF" : "#022B25"}
+            fill={color === 'white' ? "#FFFFFF" : "#022B25"}
           />
         </svg>
       </header>
