@@ -28,25 +28,20 @@ const linkList = [
 const Menu = () => {
   const [state] = useContext(AppContext);
   const [content, setContent] = useState({})
-  const [links, setLinks] = useState(linkList)
+  const [links, setLinks] = useState({linkList, lang: state.language})
 
-
-
-  const changeCopy = useCallback(allContent => {
-    const copy = allContent.find(translation => translation.language === state.language)
-    const newLinks = []
+  const changeCopy = useCallback(content => {
+    const copy = content.find(translation => translation.language === state.language)
+    const newLinks = {linkList:[], lang: state.language}
     for (let key in copy) {
-      const thisLink = links.find(item => item.key === key)
-      console.log(thisLink);
+      const thisLink = links.linkList.find(item => item.key === key)
       if (thisLink) {
         thisLink.label = copy[key]
-        newLinks.push(thisLink)
+        newLinks.linkList.push(thisLink)
       }
     }
     setLinks(newLinks)
-  },[links, state.language])
-
-
+  },[links.linkList, state.language])
 
   useEffect(() => {
     if (!Object.keys(content).length) {
@@ -55,21 +50,23 @@ const Menu = () => {
           const allContent = response.data.data[0].translations;
           setContent(allContent)
           db.content.put({ page: 'Menu', content: allContent })
-          // changeCopy(allContent)
+          changeCopy(allContent)
         })
       } else {
         db.content.get('Menu').then(contentDB => {
           setContent(contentDB.content)
-          // changeCopy(contentDB.content)
+          changeCopy(contentDB.content)
         })
       }
     } else {
-      // changeCopy(content)
+      if (state.language !== links.lang) {
+        changeCopy(content)
+      }
     }
     return () => {
       
     }
-  }, [changeCopy, content])
+  }, [changeCopy, content, links.lang, state.language])
   return (
     <aside className={cx('menu',
       'w-full flex flex-col fixed top-0 left-0 transition-transform duration-200 transform z-10',
@@ -78,7 +75,7 @@ const Menu = () => {
         'translate-x-full': !state.menuIsOpen
       }
     )} style={{ height: 'calc(100vh - 58px' }}>
-      {links.map((link, index) => <MenuItem {...link} color={index + 2} key={link.link} />)}
+      {links.linkList.map((link, index) => <MenuItem {...link} color={index + 2} key={link.link} />)}
     </aside>
   )
 }
