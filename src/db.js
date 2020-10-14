@@ -6,8 +6,6 @@ db.version(1).stores({
   user: 'id, name, email, agent',
   units: 'id',
   content: 'page, content',
-  status: '++id, label, status',
-  images: 'id'
 })
 
 export default db;

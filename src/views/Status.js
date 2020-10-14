@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext, useEffect, useCallback } from 'react'
 import cx from "classnames";
 import Button from "../components/Button";
 import Mask from "../components/Mask";
 import { Carousel } from "react-responsive-carousel";
 import Axios from "axios";
-import db from "../db";
-import { baseUrl } from "../api";
+import { AppContext } from '../store.js';
+import { baseUrl } from '../api'
+import db from '../db'
 import ImageOverlay from "../components/ImageOverlay";
 
 const StatusItem = ({ label, status }) => {
@@ -51,45 +52,51 @@ const Slide = ({handleClick, ...image}) => {
 };
 
 const Status = () => {
-  const [items, setItems] = useState([]);
+  const [state] = useContext(AppContext)
   const [images, setImages] = useState([]);
-  const [showPhotos, setShowPhotos] = useState(false);
-  const [showImage, setShowImage] = useState(false);
-  const [selectedImage, setSelectedImage] = useState({});
+  const [content, setContent] = useState({})
+  const [copy, setCopy] = useState({itens:[],images:[]})
+  const [showPhotos, setShowPhotos] = useState(false)
+  const [showImage, setShowImage] = useState(false)
+  const [selectedImage, setSelectedImage] = useState({})
+
+  const changeCopy = useCallback(content => {
+    const newCopy = content.find(translation => translation.language === state.language)
+    setCopy(newCopy)
+  },[state.language])
+
   useEffect(() => {
-    if (window.navigator.onLine) {
-      console.log("Online. Fetching from CMS...");
-      Axios(`${baseUrl}/status?fields=*.*`).then((response) => {
-        const onlineStatus = response.data.data[0].itens;
-        setItems(onlineStatus);
-        onlineStatus.forEach((status, index) => {
-          db.table("status").put({ id: index, ...status });
-        });
-      });
-      Axios(`${baseUrl}/gallery?fields=*.*.*`).then((response) => {
-        const onlineGallery = response.data.data[0].imagens;
-        setImages(onlineGallery);
-        onlineGallery.forEach((image, index) => {
-          db.table("images").put({ id: index, ...image });
-        });
-      });
+    if (!Object.keys(content).length) {
+      if (window.navigator.onLine) {
+        (async () => {
+          const response = await Axios(`${baseUrl}/status?fields=*.*.*`)
+          const allContent = response.data.data[0].translations;
+          // const galleryResponse = await Axios(`${baseUrl}/status_gallery?fields=*.*.*`)
+          // const allGallery = galleryResponse.data.data[0];
+          
+          setImages(response.data.data[0].images)
+          
+          setContent(allContent)
+          db.content.put({ page: 'Menu', content: allContent })
+          changeCopy(allContent)
+
+        })()
+      } else {
+        db.content.get('Menu').then(contentDB => {
+          setContent(contentDB.content)
+          changeCopy(contentDB.content)
+        })
+      }
     } else {
-      console.log("Offline. Fetching from Local DB...");
-      db.table("status")
-        .toArray()
-        .then((dbStatus) => {
-          if (!dbStatus) console.log("nao tem Status na db");
-          else setItems(dbStatus);
-        });
-      db.table("images")
-        .toArray()
-        .then((dbImages) => {
-          if (!dbImages) console.log("nao tem Images na db");
-          else setImages(dbImages);
-        });
+      if (state.language !== copy.lang) {
+        changeCopy(content)
+      }
     }
-    return () => {};
-  }, []);
+    return () => {
+      
+    }
+  }, [changeCopy, content, copy.lang, state.language])
+
   const changeView = () => {
     setShowPhotos(!showPhotos);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -111,7 +118,7 @@ const Status = () => {
       >
         <div className="wrapper w-screen">
           <div>
-            {items.map((item) => (
+            {copy.itens.map((item) => (
               <StatusItem key={item.label} {...item} />
             ))}
           </div>
