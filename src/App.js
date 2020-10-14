@@ -17,6 +17,7 @@ import Phone from './views/Phone';
 import Gallery from './views/Gallery';
 import Status from './views/Status';
 import Lifestyle from './views/Lifestyle';
+import Profile from './views/Profile';
 
 // components
 import Menu from './components/Menu';
@@ -67,6 +68,9 @@ function App() {
             </Route>
             <Route path="/lifestyle">
               <Lifestyle />
+            </Route>
+            <Route path="/profile">
+              <Profile />
             </Route>
           </Switch>
         </RouteContainer>
