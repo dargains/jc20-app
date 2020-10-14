@@ -23,7 +23,9 @@ const Contacts = () => {
         <Link to="/contacts/email">
           <Button type="primary" text="e-mail" className="my-8"/>
         </Link>
-        <Button type="primary" text="whatsapp" className="my-8"/>
+        <a href="https://wa.me/351925595027?text=oi">
+          <Button type="primary" text="whatsapp" className="my-8"/>
+        </a>
         <Link to="/contacts/phone">
           <Button type="primary" text="ligação" className="my-8"/>
         </Link>

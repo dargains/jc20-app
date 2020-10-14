@@ -33,6 +33,22 @@ const Header = () => {
       window.location.href = '/contacts'
     }
   }
+  const handleShare = async event => {
+    if (navigator.canShare) {
+      try {
+        await navigator.share({
+          title: document.title,
+          url: document.location.href
+        })
+        console.log('share successful')
+      } catch(err) {
+        console.log(err)
+      }
+      
+    } else {
+      console.log('não é possível fazer share');
+    }
+  }
   return (
     <header className="bg-green08 fixed bottom-0 z-20 w-screen">
       <nav className="container py-2 bg-green08 flex w-full items-center z-20 justify-between px-4">
@@ -44,12 +60,12 @@ const Header = () => {
           <Icon.Menu />
         </HeaderIcon>
         <HeaderIcon name="partilha">
-          <Link className="mx-2" to="/share">
-            <Icon.Share />
-          </Link>
+          <Icon.Share handleClick={handleShare}/>
         </HeaderIcon>
         <HeaderIcon name="perfil">
-          <Icon.User />
+          <Link to="/profile">
+            <Icon.User />
+          </Link>
         </HeaderIcon>
         <div>
           <Conditional if={state.language === "pt"}>
