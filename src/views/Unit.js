@@ -37,6 +37,7 @@ const Unit = () => {
   const [unit, setUnit] = useState({})
   const [showImage, setShowImage] = useState(false)
   const [showFloor, setShowFloor] = useState(true)
+  const [selectedArea, setSelectedArea] = useState({})
   useEffect(() => {
       db.table('units').get(id, dbUnit => {
         console.log(id, dbUnit);
@@ -102,8 +103,41 @@ const Unit = () => {
             >
               {/* PLANTA */}
               <div className="wrapper w-screen">
+                <div className="mb-12 py-1 border-b border-black">
+                  <p className="flex items-center justify-between">
+                    {
+                      Object.keys(selectedArea).length
+                      ? <>
+                        <span className="text-xl flex items-center">
+                          {selectedArea.image && <Icon.Image className="mr-2" />} {selectedArea.label}
+                        </span>
+                        <span className="text-gray-600">{selectedArea.area} m<sup>2</sup></span>
+                      </>
+                      : <>
+                        <span className="text-xs">Clique no ambiente para mais informações</span>
+                        <Icon.Click />
+                      </>
+                      
+                    }
+                  </p>
+                </div>
                 <figure>
-                  <img src={unit.floorplan.data.full_url} alt="planta" />
+                  <img src={unit.floorplan.data.full_url} alt="planta" useMap="#floorplan" />
+                  <map name="floorplan">
+                    <area
+                      shape="rect"
+                      coords="34,44,270,350"
+                      alt="Sala"
+                      onClick={() => setSelectedArea({label: 'Sala', area: '40'
+                    , image: unit.floorplan.data.full_url})}
+                    />
+                    <area
+                      shape="rect"
+                      coords="290,172,333,250"
+                      alt="Cozinha"
+                      onClick={() => setSelectedArea({label: 'Cozinha', area: '20'})}
+                    />
+                  </map>
                 </figure>
                 <p className="text-center text-xs text-gray-600 mt-2 mb-6">
                   Av. João Crisóstomo
