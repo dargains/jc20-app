@@ -9,7 +9,7 @@ const Button = ({text, type, icon, iconDirection, handleClick, className}) => {
       {
         "hover:bg-green08 text-green08 hover:text-white border-green08": type === 'primary',
         "hover:bg-white text-white hover:text-green08 border-white": type === 'secondary',
-        "bg-gray-600 hover:bg-gray-900 text-white border-gray-600 hover:border-gray-900": type === 'tertiary',
+        "bg-black bg-opacity-50 hover:bg-gray-900 text-white border-white hover:border-gray-900": type === 'tertiary',
         "flex-row-reverse": iconDirection === 'right'
       },
       className
