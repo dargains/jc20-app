@@ -10,7 +10,7 @@ const Inputbox = ({type, color, name, placeholder, register, error}) => {
       placeholder={placeholder}
       ref={register}
       className={cx(
-        "border-b bg-transparent w-full py-1 mt-6",
+        "border-b bg-transparent w-full py-1 mt-6 transition-all duration-200",
         {
           "text-white border-white": color === 'white',
           "text-green08 border-green08": color === 'green',
