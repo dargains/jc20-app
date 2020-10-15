@@ -6,7 +6,6 @@ import './tailwind.generated.css'
 // views
 import Intro from './views/Intro';
 import SignUp from './views/SignUp'
-import Home from './views/Home'
 import About from './views/About'
 import Units from './views/Units';
 import Unit from './views/Unit';
@@ -37,9 +36,6 @@ function App() {
             </Route>
             <Route exact path="/signup">
               <SignUp />
-            </Route>
-            <Route path="/home">
-              <Home />
             </Route>
             <Route path="/about">
               <About />
