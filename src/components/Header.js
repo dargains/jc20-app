@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { AppContext } from '../store.js';
 import cx from 'classnames'
@@ -19,6 +19,7 @@ const HeaderIcon = ({ children, name, handleClick, className }) => {
 const Header = () => {
   const [state, dispatch] = useContext(AppContext);
   const [showDialog, setShowDialog] = useState(false)
+  const [down, setDown] = useState(false)
 
   const handleToggleLang = lang => {
     dispatch({ type: 'CHANGE_LANGUAGE', payload: lang })
@@ -49,8 +50,17 @@ const Header = () => {
       console.log('não é possível fazer share');
     }
   }
+
+  useEffect(() => {
+    setDown(state.headerDown)
+  }, [state.headerDown])
   return (
-    <header className="bg-green08 fixed bottom-0 z-20 w-screen">
+    <header className={cx(
+      "bg-green08 fixed bottom-0 z-20 w-screen transform transition-transform duration-200",
+      {
+        "translate-y-full": down
+      }
+      )}>
       <nav className="container py-2 bg-green08 flex w-full items-center z-20 justify-between px-4">
         <HeaderIcon
           name="menu"

@@ -12,6 +12,16 @@ const initialState = {
 const reducer = (state, action) => {
   const { type, payload } = action
   switch (type) {
+    case "TOGGLE_HEADER_DOWN":
+      return {
+        ...state,
+        headerDown: payload
+      }
+    case "SET_USER":
+      return {
+        ...state,
+        user: payload
+      }
     case 'CLOSE_MENU':
       return {
         ...state,
