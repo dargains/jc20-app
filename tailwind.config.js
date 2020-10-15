@@ -46,28 +46,6 @@ module.exports = {
       },
       opacity: {
         90: 90
-      },
-      keyframes: {
-        fadeInOut: {
-          '0%': { opacity: 0 },
-          '30%': { opacity: 1 },
-          '70%': { opacity: 1 },
-          '100%': { opacity: 0 },
-        },
-        fadeIn: {
-          from: { opacity: 0 },
-          to: { opacity: 1 }
-        },
-        fadeOut: {
-          from: { opacity: 1 },
-          to: { opacity: 0 }
-        }
-      },
-      animation: {
-        fadeInOut: 'fadeInOut 2s ease-in-out',
-        fadeInOut2: 'fadeInOut 2s ease-in-out 2s',
-        fadeIn: 'fadeIn 1s ease-in-out',
-        fadeOut: 'fadeOut 1s ease-in-out'
       }
     },
   },

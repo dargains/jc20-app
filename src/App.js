@@ -4,7 +4,7 @@ import RouteContainer from './RouteContainer';
 import './tailwind.generated.css'
 
 // views
-// import Intro from './views/Intro';
+import Intro from './views/Intro';
 import SignUp from './views/SignUp'
 import Home from './views/Home'
 import About from './views/About'
@@ -30,10 +30,12 @@ function App() {
       <Router>
         <Header />
         <Menu />
-        {/* <Intro /> */}
         <RouteContainer>
           <Switch>
             <Route exact path="/">
+              <Intro />
+            </Route>
+            <Route exact path="/signup">
               <SignUp />
             </Route>
             <Route path="/home">
