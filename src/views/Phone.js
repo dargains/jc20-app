@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import { useForm } from "react-hook-form";
 import cx from 'classnames'
 import styled from 'styled-components'
@@ -8,12 +8,14 @@ import SocialMedia from '../components/SocialMedia';
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
 import {projectUrl} from '../api'
+import { AppContext } from '../store';
 
 const Phone = () => {
+  const [state, dispatch] = useContext(AppContext);
   const [emailMessage, setEmailMessage] = useState('')
   const [emailSent, setEmailSent] = useState(false)
   const [date, setDate] = useState('')
-  const { register, handleSubmit, errors } = useForm()
+  const { register, handleSubmit, errors, setValue } = useForm()
   const days = () => {
     const range = 8
     const today = new Date()
@@ -60,6 +62,12 @@ const Phone = () => {
       setEmailMessage(error.response.data.error.message)
     }
   }
+  useEffect(() => {
+    if (state.user) {
+      setValue('name', state.user.name)
+      setValue('phone', state.user.phone)
+    }
+  },[setValue, state.user])
   return (
     <section className="bg-green04 py-6">
       {

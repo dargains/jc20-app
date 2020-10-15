@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import cx from 'classnames'
 import { useForm } from "react-hook-form";
 import styled from 'styled-components';
@@ -8,11 +8,14 @@ import { Link } from 'react-router-dom';
 import SocialMedia from '../components/SocialMedia';
 import Axios from 'axios';
 import { projectUrl } from '../api';
+import { useEffect } from 'react';
+import { AppContext } from '../store';
 
 const Email = () => {
+  const [state, dispatch] = useContext(AppContext);
   const [errorMessage, setErrorMessage] = useState('')
   const [emailSent, setEmailSent] = useState(false)
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, setValue } = useForm();
 
   const onSubmit = async ({name, email, subject, text}) => {
     const body = {
@@ -42,6 +45,12 @@ const Email = () => {
       setErrorMessage(error.response.data.error.message)
     }
   }
+  useEffect(() => {
+    if (state.user) {
+      setValue('name', state.user.name)
+      setValue('email', state.user.email)
+    }
+  },[setValue, state.user])
   return (
     <section className="bg-green04 py-6">
       {
