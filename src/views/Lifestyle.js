@@ -1,10 +1,60 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import Accordion from '../components/Accordion'
 import Button from '../components/Button'
 import lifestyleImage from '../assets/images/lifestyle.jpg'
 import mapImage from '../assets/images/map.jpg'
+import { useEffect } from 'react'
+import Axios from 'axios'
+import { baseUrl } from '../api'
+import db from '../db'
+import { AppContext } from '../store'
+
+
+const LifestyleItem = ({title, image, text, link}) => <article className="text-white my-12">
+    <h2 className="font-display text-5xl font-medium capitalize -mb-6" style={{zIndex: 1}} >{title}</h2>
+    <div className="-mx-6">
+      <img src={image.data.full_url} alt="Gastronomia"/>
+    </div>
+    <p className="my-6">
+      {text}
+    </p>
+    <a href={link} target="_blank" rel="noopener noreferrer">
+      <Button text="saiba mais" type="secondary"  />
+    </a>
+  </article>
 
 const Lifestyle = () => {
+  const [state] = useContext(AppContext)
+  const [content, setContent] = useState([])
+
+  useEffect(() => {
+    console.log(content);
+    if (!Object.keys(content).length) {
+      if (window.navigator.onLine) {
+        (async () => {
+          const response = await Axios(`${baseUrl}/lifestyle?fields=*.*.*`)
+          const allContent = response.data.data;
+          
+          setContent(allContent)
+          db.content.put({ page: 'Lifestyle', content: allContent })
+          // changeCopy(allContent)
+
+        })()
+      } else {
+        db.content.get('Lifestyle').then(contentDB => {
+          setContent(contentDB.content)
+          // changeCopy(contentDB.content)
+        })
+      }
+    } else {
+      // if (state.language !== copy.lang) {
+        // changeCopy(content)
+      // }
+    }
+    return () => {
+      
+    }
+  }, [content, state.language])
   return (
     <section className="bg-green05 py-6">
       <div className="wrapper">
@@ -54,26 +104,7 @@ const Lifestyle = () => {
             </ol>
           </Accordion>
         </div>
-        <article className="text-white my-12">
-          <h2 className="font-display text-5xl font-medium capitalize -mb-6" style={{zIndex: 1}} >Gastronomia</h2>
-          <div className="-mx-6">
-            <img src={lifestyleImage} alt="Gastronomia"/>
-          </div>
-          <p className="my-6">
-            Breve texto sobre a fotografia indicada na imagem. Lorem ipsum condimentum euismod eros fames nisi quis turpis, conubia vivamus massa.
-          </p>
-          <Button text="saiba mais" type="secondary" />
-        </article>
-        <article className="text-white my-12">
-          <h2 className="font-display text-5xl font-medium capitalize -mb-6" style={{zIndex: 1}} >Gastronomia</h2>
-          <div className="-mx-6">
-            <img src={lifestyleImage} alt="Gastronomia"/>
-          </div>
-          <p className="my-6">
-            Breve texto sobre a fotografia indicada na imagem. Lorem ipsum condimentum euismod eros fames nisi quis turpis, conubia vivamus massa.
-          </p>
-          <Button text="saiba mais" type="secondary" />
-        </article>
+        {content.map(item => <LifestyleItem key={item.title} {...item} />)}
       </div>
     </section>
   )
