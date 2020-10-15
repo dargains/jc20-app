@@ -10,7 +10,7 @@ import Axios from 'axios';
 import { projectUrl } from '../api';
 
 const Email = () => {
-  const [emailMessage, setEmailMessage] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
   const [emailSent, setEmailSent] = useState(false)
   const { register, handleSubmit, errors } = useForm();
 
@@ -39,7 +39,7 @@ const Email = () => {
       console.log(mail);
       setEmailSent(true)
     } catch (error) {
-      setEmailMessage(error.response.data.error.message)
+      setErrorMessage(error.response.data.error.message)
     }
   }
   return (
@@ -106,7 +106,7 @@ const Email = () => {
 
               <textarea
                 color="white"
-                placeholder="assunto"
+                placeholder="texto"
                 name="text"
                 rows="5"
                 error={errors.text}
@@ -119,7 +119,7 @@ const Email = () => {
                 )}
               />
               {errors.text && <ErrorMessage>Este campo é obrigatório</ErrorMessage>}
-              <p className="text-red mt-4 text-xs">{emailMessage}</p>
+              <p className="text-red mt-4 text-xs">{errorMessage}</p>
               <Button text="enviar" type="secondary" className="mt-10" />
             </form>
           </div>
