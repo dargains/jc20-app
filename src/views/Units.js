@@ -103,8 +103,8 @@ const Units = () => {
         )}
       </div>
       {
-        !!units.length && 
-        <Building
+        !!units.length
+        ? <Building
           className="grid mx-auto"
           style={{ padding: "10% 8% 8%", backgroundImage: `url(${fachada})` }}
         >
@@ -120,6 +120,7 @@ const Units = () => {
             </AptImage>
           ))}
         </Building>
+        : <p className="text-2xl text-center mt-12">A carregar...</p>
       }
       {/* <button
         className="mt-4 p-2 bg-green text-white"
