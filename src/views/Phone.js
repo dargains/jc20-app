@@ -11,7 +11,7 @@ import {projectUrl} from '../api'
 import { AppContext } from '../store';
 
 const Phone = () => {
-  const [state, dispatch] = useContext(AppContext);
+  const [state] = useContext(AppContext);
   const [emailMessage, setEmailMessage] = useState('')
   const [emailSent, setEmailSent] = useState(false)
   const [date, setDate] = useState('')

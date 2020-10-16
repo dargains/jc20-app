@@ -12,7 +12,7 @@ import { useEffect } from 'react';
 import { AppContext } from '../store';
 
 const Email = () => {
-  const [state, dispatch] = useContext(AppContext);
+  const [state] = useContext(AppContext);
   const [errorMessage, setErrorMessage] = useState('')
   const [emailSent, setEmailSent] = useState(false)
   const { register, handleSubmit, errors, setValue } = useForm();
