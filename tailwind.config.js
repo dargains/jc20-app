@@ -39,7 +39,8 @@ module.exports = {
         '2xs': '0.625rem'
       },
       borderRadius: {
-        'xl': '50px'
+        'xl': '35px',
+        '2xl': '50px'
       },
       minWidth: {
         175: '175px'
