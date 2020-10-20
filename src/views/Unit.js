@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {useParams} from "react-router-dom";
 import Axios from 'axios'
 import styled from 'styled-components'
+import ImageMap from "image-map"
 import cx from 'classnames'
 import { baseUrl } from '../api'
 import db from '../db'
@@ -32,6 +33,18 @@ const ContentItens = ({content}) => {
   );
 };
 
+const ImageArea = ({name, coordinates, handleClick}) => {
+  return (
+    <area
+      alt={name}
+      title={name}
+      coords={coordinates}
+      shape="poly"
+      onClick={handleClick}
+    />
+  )
+}
+
 const Unit = () => {
   let {id} = useParams();
   const [unit, setUnit] = useState({})
@@ -44,11 +57,16 @@ const Unit = () => {
         if (!dbUnit) Axios(`${baseUrl}/units/${id}?fields=*.*`).then(response => {
           const onlineUnits = response.data.data
           setUnit(onlineUnits)
+          setTimeout(() => {
+            
+            ImageMap('img[usemap]')
+          }, 1000);
         })
-        else setUnit(dbUnit)
+        else {
+          setUnit(dbUnit)
+          ImageMap('img[usemap]')
+        }
       })
-
-
     return () => {
 
     }
@@ -109,7 +127,7 @@ const Unit = () => {
                       Object.keys(selectedArea).length
                       ? <>
                         <span className="text-xl flex items-center">
-                          {selectedArea.image && <Icon.Image className="mr-2" />} {selectedArea.label}
+                          {selectedArea.image && <Icon.Image className="mr-2" />} {selectedArea.name}
                         </span>
                         <span className="text-gray-600">{selectedArea.area} m<sup>2</sup></span>
                       </>
@@ -122,26 +140,19 @@ const Unit = () => {
                   </p>
                 </div>
                 <figure>
-                  <img src={unit.floorplan.data.full_url} alt="planta" useMap="#floorplan" />
-                  <map name="floorplan">
-                    <area
-                      shape="rect"
-                      coords="34,44,270,350"
-                      alt="Sala"
-                      onClick={() => setSelectedArea({label: 'Sala', area: '40'
-                    , image: unit.floorplan.data.full_url})}
-                    />
-                    <area
-                      shape="rect"
-                      coords="290,172,333,250"
-                      alt="Cozinha"
-                      onClick={() => setSelectedArea({label: 'Cozinha', area: '20'})}
-                    />
-                  </map>
+                  <img src={unit.floorplan.data.full_url} alt="planta" useMap={unit.image_areas && "#floorplan"} />
+                  {
+                    unit.image_areas &&
+                    <map name="floorplan">
+                      {unit.image_areas.map(area => <ImageArea key={area.name} {...area} handleClick={() => {setSelectedArea(area)}} />)}
+                    </map>
+                  }
                 </figure>
+
                 <p className="text-center text-xs text-gray-600 mt-2 mb-6">
                   Av. João Crisóstomo
                 </p>
+
                 <div className="bg-gray-400 rounded-xl flex items-center justify-between py-3 px-12">
                   {unit.info_file && (
                     <a
@@ -163,6 +174,7 @@ const Unit = () => {
                     }}
                   />
                 </div>
+                
                 <InfoGrid className="bg-gray-300 mt-8">
                   <article className="flex items-center justify-between p-4 bg-white">
                     <div className="flex flex-col items-center w-12">
