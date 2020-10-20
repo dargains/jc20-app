@@ -66,8 +66,9 @@ const Units = () => {
     <section
       className={cx(
         "apartments",
-        "bg-cover bg-no-repeat bg-center w-full min-h-screen"
+        "bg-cover bg-no-repeat bg-center w-full"
       )}
+      style={{minHeight: window.innerHeight}}
     >
       <div className="h-24 bg-green07 flex items-center justify-between px-4">
         {unit.title ? (

@@ -15,7 +15,7 @@ import Image02 from '../assets/images/cam-04-hall.jpg'
 import Image03 from '../assets/images/cam-07-escadas.jpg'
 import Image04 from '../assets/images/cam-08-wc.jpg'
 
-const Signup = () => {
+const Welcome = () => {
   const [errorMessage, setErrorMessage] = useState('')
   const [showHello, setShowHello] = useState(false)
   const [state, dispatch] = useContext(AppContext);
@@ -24,9 +24,9 @@ const Signup = () => {
   const history = useHistory();
 
   const showIntro = () => {
-    setName(name)
     setShowHello(true)
     setTimeout(() => {
+      dispatch({ type: 'TOGGLE_HEADER_DOWN', payload: false })
       dispatch({ type: 'TOGGLE_MENU', payload: true })
     }, 3000);
   }
@@ -38,6 +38,7 @@ const Signup = () => {
       const dbUser = data;
       dbUser.id = response.data.data.id
       await db.user.put({ ...dbUser })
+      setName(data.name)
       showIntro()
     } catch (error) {
       setErrorMessage(error.response.data.error.message)
@@ -62,7 +63,7 @@ const Signup = () => {
   }, [dispatch, history, name, state.user])
 
   return (
-    <section className="w-screen min-h-screen ">
+    <section className="w-screen full-h">
       {
         !showHello
         ? <div className="wrapper py-6 bg-green08 h-full">
@@ -130,7 +131,7 @@ const Signup = () => {
           </form>
         </div>
         : <div
-          className="w-full h-screen flex items-end p-8 bg-cover bg-center"
+          className="w-full full-h flex items-end p-8 bg-cover bg-center"
           style={{ backgroundImage: `url(${RandomImage})` }}
         >
           <div className="bg-gray-800 bg-opacity-25 absolute w-full h-full pointer-events-none top-0 left-0"></div>
@@ -150,4 +151,4 @@ const ErrorMessage = styled.span`
   font-size: 12px;
 `
 
-export default Signup
+export default Welcome

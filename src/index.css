@@ -27,11 +27,11 @@ body {
   font-family: Roboto, sans-serif;
   font-weight: 300;
 }
-main {
+main,
+section,
+.full-h {
   min-height: 100vh;
-}
-section {
-  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
 }
 .font-body {
   font-family: "Roboto", sans-serif;

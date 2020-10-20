@@ -56,12 +56,14 @@ const Header = () => {
   }, [state.headerDown])
   return (
     <header className={cx(
-      "fixed top-0 pointer-events-none z-20 h-screen w-screen"
+      "fixed top-0 pointer-events-none z-20 full-h w-screen"
       )}>
       <nav className={cx("absolute bottom-0 container py-2 bg-green08 flex w-full items-center z-20 justify-between px-4 pointer-events-auto transform transition-transform duration-200",
       {
         "translate-y-full": down
-      })}>
+      })}
+      style={{height: 58}}
+      >
         <HeaderIcon
           name="menu"
           handleClick={toggleMenu}

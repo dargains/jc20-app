@@ -69,12 +69,12 @@ const Menu = () => {
   }, [changeCopy, content, links.lang, state.language])
   return (
     <aside className={cx('menu',
-      'w-full flex flex-col fixed top-0 left-0 transition-transform duration-200 transform z-10',
+      'w-full full-h flex flex-col fixed top-0 left-0 transition-transform duration-200 transform z-10',
       {
         'translate-x-0': state.menuIsOpen,
         'translate-x-full': !state.menuIsOpen
       }
-    )} style={{ height: 'calc(100vh - 58px' }}>
+    )} style={{ paddingBottom: 58 }}>
       {links.linkList.map((link, index) => <MenuItem {...link} color={index + 2} key={link.link} />)}
     </aside>
   )

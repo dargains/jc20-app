@@ -5,7 +5,7 @@ import './tailwind.generated.css'
 
 // views
 import Intro from './views/Intro';
-import SignUp from './views/SignUp'
+import Welcome from './views/Welcome'
 import About from './views/About'
 import Units from './views/Units';
 import Unit from './views/Unit';
@@ -17,15 +17,24 @@ import Gallery from './views/Gallery';
 import Status from './views/Status';
 import Lifestyle from './views/Lifestyle';
 import Profile from './views/Profile';
+import Login from './views/Login';
 
 // components
 import Menu from './components/Menu';
 import Header from './components/Header';
+import { useEffect } from 'react';
 
 
 function App() {
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      // We execute the same script as before
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    });
+  })
   return (
-    <div className="App min-h-screen">
+    <div className="App full-h">
       <Router>
         <Header />
         <Menu />
@@ -34,8 +43,8 @@ function App() {
             <Route exact path="/">
               <Intro />
             </Route>
-            <Route exact path="/signup">
-              <SignUp />
+            <Route exact path="/welcome">
+              <Welcome />
             </Route>
             <Route path="/about">
               <About />
@@ -69,6 +78,9 @@ function App() {
             </Route>
             <Route path="/profile">
               <Profile />
+            </Route>
+            <Route path="/login">
+              <Login />
             </Route>
           </Switch>
         </RouteContainer>
