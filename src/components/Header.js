@@ -58,7 +58,7 @@ const Header = () => {
     <header className={cx(
       "fixed top-0 pointer-events-none z-20 h-full w-full"
       )}>
-      <nav className={cx("absolute bottom-0 container py-2 bg-green08 flex w-full items-center z-20 justify-between px-4 pointer-events-auto transform transition-transform duration-200",
+      <nav className={cx("absolute bottom-0 py-2 bg-green08 flex w-full items-center z-20 justify-between px-4 pointer-events-auto transform transition-transform duration-200",
       {
         "translate-y-20": down,
       })}

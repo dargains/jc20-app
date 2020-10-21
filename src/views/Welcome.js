@@ -17,7 +17,7 @@ import Image04 from '../assets/images/cam-08-wc.jpg'
 
 const Welcome = () => {
   const [errorMessage, setErrorMessage] = useState('')
-  const [showHello, setShowHello] = useState(true)
+  const [showHello, setShowHello] = useState(false)
   const [state, dispatch] = useContext(AppContext);
   const [name, setName] = useState('')
   const { register, handleSubmit, errors } = useForm();
@@ -63,7 +63,7 @@ const Welcome = () => {
   }, [dispatch, history, name, state.user])
 
   return (
-    <section className="w-screen min-h-full bg-green08 " style={{height: showHello ? window.innerHeight : ''}}>
+    <section className="w-screen bg-green08" style={{height: showHello ? window.innerHeight : ''}}>
       {
         !showHello
         ? <div className="wrapper py-6">
