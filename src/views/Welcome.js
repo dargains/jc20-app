@@ -56,12 +56,12 @@ const Welcome = () => {
       }, 3000);
     }
     return () => {
-      
+      setShowHello(false)
     }
   }, [dispatch, history, name, state.user])
 
   return (
-    <section className="w-screen bg-green08" style={{height: showHello ? window.innerHeight : ''}}>
+    <section className="w-screen py-0 bg-green08" style={{height: showHello ? window.innerHeight : ''}}>
       {
         !showHello
         ? <div className="wrapper py-6">

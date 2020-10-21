@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import { useForm } from "react-hook-form";
 import cx from 'classnames'
 import { AppContext } from '../store';
@@ -12,21 +12,35 @@ import Axios from 'axios';
 
 const Login = () => {
   const [state, dispatch] = useContext(AppContext);
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, setValue } = useForm();
   const [errorMessage, setErrorMessage] = useState('')
   const location = useLocation()
+  const history = useHistory()
   const type = location.hash.substr(1)
   const onSubmit = async data => {
     delete data.terms
     try {
       const response = await Axios.post(`${projectUrl}/auth/authenticate`, data)
-      data.id = response.data.data.id
+      console.log(response);
+      data = {
+        ...data,
+        ...state.user,
+        ...response.data.data.user
+      }
+      dispatch({type: 'DELETE_USER'})
       data.logged = true
       dispatch({type: 'SET_USER', payload: data})
+      history.push('/profile')
     } catch (error) {
       setErrorMessage(error.response.data.error.message)
     }
   }
+
+  useEffect(() => {
+    if (state.user) setValue('email', state.user.email)
+  }, [setValue, state.user])
+
+
   return (
     <section>
       <Mask />

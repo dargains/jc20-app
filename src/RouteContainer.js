@@ -16,7 +16,7 @@ const RouteContainer = (props) => {
         const user = users[0]
         if (user) {
           dispatch({ type: 'SET_USER', payload: user })
-        }
+        } else if (location.pathname !== '/' && location.pathname !== '/welcome') history.push('/')
       })
     } else if (location.pathname === '/') history.push('/welcome')
     if (location.pathname === '/' || location.pathname === '/welcome') setPadding(0)

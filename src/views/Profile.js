@@ -1,12 +1,19 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { AppContext } from '../store';
 import Icon from '../components/Icon'
 import Mask from '../components/Mask'
 
 const Profile = () => {
-  const [state] = useContext(AppContext);
+  const [state, dispatch] = useContext(AppContext);
+  const history = useHistory();
   const {user} = state
+
+  const handleLogout = () => {
+    dispatch({type: "DELETE_USER"})
+    history.push('/')
+  }
+
   return (
     <section>
       <Mask />
@@ -16,9 +23,13 @@ const Profile = () => {
           <h2 className="text-2xl capitalize mb-8">
             <span className="text-green font-bold">Olá,</span> {user.name}
           </h2>
-          <article className="bg-white rounded-lg shadow-lg flex items-center justify-between px-6 py-8">
+          <Link to="" className="bg-white rounded-lg shadow-lg flex items-center justify-between px-6 py-8 mb-6">
             <Icon.Construction height={64} />
             <span className="pl-4 text-2xl text-center flex-1">Meus registos</span>
+          </Link>
+          <article className="bg-white rounded-lg shadow-lg flex items-center justify-between px-6 py-8 mb-6" onClick={handleLogout}>
+            <Icon.Construction height={64} />
+            <span className="pl-4 text-2xl text-center flex-1">Logout</span>
           </article>
         </div>
         : <div className="wrapper">

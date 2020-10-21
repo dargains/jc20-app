@@ -19,10 +19,17 @@ const reducer = (state, action) => {
         headerDown: payload
       }
     case "SET_USER":
+      payload.name = payload.name || payload.first_name
       db.user.put(payload)
       return {
         ...state,
         user: payload
+      }
+    case "DELETE_USER":
+      db.user.clear()
+      return {
+        ...state,
+        user: {}
       }
     case 'CLOSE_MENU':
       return {

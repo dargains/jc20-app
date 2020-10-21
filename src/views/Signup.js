@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Axios from 'axios';
 import cx from 'classnames'
 import { useForm } from "react-hook-form";
-import { baseUrl } from '../api';
+import { baseUrl, projectUrl } from '../api';
 import { useEffect } from 'react';
 import { AppContext } from '../store';
 import Button from '../components/Button'
@@ -22,11 +22,22 @@ const SignUp = () => {
 
   const onSubmit = async data => {
     delete data.terms
+    const userData = {
+      first_name: data.name,
+      email: data.email,
+      password: data.password,
+      role: 5,
+      status: 'active'
+    }
     data.agent = type === 'agent'
     try {
+      const response = await Axios.post(`${projectUrl}/users`, userData)
       await Axios.patch(`${baseUrl}/users/${state.user.id}`, data)
       setDone(true)
-      data.id = state.user.id
+      debugger
+      data.userId = state.user.id
+      dispatch({type: 'DELETE_USER'})
+      data.id = response.data.data.id
       data.logged = true
       dispatch({type: 'SET_USER', payload: data})
     } catch (error) {
