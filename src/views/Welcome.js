@@ -6,7 +6,6 @@ import Button from '../components/Button'
 import Inputbox from '../components/Inputbox'
 import Axios from 'axios';
 import cx from 'classnames'
-import db from '../db'
 import { AppContext } from '../store.js';
 import { baseUrl } from '../api';
 
@@ -35,9 +34,8 @@ const Welcome = () => {
     delete data.terms
     try {
       const response = await Axios.post(`${baseUrl}/users`, data)
-      const dbUser = data;
-      dbUser.id = response.data.data.id
-      await db.user.put({ ...dbUser })
+      data.id = response.data.data.id
+      dispatch({type: "SET_USER", payload: data})
       setName(data.name)
       showIntro()
     } catch (error) {

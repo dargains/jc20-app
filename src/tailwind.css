@@ -20,6 +20,12 @@ section {
 .checkboxField input:checked + span {
   @apply bg-white;
 }
+.checkboxField input + span svg {
+  @apply hidden;
+}
+.checkboxField input:checked + span svg {
+  @apply block;
+}
 
 @responsive {
   .aspect-ratio {

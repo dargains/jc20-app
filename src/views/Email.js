@@ -142,7 +142,6 @@ const Email = () => {
 const ErrorMessage = styled.span`
   color: #fe0a01;
   font-size: 12px;
-
 `
 
 export default Email

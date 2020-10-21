@@ -1,19 +1,31 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useForm } from "react-hook-form";
 import cx from 'classnames'
+import { AppContext } from '../store';
 import Mask from '../components/Mask'
 import Inputbox from '../components/Inputbox';
 import styled from 'styled-components';
 import Button from '../components/Button';
+import { projectUrl } from '../api';
+import Axios from 'axios';
 
 const Login = () => {
+  const [state, dispatch] = useContext(AppContext);
   const { register, handleSubmit, errors } = useForm();
   const [errorMessage, setErrorMessage] = useState('')
   const location = useLocation()
   const type = location.hash.substr(1)
-  const onSubmit = data => {
-    console.log(data);
+  const onSubmit = async data => {
+    delete data.terms
+    try {
+      const response = await Axios.post(`${projectUrl}/auth/authenticate`, data)
+      data.id = response.data.data.id
+      data.logged = true
+      dispatch({type: 'SET_USER', payload: data})
+    } catch (error) {
+      setErrorMessage(error.response.data.error.message)
+    }
   }
   return (
     <section>
@@ -74,7 +86,7 @@ const Login = () => {
             <p className="text-red mt-4 text-xs">{errorMessage}</p>
             <Button text="aceder" type="primary" className="mt-10" />
           </form>
-          <p className="text-green08 text-sm text-center mt-8">Não tem conta? <Link to="/signup" className="underline">Criar</Link></p>
+          <p className="text-green08 text-sm text-center mt-8">Não tem conta? <Link to={`/signup#${type}`} className="underline">Criar</Link></p>
           <p className="text-green08 text-sm text-center mt-4">Esqueceu-se da password? <Link to="/restore" className="underline">Restaure</Link></p>
       </div>
     </section>

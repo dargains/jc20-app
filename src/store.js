@@ -1,4 +1,5 @@
 import React, { useReducer, createContext } from "react";
+import db from "./db";
 
 export const AppContext = createContext();
 
@@ -18,6 +19,7 @@ const reducer = (state, action) => {
         headerDown: payload
       }
     case "SET_USER":
+      db.user.put(payload)
       return {
         ...state,
         user: payload

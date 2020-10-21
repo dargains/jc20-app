@@ -18,6 +18,7 @@ import Status from './views/Status';
 import Lifestyle from './views/Lifestyle';
 import Profile from './views/Profile';
 import Login from './views/Login';
+import SignUp from './views/Signup';
 
 // components
 import Menu from './components/Menu';
@@ -83,6 +84,9 @@ function App() {
             </Route>
             <Route path="/login">
               <Login />
+            </Route>
+            <Route path="/signup">
+              <SignUp />
             </Route>
           </Switch>
         </RouteContainer>
