@@ -28,7 +28,6 @@ const Lifestyle = () => {
   const [content, setContent] = useState([])
 
   useEffect(() => {
-    console.log(content);
     if (!Object.keys(content).length) {
       if (window.navigator.onLine) {
         (async () => {

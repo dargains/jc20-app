@@ -12,7 +12,7 @@ const Intro = () => {
     history.push('/welcome')
   }
   return (
-    <section className="min-w-screen full-h bg-white z-20 p-12 flex flex-col itens-center justify-end bg-cover bg-right" style={{ backgroundImage: `url(${Fachada})`, marginBottom: '-58px' }}>
+    <section className="min-w-screen h-full bg-white z-20 p-12 flex flex-col itens-center justify-end bg-cover bg-right" style={{ backgroundImage: `url(${Fachada})`, marginBottom: '-58px' }}>
       <Button text="português" type="tertiary" className="my-2" handleClick={() => chooseLang('pt')} />
       <Button text="english" type="tertiary" className="my-2" handleClick={() => chooseLang('en')} />
     </section>

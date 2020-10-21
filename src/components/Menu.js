@@ -69,7 +69,7 @@ const Menu = () => {
   }, [changeCopy, content, links.lang, state.language])
   return (
     <aside className={cx('menu',
-      'w-full full-h flex flex-col fixed top-0 left-0 transition-transform duration-200 transform z-10',
+      'w-full h-full flex flex-col fixed top-0 left-0 transition-transform duration-200 transform z-10',
       {
         'translate-x-0': state.menuIsOpen,
         'translate-x-full': !state.menuIsOpen

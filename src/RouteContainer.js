@@ -19,7 +19,7 @@ const RouteContainer = (props) => {
         }
       })
     } else if (location.pathname === '/') history.push('/welcome')
-    if (location.pathname === '/welcome') setPadding(0)
+    if (location.pathname === '/' || location.pathname === '/welcome') setPadding(0)
     else setPadding(58)
     window.scrollTo({top:0, behavior: 'smooth'})
     return () => {

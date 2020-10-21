@@ -39,7 +39,7 @@ const Header = () => {
       try {
         await navigator.share({
           title: document.title,
-          url: document.location.href
+          url: 'https://jc20.graffito.pt'
         })
         console.log('share successful')
       } catch(err) {
@@ -56,11 +56,11 @@ const Header = () => {
   }, [state.headerDown])
   return (
     <header className={cx(
-      "fixed top-0 pointer-events-none z-20 full-h w-screen"
+      "fixed top-0 pointer-events-none z-20 h-full w-full"
       )}>
       <nav className={cx("absolute bottom-0 container py-2 bg-green08 flex w-full items-center z-20 justify-between px-4 pointer-events-auto transform transition-transform duration-200",
       {
-        "translate-y-full": down
+        "translate-y-20": down,
       })}
       style={{height: 58}}
       >
@@ -106,7 +106,7 @@ const Header = () => {
 
       <aside
         className={cx(
-          "fixed top-0 left-0 h-full w-full z-10 bg-white bg-opacity-50 pointer-events-none opacity-0 transition-opacity duration-300",
+          "absolute top-0 left-0 h-full w-full z-10 bg-white bg-opacity-50 pointer-events-none opacity-0 transition-opacity duration-300",
           { "pointer-events-auto opacity-100": showDialog }
         )}
       >

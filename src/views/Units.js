@@ -63,13 +63,7 @@ const Units = () => {
     history.push(`/unit/${id}`)
   }
   return (
-    <section
-      className={cx(
-        "apartments",
-        "bg-cover bg-no-repeat bg-center w-full"
-      )}
-      style={{minHeight: window.innerHeight}}
-    >
+    <section>
       <div className="h-24 bg-green07 flex items-center justify-between px-4">
         {unit.title ? (
           <div

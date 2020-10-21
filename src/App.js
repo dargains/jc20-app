@@ -27,17 +27,19 @@ import { useEffect } from 'react';
 
 function App() {
   useEffect(() => {
-    window.addEventListener('resize', () => {
-      // We execute the same script as before
-      let vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-    });
+    // let vh = window.innerHeight * 0.01;
+    // document.documentElement.style.setProperty('--vh', `${vh}px`);
+    // window.addEventListener('resize', () => {
+    //   // We execute the same script as before
+    //   let vh = window.innerHeight * 0.01;
+    //   document.documentElement.style.setProperty('--vh', `${vh}px`);
+    // });
   })
   return (
-    <div className="App full-h">
+    <div className="App h-full">
       <Router>
-        <Header />
         <Menu />
+        <Header />
         <RouteContainer>
           <Switch>
             <Route exact path="/">

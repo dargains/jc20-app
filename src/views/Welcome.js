@@ -17,7 +17,7 @@ import Image04 from '../assets/images/cam-08-wc.jpg'
 
 const Welcome = () => {
   const [errorMessage, setErrorMessage] = useState('')
-  const [showHello, setShowHello] = useState(false)
+  const [showHello, setShowHello] = useState(true)
   const [state, dispatch] = useContext(AppContext);
   const [name, setName] = useState('')
   const { register, handleSubmit, errors } = useForm();
@@ -63,10 +63,10 @@ const Welcome = () => {
   }, [dispatch, history, name, state.user])
 
   return (
-    <section className="w-screen full-h">
+    <section className="w-screen min-h-full bg-green08 " style={{height: showHello ? window.innerHeight : ''}}>
       {
         !showHello
-        ? <div className="wrapper py-6 bg-green08 h-full">
+        ? <div className="wrapper py-6">
           <h1 className="text-white font-display font-semibold text-5xl mb-8 w-2/3">Bem-vindo ao <span className="block text-green">Avenida Living</span> App</h1>
           <form onSubmit={handleSubmit(onSubmit)} >
             <Inputbox
@@ -131,7 +131,7 @@ const Welcome = () => {
           </form>
         </div>
         : <div
-          className="w-full full-h flex items-end p-8 bg-cover bg-center"
+          className="w-full h-full flex items-end p-8 bg-cover bg-center"
           style={{ backgroundImage: `url(${RandomImage})` }}
         >
           <div className="bg-gray-800 bg-opacity-25 absolute w-full h-full pointer-events-none top-0 left-0"></div>
