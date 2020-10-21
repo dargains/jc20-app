@@ -24,6 +24,7 @@ const SignUp = () => {
     delete data.terms
     const userData = {
       first_name: data.name,
+      last_name: state.user.id,
       email: data.email,
       password: data.password,
       role: 5,
