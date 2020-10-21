@@ -59,7 +59,7 @@ const Gallery = () => {
     },
   ]
   return (
-    <section className="py-6">
+    <section>
       <Mask />
       <div className="wrapper">
         <h1 className=" font-display text-4xl font-semibold w-2/3 mb-8">

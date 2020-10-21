@@ -103,7 +103,7 @@ const Status = () => {
   };
 
   return (
-    <section className="py-6 overflow-hidden">
+    <section className="overflow-hidden">
       <Mask />
       <div className="wrapper">
         <h1 className="font-display text-4xl font-semibold w-2/3 mb-8">

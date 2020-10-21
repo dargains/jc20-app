@@ -69,7 +69,7 @@ const Phone = () => {
     }
   },[setValue, state.user])
   return (
-    <section className="bg-green04 py-6">
+    <section className="bg-green04">
       {
         emailSent
         ? <div className="wrapper">

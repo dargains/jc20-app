@@ -55,7 +55,7 @@ const Lifestyle = () => {
     }
   }, [content, state.language])
   return (
-    <section className="bg-green05 py-6">
+    <section className="bg-green05">
       <div className="wrapper">
         <h1 className=" font-display text-4xl font-semibold w-2/3 mb-8 text-green">
           Saldanha<br/><span className="text-white font-light">life style</span>

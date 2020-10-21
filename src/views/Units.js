@@ -63,7 +63,7 @@ const Units = () => {
     history.push(`/unit/${id}`)
   }
   return (
-    <section>
+    <section className="py-0">
       <div className="h-24 bg-green07 flex items-center justify-between px-4">
         {unit.title ? (
           <div

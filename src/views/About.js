@@ -5,7 +5,7 @@ import LogoImage from "../assets/images/logo rc.png";
 
 const About = () => {
   return (
-    <section>
+    <section className="pb-0">
       <figure className="w-2/5 mx-auto my-8">
         <img src={LogoImage} alt="Rio Capital" />
       </figure>
