@@ -4,7 +4,7 @@ import cx from 'classnames'
 import { baseUrl } from '../api'
 import { useContext } from 'react'
 import { AppContext } from '../store'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import Mask from '../components/Mask'
 import Button from '../components/Button'
 import Icon from '../components/Icon'
@@ -25,7 +25,7 @@ const sortBy = (array, type) => {
   }
 }
 
-const ClientItem = ({created_on, email, name, phone}) => {
+const ClientItem = ({created_on, email, name, phone, type}) => {
   const thisDate = new Date(created_on)
   const date = thisDate.getDate() + '/' + (thisDate.getMonth() + 1) + '/' + thisDate.getFullYear()
   const nextMonth = new Date(thisDate)
@@ -33,7 +33,7 @@ const ClientItem = ({created_on, email, name, phone}) => {
   const endDate = nextMonth.getDate() + '/' + (nextMonth.getMonth() + 1) + '/' + nextMonth.getFullYear()
   const hour = thisDate.getHours() + ':' + zeroPrefix(thisDate.getMinutes())
   const today = new Date()
-  const isHidden = today - nextMonth > 0
+  const isHidden = type === 'sup' ? today - nextMonth < 0 : today - nextMonth > 0
   return (
     <article className={cx("bg-white rounded-lg shadow-lg p-6 text-green08 mb-8 overflow-hidden",
     {
@@ -56,6 +56,9 @@ const ClientList = () => {
   const [list, setList] = useState([])
   const [order, setOrder] = useState('date')
   const [state] = useContext(AppContext)
+  const location = useLocation()
+
+  const type = location.hash.substr(1)
 
   const toggleOrder = () => {
     setOrder(order === 'date' ? 'alphabetically' : 'date')
@@ -99,7 +102,7 @@ const ClientList = () => {
         </div>
         <div>
           {
-            sortBy(list, order).map(item => <ClientItem key={item.id} {...item} />)
+            sortBy(list, order).map(item => <ClientItem key={item.id} {...item} type={type} />)
           }
         </div>
       </div>

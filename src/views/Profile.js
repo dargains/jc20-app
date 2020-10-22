@@ -24,11 +24,11 @@ const Profile = () => {
             <span className="text-green font-bold">Olá,</span> {user.name}
           </h2>
           <Link to="/clientlist" className="bg-white text-green08 rounded-lg shadow-lg flex items-center justify-between px-6 py-8 mb-6">
-            <Icon.Construction height={64} />
+            <Icon.Users height={64} />
             <span className="pl-4 text-2xl text-center flex-1">Meus registos</span>
           </Link>
-          <Link to="" className="bg-white text-green08 rounded-lg shadow-lg flex items-center justify-between px-6 py-8 mb-6">
-            <Icon.Construction height={64} className="opacity-50" />
+          <Link to="/clientlist#sup" className="bg-white text-green08 rounded-lg shadow-lg flex items-center justify-between px-6 py-8 mb-6">
+            <Icon.Users height={64} className="opacity-50" />
             <span className="pl-4 text-2xl text-center flex-1">Registos superados</span>
           </Link>
           <article className="bg-white text-green08 rounded-lg shadow-lg flex items-center justify-between px-6 py-8 mb-6" onClick={handleLogout}>
@@ -41,11 +41,11 @@ const Profile = () => {
             Aceda ao seu <br/><span className="text-green">Perfil</span>
           </h1>
           <Link to="/login#client" className="bg-white rounded-xl shadow-lg flex flex-col items-center justify-center pt-8 pb-12">
-            <Icon.Construction height={64} />
+            <Icon.Family height={64} />
             <p className="text-green08 text-2xl mt-4">Cliente</p>
           </Link>
           <Link to="/login#agent" className="bg-white rounded-xl shadow-lg flex flex-col items-center justify-center pt-8 pb-12 my-8">
-            <Icon.Construction height={64} />
+            <Icon.Agent height={64} />
             <p className="text-green08 text-2xl mt-4">Consultor</p>
           </Link>
         </div>
