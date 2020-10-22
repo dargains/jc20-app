@@ -175,9 +175,9 @@ const Phone = () => {
             <p className="text-white mt-12 mb-4">
               ou através do número:
             </p>
-            <p className="text-white border border-white rounded-lg p-4 text-center text-4xl font-bold font-display">
+            <a href="tel:+351978456432" className="block text-white border border-white rounded-lg p-4 text-center text-4xl font-bold font-display">
               <span className="text-black">+351</span> 978 456 432
-            </p>
+            </a>
           </div>
       }
     </section>

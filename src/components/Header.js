@@ -29,7 +29,7 @@ const Header = () => {
   }
   const handleContact = () => {
     if (window.innerWidth < 768) {
-      window.location.href = 'https://wa.me/351925595027?text=oi'
+      window.location.href = 'https://wa.me/351978456432'
     } else {
       window.location.href = '/contacts'
     }
