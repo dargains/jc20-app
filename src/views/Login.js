@@ -27,11 +27,11 @@ const Login = () => {
         ...data,
         ...state.user,
         ...response.data.data.user,
-        ...userResponse.data.data
+        ...userResponse.data.data,
+        logged: true
       }
 
       dispatch({type: 'DELETE_USER'})
-      data.logged = true
       dispatch({type: 'SET_USER', payload: data})
       history.push('/profile')
     } catch (error) {
