@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useHistory, useLocation, withRouter } from 'react-router-dom'
 import { AppContext } from './store.js'
 import db from './db'
+import Axios from 'axios'
+import { projectUrl } from './api.js'
 
 const RouteContainer = (props) => {
   const [padding, setPadding] = useState(0)
@@ -15,7 +17,12 @@ const RouteContainer = (props) => {
       db.table('user').toArray().then(users => {
         const user = users[0]
         if (user) {
-          dispatch({ type: 'SET_USER', payload: user })
+          Axios.post(`${projectUrl}/auth/refresh`, {token: user.token}).then(response => {
+            user.token = response.data.data.token
+            dispatch({ type: 'SET_USER', payload: user })
+          }).catch(() => {
+            dispatch({ type: 'DELETE_USER'})
+          })
         } else if (location.pathname !== '/' && location.pathname !== '/welcome') history.push('/')
       })
     } else if (location.pathname === '/') history.push('/welcome')
