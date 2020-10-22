@@ -17,11 +17,13 @@ const RouteContainer = (props) => {
       db.table('user').toArray().then(users => {
         const user = users[0]
         if (user) {
-          Axios.post(`${projectUrl}/auth/refresh`, {token: user.token}).then(response => {
+          dispatch({ type: 'SET_USER', payload: user })
+          if (user.token) Axios.post(`${projectUrl}/auth/refresh`, {token: user.token}).then(response => {
             user.token = response.data.data.token
             dispatch({ type: 'SET_USER', payload: user })
           }).catch(() => {
-            dispatch({ type: 'DELETE_USER'})
+            user.logged = false
+            dispatch({ type: 'SET_USER', payload: user})
           })
         } else if (location.pathname !== '/' && location.pathname !== '/welcome') history.push('/')
       })
