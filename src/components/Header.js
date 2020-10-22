@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { AppContext } from '../store.js';
 import cx from 'classnames'
 import Icon from './Icon'
@@ -20,6 +20,7 @@ const Header = () => {
   const [state, dispatch] = useContext(AppContext);
   const [showDialog, setShowDialog] = useState(false)
   const [down, setDown] = useState(false)
+  const history = useHistory()
 
   const handleToggleLang = lang => {
     dispatch({ type: 'CHANGE_LANGUAGE', payload: lang })
@@ -31,25 +32,26 @@ const Header = () => {
     if (window.innerWidth < 768) {
       window.location.href = 'https://wa.me/351978456432'
     } else {
-      window.location.href = '/contacts'
+      history.push('/contacts')
     }
   }
-  const handleShare = async event => {
-    if (navigator.canShare) {
-      try {
-        await navigator.share({
-          title: document.title,
-          url: 'https://jc20.graffito.pt'
-        })
-        console.log('share successful')
-      } catch(err) {
-        console.log(err)
-      }
+  
+  // const handleShare = async event => {
+  //   if (navigator.canShare) {
+  //     try {
+  //       await navigator.share({
+  //         title: document.title,
+  //         url: 'https://jc20.graffito.pt'
+  //       })
+  //       console.log('share successful')
+  //     } catch(err) {
+  //       console.log(err)
+  //     }
       
-    } else {
-      console.log('não é possível fazer share');
-    }
-  }
+  //   } else {
+  //     console.log('não é possível fazer share');
+  //   }
+  // }
 
   useEffect(() => {
     setDown(state.headerDown)
@@ -72,7 +74,9 @@ const Header = () => {
           <Icon.Menu />
         </HeaderIcon>
         <HeaderIcon name="partilha">
-          <Icon.Share handleClick={handleShare}/>
+          <Link to="/share">
+            <Icon.Share />
+          </Link>
         </HeaderIcon>
         <HeaderIcon name="perfil">
           <Link to="/profile">

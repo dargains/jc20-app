@@ -28,7 +28,8 @@ const Login = () => {
         ...state.user,
         ...response.data.data.user,
         ...userResponse.data.data,
-        logged: true
+        logged: true,
+        token: response.data.data.token
       }
 
       dispatch({type: 'DELETE_USER'})

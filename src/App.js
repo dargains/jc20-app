@@ -19,6 +19,8 @@ import Lifestyle from './views/Lifestyle';
 import Profile from './views/Profile';
 import Login from './views/Login';
 import SignUp from './views/Signup';
+import ClientRegister from './views/ClientRegister';
+import ClientList from './views/ClientList';
 
 // components
 import Menu from './components/Menu';
@@ -87,6 +89,12 @@ function App() {
             </Route>
             <Route path="/signup">
               <SignUp />
+            </Route>
+            <Route path="/clientregister">
+              <ClientRegister />
+            </Route>
+            <Route path="/clientlist">
+              <ClientList />
             </Route>
           </Switch>
         </RouteContainer>

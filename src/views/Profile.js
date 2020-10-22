@@ -23,7 +23,7 @@ const Profile = () => {
           <h2 className="text-2xl capitalize mb-8">
             <span className="text-green font-bold">Olá,</span> {user.name}
           </h2>
-          <Link to="" className="bg-white text-green08 rounded-lg shadow-lg flex items-center justify-between px-6 py-8 mb-6">
+          <Link to="/clientlist" className="bg-white text-green08 rounded-lg shadow-lg flex items-center justify-between px-6 py-8 mb-6">
             <Icon.Construction height={64} />
             <span className="pl-4 text-2xl text-center flex-1">Meus registos</span>
           </Link>
