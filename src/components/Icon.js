@@ -47,6 +47,22 @@ const Area = props => {
   )
 }
 
+const Arrow = props => {
+  return (
+    <SVGBase name="bathroom" {...props}>
+      <g transform="translate(-351 -330)">
+        <g transform="translate(354 333.476)">
+          <g transform="translate(3.716 -1.505)">
+            <g transform="translate(0)">
+              <path d="M147.373,14.41a.973.973,0,0,0-1.265,0l-3,2.744V.833a.914.914,0,0,0-1.822,0V17.154l-3-2.744a.972.972,0,0,0-1.288.02.783.783,0,0,0,0,1.158l4.554,4.167a.972.972,0,0,0,1.288,0l0,0,4.554-4.167A.784.784,0,0,0,147.373,14.41Z" transform="translate(-136.742)"/>
+            </g>
+          </g>
+        </g>
+      </g>
+    </SVGBase>
+  )
+}
+
 const Bathroom = props => {
   return (
     <SVGBase name="bathroom" {...props}>
@@ -97,6 +113,22 @@ const Click = props => {
         <g transform="translate(346.323 245)">
           <path d="M13.207 56.5h-.029a1.054 1.054 0 0 0-1.025 1.081v.843a.3.3 0 1 1-.608 0V56.87a1 1 0 1 0-2 0v1.65a.3.3 0 0 1-.608 0v-2.1a1.052 1.052 0 0 0-1.016-1.088H7.89a1.018 1.018 0 0 0-1 1.042v2.368a.3.3 0 0 1-.608 0v-2.3-.023-5.433a1.065 1.065 0 0 0-1.015-1.1 1.065 1.065 0 0 0-1.016 1.1L4.248 59.9a.3.3 0 0 1-.539.193L2.644 58.8a1.62 1.62 0 0 0-1.144-.6 1.586 1.586 0 0 0-1.191.427l-.009.002-.211.171 3.69 7.091a3.273 3.273 0 0 0 2.874 1.82h4.265a3.44 3.44 0 0 0 3.3-3.553v-2.439-4.132a1.051 1.051 0 0 0-1.011-1.087zm0 0" transform="translate(0 -47.715)"/>
           <path d="M48.9 3.377a.3.3 0 0 0 .3-.3 2.453 2.453 0 1 1 4.906 0 .3.3 0 0 0 .608 0 3.061 3.061 0 1 0-6.123 0 .3.3 0 0 0 .309.3zm0 0" transform="translate(-46.396)"/>
+        </g>
+      </g>
+    </SVGBase>
+  )
+}
+
+const Clock = props => {
+  return (
+    <SVGBase name="click" {...props}>
+      <g transform="translate(-240 -328.5)">
+        <rect width="24" height="24" transform="translate(240 328.5)" fill="none"/>
+        <g transform="translate(243 331.354)">
+          <g transform="translate(-1 -1)">
+            <path d="M9-1A10,10,0,1,0,19,9,10,10,0,0,0,9-1ZM9,17.333A8.333,8.333,0,1,1,17.333,9,8.333,8.333,0,0,1,9,17.333Z" transform="translate(1 1)"/>
+            <path d="M152.5,84.333a.833.833,0,0,0-.833.833v5h-2.5a.833.833,0,0,0,0,1.667H152.5a.833.833,0,0,0,.833-.833V85.166A.833.833,0,0,0,152.5,84.333Z" transform="translate(-142.501 -81)"/>
+          </g>
         </g>
       </g>
     </SVGBase>
@@ -421,10 +453,12 @@ const Whatsapp = props => {
 
 export default {
   Area,
+  Arrow,
   Bathroom,
   Bedroom,
   Car,
   Click,
+  Clock,
   Close,
   Construction,
   Contact,
