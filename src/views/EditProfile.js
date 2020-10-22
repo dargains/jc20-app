@@ -1,24 +1,21 @@
-import React, {useContext, useState} from 'react'
-import { Link, useLocation } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import Axios from 'axios'
+import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
-import Axios from 'axios';
 import cx from 'classnames'
-import { useForm } from "react-hook-form";
-import { baseUrl, projectUrl } from '../api';
-import { useEffect } from 'react';
-import { AppContext } from '../store';
+import { baseUrl, projectUrl } from '../api'
 import Button from '../components/Button'
 import Inputbox from '../components/Inputbox'
 import Mask from '../components/Mask'
+import { AppContext } from '../store'
 
-const SignUp = () => {
+const EditProfile = () => {
   const [state, dispatch] = useContext(AppContext);
+  const [type, setType] = useState()
   const [errorMessage, setErrorMessage] = useState('')
   const [done, setDone] = useState(false)
   const { register, handleSubmit, errors, setValue } = useForm();
-  const location = useLocation()
-
-  const type = location.hash.substr(1)
 
   const onSubmit = async data => {
     delete data.terms
@@ -32,14 +29,20 @@ const SignUp = () => {
     }
     data.agent = type === 'agent'
     try {
-      const response = await Axios.post(`${projectUrl}/users`, userData)
-      await Axios.patch(`${baseUrl}/users/${state.user.id}`, data)
+      const response = await Axios.patch(`${projectUrl}/users/${state.user.userId}`, userData, {headers: { Authorization: `Bearer ${state.user.token}` }})
+      const userResponse = await Axios.patch(`${baseUrl}/users/${state.user.id}`, data, {headers: { Authorization: `Bearer ${state.user.token}` }})
       setDone(true)
-      data.userId = state.user.id
-      dispatch({type: 'DELETE_USER'})
-      data.id = response.data.data.id
-      data.logged = true
-      dispatch({type: 'SET_USER', payload: data})
+      const payload = {
+        ...data,
+        ...state.user,
+        ...userResponse.data.data,
+        ...response.data.data,
+        token: state.user.token,
+        logged: true,
+        userId: response.data.data.id,
+        id: userResponse.data.data.id
+      }
+      dispatch({type: 'SET_USER', payload})
     } catch (error) {
       setErrorMessage(error.response.data.error.message)
     }
@@ -47,46 +50,25 @@ const SignUp = () => {
 
   useEffect(() => {
     if (state.user) {
+      setType(state.user.agent ? "agent" : "client")
       for (let key in state.user) {
-        setValue(key, state.user[key])
+        if (key !== 'password') setValue(key, state.user[key])
       }
     }
   },[setValue, state.user])
+
 
   return (
     <section>
       <Mask />
       <div className="wrapper">
+        <h1 className=" font-display text-4xl font-semibold w-2/3 mb-8">
+          Editar <span className="text-green">perfil</span>
+        </h1>
         {
           done
-          ? <div>
-            <h1 className=" font-display text-4xl font-semibold w-2/3 mb-8">
-              Sua conta foi criada com <span className="text-green">sucesso</span>
-            </h1>
-            <p className="text-green08 mb-4">
-              Obrigado por se cadastrar no Avenida Living App!
-            </p>
-            
-            {
-              type === 'client'
-              ? <p className="text-green08 mb-4">A área pessoal foi criada para facilitar a interação do cliente com a promotora e concentrar em um espaço único as informações sobre a evolução da sua obra.</p>
-              : <p className="text-green08 mb-4">A área pessoal foi criada para facilitar a interação do consultor com a promotora e concentrar em um espaço único as informações e documentos necessários à apresentação e venda.</p>
-            }
-            {
-              type === 'client'
-              ? <p className="text-green08 mb-4">Seja bem-vindo!</p>
-              : <p className="text-green08 mb-4">Boas vendas!</p>
-            }
-            
-            <Link to="/profile" className="block mt-12">
-              <Button text="aceder a conta" type="primary" />
-            </Link>
-          </div>
-          : <div>
-            <h1 className=" font-display text-4xl font-semibold w-2/3 mb-8">
-              Crie a sua <span className="text-green">conta</span>
-            </h1>
-            <form onSubmit={handleSubmit(onSubmit)} >
+          ? <p className="text-xl">Perfil Editado com sucesso</p>
+          : <form onSubmit={handleSubmit(onSubmit)} >
               <Inputbox
                 type="text"
                 color="green"
@@ -161,7 +143,7 @@ const SignUp = () => {
               <Inputbox
                 type="password"
                 color="green"
-                placeholder="código cliente"
+                placeholder={type === 'agent' ? "código imobiliária" : "código cliente"}
                 name="code"
                 error={errors.code}
                 register={register({required: true})}
@@ -169,12 +151,11 @@ const SignUp = () => {
               {errors.code && <ErrorMessage>Este campo é obrigatório</ErrorMessage>}
 
               <p className="text-red mt-4 text-xs">{errorMessage}</p>
-              <Button text="criar" type="primary" className="mt-10" />
-              <Link to="/login#client">
+              <Button text="guardar" type="primary" className="mt-10" />
+              <Link to="/profile">
                 <Button text="voltar" type="primary" className="mt-6" />
               </Link>
             </form>
-          </div>
         }
       </div>
     </section>
@@ -186,4 +167,4 @@ const ErrorMessage = styled.span`
   font-size: 12px;
 `
 
-export default SignUp
+export default EditProfile

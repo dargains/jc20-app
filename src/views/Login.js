@@ -22,13 +22,15 @@ const Login = () => {
     try {
       const response = await Axios.post(`${projectUrl}/auth/authenticate`, data)
       const userResponse = await Axios.get(`${baseUrl}/users/${response.data.data.user.last_name}`, {headers: { Authorization: `Bearer ${response.data.data.token}` }})
-      delete userResponse.id
+      
       data = {
         ...data,
         ...state.user,
-        ...response.data.data.user,
         ...userResponse.data.data,
+        ...response.data.data.user,
         logged: true,
+        userId: response.data.data.user.id,
+        id: userResponse.data.data.id,
         token: response.data.data.token
       }
 

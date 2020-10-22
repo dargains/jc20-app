@@ -1,8 +1,5 @@
 import React, { useState } from 'react'
-import Axios from 'axios';
 import cx from 'classnames'
-import { baseUrl } from '../api';
-import db from '../db';
 import Mask from '../components/Mask'
 import Button from '../components/Button';
 import Icon from '../components/Icon';
@@ -14,40 +11,6 @@ const Share = () => {
   const [state] = useContext(AppContext)
   const [noLoginError, setNoLoginError] = useState(false)
   const history = useHistory()
-
-  // const onSubmit = async () => {
-  //   const users = await db.user.toArray()
-  //   const data = {
-  //     user_id: users[0].id,
-  //     name: person.name,
-  //     email: person.email,
-  //     phone: person.phone
-
-  //   }
-  //   Axios.post(`${baseUrl}/clients`, data).then(response => {
-  //     console.log(response)
-  //     Axios.post('https://graffito.pt/directus/public/jc20/auth/authenticate', {
-  //       email: 'andre.dargains@gmail.com',
-  //       password: '123qwe'
-  //     }).then(response => {
-  //       const headers = {
-  //         Authorization: `Bearer ${response.data.data.token}`
-  //       }
-  //       const data = {
-  //         "to": { "email": 'andre.dargains@gmail.com', "name": 'contact email' },
-  //         "subject": "Contact message",
-  //         "body": "{{name}} from {{email}} has sent the following message: {{message}}",
-  //         "type": "html",
-  //         "data": {
-  //           "name": 'token.name',
-  //           "email": 'token.email',
-  //           "message": 'token.message'
-  //         }
-  //       }
-  //       Axios.post(`https://graffito.pt/directus/public/jc20/mail`, data, { headers })
-  //     })
-  //   })
-  // }
 
   const handleOpenRegister = () => {
     if (state.user.logged) {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 import RouteContainer from './RouteContainer';
 import './tailwind.generated.css'
@@ -21,11 +21,11 @@ import Login from './views/Login';
 import SignUp from './views/Signup';
 import ClientRegister from './views/ClientRegister';
 import ClientList from './views/ClientList';
+import EditProfile from './views/EditProfile';
 
 // components
 import Menu from './components/Menu';
 import Header from './components/Header';
-import { useEffect } from 'react';
 
 
 function App() {
@@ -89,6 +89,9 @@ function App() {
             </Route>
             <Route path="/signup">
               <SignUp />
+            </Route>
+            <Route path="/editprofile">
+              <EditProfile />
             </Route>
             <Route path="/clientregister">
               <ClientRegister />

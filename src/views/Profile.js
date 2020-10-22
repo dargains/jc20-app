@@ -31,6 +31,14 @@ const Profile = () => {
             <Icon.Users height={64} className="opacity-50" />
             <span className="pl-4 text-2xl text-center flex-1">Registos superados</span>
           </Link>
+          <Link to="/documents" className="bg-white text-green08 rounded-lg shadow-lg flex items-center justify-between px-6 py-8 mb-6">
+            <Icon.Document height={64} />
+            <span className="pl-4 text-2xl text-center flex-1">Documentos comerciais</span>
+          </Link>
+          <Link to="/editprofile" className="bg-white text-green08 rounded-lg shadow-lg flex items-center justify-between px-6 py-8 mb-6">
+            <Icon.Gear height={64} />
+            <span className="pl-4 text-2xl text-center flex-1">Editar perfil</span>
+          </Link>
           <article className="bg-white text-green08 rounded-lg shadow-lg flex items-center justify-between px-6 py-8 mb-6" onClick={handleLogout}>
             <Icon.Construction height={64} />
             <span className="pl-4 text-2xl text-center flex-1">Logout</span>
