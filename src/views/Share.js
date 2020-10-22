@@ -137,7 +137,7 @@ const Share = () => {
             className={cx("transition-all duration-200 delay-200", {
               "opacity-0 transform-y-4": !noLoginError,
             })}
-            handleClick={() => {history.push('/profile')}}
+            handleClick={() => {history.push('/login#agent')}}
           />
         </div>
       </aside>
