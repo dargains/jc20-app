@@ -25,7 +25,7 @@ const StatusItem = ({ label, status }) => {
       <div className="overflow-hidden w-full rounded-xl">
         <div className="bg-green01 h-2 w-full rounded-xl" />
         <div
-          className="bg-green05 h-2 w-full rounded-xl absolute top-0 left-0 duration-300 transition-transform delay-300"
+          className="bg-green05 h-2 w-full rounded-xl absolute top-0 left-0 duration-500 transition-transform delay-300"
           style={{ transform: `translateX(-${100 - barStatus}%)` }}
         />
       </div>
@@ -133,6 +133,7 @@ const Status = () => {
         </div>
         <div className="wrapper w-screen">
           <div className="-mx-6">
+            <p className="text-sm text-green05 text-right px-6 mb-2">ago 2020</p>
             {!!images.length && (
               <Carousel
                 showThumbs={false}
