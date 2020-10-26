@@ -4,6 +4,9 @@
   outline-color: transparent;
   user-select: none;
 }
+*:focus {
+  outline-color: transparent;
+}
 *::selection {
   background-color:transparent;
 }
@@ -25,7 +28,7 @@ h4 {
 option:first {
   color: #999;
 }
-input,textarea {
+input,textarea, select {
   border-radius: 0 !important;
 }
 textarea {
