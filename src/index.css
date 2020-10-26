@@ -5,10 +5,7 @@
   user-select: none;
 }
 *:focus {
-  outline-color: transparent;
-}
-*::selection {
-  background-color:transparent;
+  outline: none;
 }
 img {
   display: block;

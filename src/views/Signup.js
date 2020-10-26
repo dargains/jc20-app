@@ -15,12 +15,21 @@ const SignUp = () => {
   const [state, dispatch] = useContext(AppContext);
   const [errorMessage, setErrorMessage] = useState('')
   const [done, setDone] = useState(false)
-  const { register, handleSubmit, errors, setValue } = useForm();
+  const [companies, setCompanies] = useState([])
+  const { register, handleSubmit, setError, errors, setValue } = useForm();
   const location = useLocation()
 
   const type = location.hash.substr(1)
 
   const onSubmit = async data => {
+    if (data.company && (companies.find(c => c.name === data.company).code !== data.code)) {
+      console.log(companies.find(c => c.name === data.company).code, data.code);
+      setError("code", {
+        type: "wrongCode",
+        message: "Código inválido"
+      })
+      return
+    }
     delete data.terms
     const userData = {
       first_name: data.name,
@@ -51,6 +60,9 @@ const SignUp = () => {
         setValue(key, state.user[key])
       }
     }
+    Axios(`${baseUrl}/companies`).then(response => {
+      setCompanies(response.data.data)
+    })
   },[setValue, state.user])
 
   return (
@@ -127,36 +139,46 @@ const SignUp = () => {
               />
               {errors.password && <ErrorMessage>Este campo é obrigatório</ErrorMessage>}
 
-              <select
-                name="apartment"
-                ref={register({required: true})}
-                className={cx(
-                  "border-b bg-transparent w-full py-1 mt-6 text-green08 border-green08",
-                  {
-                    "text-red border-red": errors.apartment
-                  })
-                }>
-                  {
-                    type === 'client'
-                    ? <>
-                      <option value="">apartamento</option>
-                      <option value="A">A</option>
-                      <option value="B">B</option>
-                      <option value="C">c</option>
-                      <option value="D">d</option>
-                      <option value="E">E</option>
-                      <option value="F">F</option>
-                      <option value="G">G</option>
-                      <option value="H">H</option>
-                    </>
-                    : <>
-                    <option value="">imobiliária</option>
-                    <option value="remax">Remax</option>
-                    <option value="century21">Century 21</option>
-                    </>
-                  }
-              </select>
-              {errors.apartment && <ErrorMessage>Este campo é obrigatório</ErrorMessage>}
+              {
+                type === 'client'
+                ? <>
+                <select
+                  name="apartment"
+                  ref={register({required: true})}
+                  className={cx(
+                    "border-b bg-transparent w-full py-1 mt-6 text-green08 border-green08",
+                    {
+                      "text-red border-red": errors.apartment
+                    })
+                  }>
+                  <option value="">apartamento</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">c</option>
+                  <option value="D">d</option>
+                  <option value="E">E</option>
+                  <option value="F">F</option>
+                  <option value="G">G</option>
+                  <option value="H">H</option>
+                </select>
+                {errors.apartment && <ErrorMessage>Este campo é obrigatório</ErrorMessage>}
+                </>
+                : <>
+                <select
+                  name="company"
+                  ref={register({required: true})}
+                  className={cx(
+                    "border-b bg-transparent w-full py-1 mt-6 text-green08 border-green08",
+                    {
+                      "text-red border-red": errors.company
+                    })
+                  }>
+                  <option value="">imobiliária</option>
+                  {companies.map(({name}) => <option key={name}>{name}</option>)}
+                </select>
+                {errors.company && <ErrorMessage>Este campo é obrigatório</ErrorMessage>}
+                </>
+              }
 
               <Inputbox
                 type="password"
@@ -166,7 +188,10 @@ const SignUp = () => {
                 error={errors.code}
                 register={register({required: true})}
               />
-              {errors.code && <ErrorMessage>Este campo é obrigatório</ErrorMessage>}
+              {errors.code?.type === "required" &&
+                <ErrorMessage>Este campo é obrigatório</ErrorMessage>}
+              {errors.code?.type === "wrongCode" &&
+                <ErrorMessage>Código inválido</ErrorMessage>}
 
               <p className="text-red mt-4 text-xs">{errorMessage}</p>
               <Button text="criar" type="primary" className="mt-10" />
