@@ -20,10 +20,10 @@ const Email = () => {
   const onSubmit = async ({name, email, subject, text}) => {
     const body = {
       "to": [
-        "andre.dargains@gmail.com"
+        "geral@riocapital.pt"
       ],
-      "subject": "[JC20] Contato",
-      "body": "{{name}} ({{email}}) tem a seguinte questão:<br>{{subject}}<br>{{text}}",
+      "subject": "[Avenida Living] Contato",
+      "body": "{{name}} ({{email}}) enviou a seguinte mensagem:<br>{{subject}}<br>{{text}}",
       "type": "html",
       "data": {
         name,

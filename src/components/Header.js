@@ -30,7 +30,7 @@ const Header = () => {
   }
   const handleContact = () => {
     if (window.innerWidth < 768) {
-      window.location.href = 'https://wa.me/351978456432'
+      window.location.href = 'https://wa.me/351912566905'
     } else {
       history.push('/contacts')
     }
@@ -151,7 +151,7 @@ const Header = () => {
             handleClick={handleContact}
           />
           <p className="hidden md:block font-display text-4xl text-green08 font-bold">
-            +351 <span className="text-green">978 456 432</span>
+            +351 <span className="text-green">912 566 905</span>
           </p>
         </div>
       </aside>

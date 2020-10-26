@@ -36,9 +36,10 @@ const Phone = () => {
   const onSubmit = async ({name, phone, day, hour}) => {
     const body = {
       "to": [
-        "andre.dargains@gmail.com"
+        "claudio@riocapital.pt",
+        "geral@riocapital.pt"
       ],
-      "subject": "[JC20] Pedido de contato telefonico",
+      "subject": "[Avenida Living] Pedido de contato telefonico",
       "body": "{{name}} deseja ser contactado em {{day}} as {{hour}} horas no número de telefone {{phone}}",
       "type": "html",
       "data": {
@@ -175,8 +176,8 @@ const Phone = () => {
             <p className="text-white mt-12 mb-4">
               ou através do número:
             </p>
-            <a href="tel:+351978456432" className="block text-white border border-white rounded-lg p-4 text-center text-4xl font-bold font-display">
-              <span className="text-black">+351</span> 978 456 432
+            <a href="tel:+351912566905" className="block text-white border border-white rounded-lg p-4 text-center text-4xl font-bold font-display">
+              <span className="text-black">+351</span> 912 566 905
             </a>
           </div>
       }
