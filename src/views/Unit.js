@@ -53,7 +53,6 @@ const Unit = () => {
   const [selectedArea, setSelectedArea] = useState({})
   useEffect(() => {
       db.table('units').get(id, dbUnit => {
-        console.log(id, dbUnit);
         if (!dbUnit) Axios(`${baseUrl}/units/${id}?fields=*.*`).then(response => {
           const onlineUnits = response.data.data
           setUnit(onlineUnits)
@@ -121,7 +120,7 @@ const Unit = () => {
             >
               {/* PLANTA */}
               <div className="wrapper w-screen">
-                <div className="mb-12 py-1 border-b border-black">
+                <div className="mb-12 h-8 border-b border-black">
                   <p className="flex items-center justify-between">
                     {
                       Object.keys(selectedArea).length
@@ -140,10 +139,10 @@ const Unit = () => {
                   </p>
                 </div>
                 <figure>
-                  <img src={unit.floorplan.data.full_url} alt="planta" useMap={unit.image_areas && "#floorplan"} />
+                  <img src={unit.floorplan.data.full_url} alt="planta" useMap={unit.image_areas && `#floorplan${unit.title}`} />
                   {
                     unit.image_areas &&
-                    <map name="floorplan">
+                    <map name={`floorplan${unit.title}`}>
                       {unit.image_areas.map(area => <ImageArea key={area.name} {...area} handleClick={() => {setSelectedArea(area)}} />)}
                     </map>
                   }
@@ -184,7 +183,7 @@ const Unit = () => {
                       </small>
                     </div>
                     <p className="text-lg font-light flex-1 text-center">
-                      {unit.indoors_area + unit.outdoors_area}{" "}
+                      {parseFloat(unit.indoors_area) + parseFloat(unit.outdoors_area)}{" "}
                       <small className="text-xs">
                         m<sup>2</sup>
                       </small>
@@ -263,14 +262,14 @@ const Unit = () => {
                     </p>
                   </article>
                 </InfoGrid>
-                <Button
+                {/* <Button
                   text="acabamentos"
                   type="primary"
                   icon
                   iconDirection="right"
                   handleClick={changeView}
                   className="mt-8"
-                />
+                /> */}
               </div>
 
               {/* INFO */}
@@ -279,7 +278,7 @@ const Unit = () => {
                   Mapa de Acabamentos
                 </p>
                 <div>
-                  {unit.finishes.map(({ title, itens }) => (
+                  {!!unit.finishes && unit.finishes.map(({ title, itens }) => (
                     <Accordion key={title} header={title} color="green">
                       <ContentItens content={itens} />
                     </Accordion>
@@ -300,6 +299,7 @@ const Unit = () => {
             src={unit.floorplan.data.full_url}
             alt={`Planta - Apartamento ${unit.title}`}
             showImage={showImage}
+            spaced
             handleClose={() => {
               setShowImage(false);
             }}
