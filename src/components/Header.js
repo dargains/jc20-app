@@ -116,10 +116,10 @@ const Header = () => {
       >
         <div
           className={cx(
-            "bg-white pt-16 pb-10 rounded-t-full w-full absolute text-center transform transition-transform duration-300 delay-150",
+            "bg-white pt-16 pb-10 rounded-t-full w-full shadow-lg absolute text-center transform transition-transform duration-300 delay-150",
             { "translate-y-4": !showDialog }
           )}
-          style={{ bottom: 58 }}
+          style={{ bottom: 58, backgroundImage: 'linear-gradient(to bottom, #d3d7d6, #ffffff' }}
         >
           <Icon.Close
             className="text-green08 absolute transform -translate-x-1/2 scale-75"
