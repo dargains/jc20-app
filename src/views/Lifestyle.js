@@ -64,7 +64,7 @@ const Lifestyle = () => {
           <img src={lifestyleImage} alt="Saldanha"/>
         </div>
         <p className="text-white my-8">
-          Breve texto sobre a fotografia indicada na imagem. Lorem ipsum condimentum euismod eros fames nisi quis turpis, conubia vivamus massa.
+        Localizado no elegante bairro das Avenidas Novas, Avenida Living está no coração da cidade, beneficiando de toda a centralidade. Ao seu redor, dispõe de uma vasta oferta de espaços de cultura e lazer, bem como de escolas e hospitais e de diversas zonas que lhe oferecem um contacto imperdível com a natureza.
         </p>
         <div className="-mx-6">
           <img src={mapImage} alt="Saldanha"/>
@@ -87,19 +87,49 @@ const Lifestyle = () => {
             header="Cultura e lazer"
           >
             <ol className="text-white py-6 px-4">
-              <li className="py-2"><span className="rounded-full bg-red w-6 h-6 mr-4 inline-flex items-center justify-center text-xs">1</span> Museu Fundação Gulbenkian</li>
-              <li className="py-2"><span className="rounded-full bg-red w-6 h-6 mr-4 inline-flex items-center justify-center text-xs">2</span> Jardim Zoológico</li>
-              <li className="py-2"><span className="rounded-full bg-red w-6 h-6 mr-4 inline-flex items-center justify-center text-xs">3</span> Campo Pequeno</li>
+              <li className="py-2"><span className="rounded-full bg-purple-900 w-6 h-6 mr-4 inline-flex items-center justify-center text-xs">1</span> Museu Fundação Gulbenkian</li>
+              <li className="py-2"><span className="rounded-full bg-purple-900 w-6 h-6 mr-4 inline-flex items-center justify-center text-xs">2</span> Jardim Zoológico</li>
+              <li className="py-2"><span className="rounded-full bg-purple-900 w-6 h-6 mr-4 inline-flex items-center justify-center text-xs">3</span> Campo Pequeno</li>
             </ol>
           </Accordion>
           <Accordion
             color="white"
-            header="Cultura e lazer"
+            header="Shopping"
           >
             <ol className="text-white py-6 px-4">
-              <li className="py-2"><span className="rounded-full bg-blue-800 w-6 h-6 mr-4 inline-flex items-center justify-center text-xs">1</span> Museu Fundação Gulbenkian</li>
-              <li className="py-2"><span className="rounded-full bg-blue-800 w-6 h-6 mr-4 inline-flex items-center justify-center text-xs">2</span> Jardim Zoológico</li>
-              <li className="py-2"><span className="rounded-full bg-blue-800 w-6 h-6 mr-4 inline-flex items-center justify-center text-xs">3</span> Campo Pequeno</li>
+              <li className="py-2"><span className="rounded-full bg-red w-6 h-6 mr-4 inline-flex items-center justify-center text-xs">4</span> El Corte Inglés</li>
+              <li className="py-2"><span className="rounded-full bg-red w-6 h-6 mr-4 inline-flex items-center justify-center text-xs">5</span> Avenida da Liberdade</li>
+              <li className="py-2"><span className="rounded-full bg-red w-6 h-6 mr-4 inline-flex items-center justify-center text-xs">6</span> Atrium Saldanha</li>
+            </ol>
+          </Accordion>
+          <Accordion
+            color="white"
+            header="Educação"
+          >
+            <ol className="text-white py-6 px-4">
+              <li className="py-2"><span className="rounded-full bg-orange-500 w-6 h-6 mr-4 inline-flex items-center justify-center text-xs">7</span> Universidade Lisboa</li>
+              <li className="py-2"><span className="rounded-full bg-orange-500 w-6 h-6 mr-4 inline-flex items-center justify-center text-xs">8</span> Universidade Católica</li>
+              <li className="py-2"><span className="rounded-full bg-orange-500 w-6 h-6 mr-4 inline-flex items-center justify-center text-xs">9</span> Universidade Nova</li>
+            </ol>
+          </Accordion>
+          <Accordion
+            color="white"
+            header="Desporto e Saúde"
+          >
+            <ol className="text-white py-6 px-4">
+              <li className="py-2"><span className="rounded-full bg-blue-400 w-6 h-6 mr-4 inline-flex items-center justify-center text-xs">10</span> Estádio Universitário</li>
+              <li className="py-2"><span className="rounded-full bg-blue-400 w-6 h-6 mr-4 inline-flex items-center justify-center text-xs">11</span> Piscina do Rego</li>
+              <li className="py-2"><span className="rounded-full bg-blue-400 w-6 h-6 mr-4 inline-flex items-center justify-center text-xs">12</span> Hospital Santa Maria</li>
+            </ol>
+          </Accordion>
+          <Accordion
+            color="white"
+            header="Natureza"
+          >
+            <ol className="text-white py-6 px-4">
+              <li className="py-2"><span className="rounded-full bg-green w-6 h-6 mr-4 inline-flex items-center justify-center text-xs">13</span> Monsanto</li>
+              <li className="py-2"><span className="rounded-full bg-green w-6 h-6 mr-4 inline-flex items-center justify-center text-xs">14</span> Jardim Gulbenkian</li>
+              <li className="py-2"><span className="rounded-full bg-green w-6 h-6 mr-4 inline-flex items-center justify-center text-xs">15</span> Parque Eduardo VII</li>
             </ol>
           </Accordion>
         </div>
