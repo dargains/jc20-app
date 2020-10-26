@@ -14,6 +14,7 @@ const Login = () => {
   const [state, dispatch] = useContext(AppContext);
   const { register, handleSubmit, errors, setValue } = useForm();
   const [errorMessage, setErrorMessage] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const location = useLocation()
   const history = useHistory()
   const type = location.hash.substr(1)
@@ -67,12 +68,13 @@ const Login = () => {
             {errors.email && <ErrorMessage>Este campo é obrigatório</ErrorMessage>}
 
             <Inputbox
-              type="password"
+              type={showPassword ? "text" : "password"}
               color="green"
               placeholder="password *"
               name="password"
               error={errors.password}
               register={register({required: true})}
+              togglePassword={() => {setShowPassword(!showPassword)}}
             />
             {errors.password && <ErrorMessage>Este campo é obrigatório</ErrorMessage>}
 

@@ -16,6 +16,8 @@ const SignUp = () => {
   const [errorMessage, setErrorMessage] = useState('')
   const [done, setDone] = useState(false)
   const [companies, setCompanies] = useState([])
+  const [showPassword, setShowPassword] = useState(false)
+  const [showCode, setShowCode] = useState(false)
   const { register, handleSubmit, setError, errors, setValue } = useForm();
   const location = useLocation()
 
@@ -130,12 +132,13 @@ const SignUp = () => {
               {errors.phone && <ErrorMessage>Este campo é obrigatório</ErrorMessage>}
 
               <Inputbox
-                type="password"
+                type={showPassword ? "text" : "password"}
                 color="green"
                 placeholder="password"
                 name="password"
                 error={errors.password}
                 register={register({required: true})}
+                togglePassword={() => {setShowPassword(!showPassword)}}
               />
               {errors.password && <ErrorMessage>Este campo é obrigatório</ErrorMessage>}
 
@@ -181,12 +184,13 @@ const SignUp = () => {
               }
 
               <Inputbox
-                type="password"
+                type={showCode ? "text" : "password"}
                 color="green"
                 placeholder="código cliente"
                 name="code"
                 error={errors.code}
                 register={register({required: true})}
+                togglePassword={() => {setShowCode(!showCode)}}
               />
               {errors.code?.type === "required" &&
                 <ErrorMessage>Este campo é obrigatório</ErrorMessage>}

@@ -15,6 +15,7 @@ const EditProfile = () => {
   const [type, setType] = useState()
   const [errorMessage, setErrorMessage] = useState('')
   const [done, setDone] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
   const { register, handleSubmit, errors, setValue } = useForm();
 
   const onSubmit = async data => {
@@ -100,16 +101,17 @@ const EditProfile = () => {
               {errors.phone && <ErrorMessage>Este campo é obrigatório</ErrorMessage>}
 
               <Inputbox
-                type="password"
+                type={showPassword ? "text" : "password"}
                 color="green"
                 placeholder="password"
                 name="password"
                 error={errors.password}
                 register={register({required: true})}
+                togglePassword={() => {setShowPassword(!showPassword)}}
               />
               {errors.password && <ErrorMessage>Este campo é obrigatório</ErrorMessage>}
 
-              <select
+              {/* <select
                 name="apartment"
                 ref={register({required: true})}
                 className={cx(
@@ -138,9 +140,9 @@ const EditProfile = () => {
                     </>
                   }
               </select>
-              {errors.apartment && <ErrorMessage>Este campo é obrigatório</ErrorMessage>}
+              {errors.apartment && <ErrorMessage>Este campo é obrigatório</ErrorMessage>} */}
 
-              <Inputbox
+              {/* <Inputbox
                 type="password"
                 color="green"
                 placeholder={type === 'agent' ? "código imobiliária" : "código cliente"}
@@ -148,7 +150,7 @@ const EditProfile = () => {
                 error={errors.code}
                 register={register({required: true})}
               />
-              {errors.code && <ErrorMessage>Este campo é obrigatório</ErrorMessage>}
+              {errors.code && <ErrorMessage>Este campo é obrigatório</ErrorMessage>} */}
 
               <p className="text-red mt-4 text-xs">{errorMessage}</p>
               <Button text="guardar" type="primary" className="mt-10" />
