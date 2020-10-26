@@ -131,6 +131,8 @@ const Welcome = () => {
         : <div
           className="w-full h-full flex items-end p-8 bg-cover bg-center"
           style={{ backgroundImage: `url(${RandomImage})` }}
+          onClick={() => {dispatch({ type: 'TOGGLE_HEADER_DOWN', payload: false })
+          dispatch({ type: 'TOGGLE_MENU', payload: true })}}
         >
           <div className="bg-gray-800 bg-opacity-25 absolute w-full h-full pointer-events-none top-0 left-0"></div>
           <h2 className="font-display font-semibold text-5xl text-white w-2/3">
