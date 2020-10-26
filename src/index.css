@@ -1,6 +1,11 @@
 * {
   position: relative;
   box-sizing: border-box;
+  outline-color: transparent;
+  user-select: none;
+}
+*::selection {
+  background-color:transparent;
 }
 img {
   display: block;
@@ -19,6 +24,9 @@ h4 {
 }
 option:first {
   color: #999;
+}
+input,textarea {
+  border-radius: 0 !important;
 }
 textarea {
   resize: none !important;
