@@ -154,16 +154,16 @@ const Phone = () => {
                 <option value="13:30">13:30</option>
                 <option value="14:00">14:00</option>
                 <option value="14:30">14:30</option>
-                <option value="14:00">15:00</option>
-                <option value="14:00">15:30</option>
-                <option value="14:00">16:00</option>
-                <option value="14:00">16:30</option>
-                <option value="14:00">17:00</option>
-                <option value="14:00">17:30</option>
-                <option value="14:00">18:00</option>
-                <option value="14:00">18:30</option>
-                <option value="14:00">19:00</option>
-                <option value="14:00">19:30</option>
+                <option value="15:00">15:00</option>
+                <option value="15:30">15:30</option>
+                <option value="16:00">16:00</option>
+                <option value="16:30">16:30</option>
+                <option value="17:00">17:00</option>
+                <option value="17:30">17:30</option>
+                <option value="18:00">18:00</option>
+                <option value="18:30">18:30</option>
+                <option value="19:00">19:00</option>
+                <option value="19:30">19:30</option>
               </select>
               {errors.hour && <ErrorMessage>Este campo é obrigatório</ErrorMessage>}
               <p className="text-red mt-4 text-xs">{emailMessage}</p>
@@ -176,8 +176,8 @@ const Phone = () => {
             <p className="text-white mt-12 mb-4">
               ou através do número:
             </p>
-            <a href="tel:+351912566905" className="block text-white border border-white rounded-lg p-4 text-center text-4xl font-bold font-display">
-              <span className="text-black">+351</span> 912 566 905
+            <a href="tel:+351964074080" className="block text-white border border-white rounded-lg p-4 text-center text-4xl font-bold font-display">
+              <span className="text-black">+351</span> 964 074 080
             </a>
           </div>
       }
