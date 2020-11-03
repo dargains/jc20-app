@@ -1,5 +1,4 @@
 import React, {useState, useContext, useEffect} from 'react'
-import { useHistory } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import styled from 'styled-components'
 import Button from '../components/Button'
@@ -20,7 +19,6 @@ const Welcome = () => {
   const [state, dispatch] = useContext(AppContext);
   const [name, setName] = useState('')
   const { register, handleSubmit, errors } = useForm();
-  const history = useHistory();
 
   const showIntro = () => {
     setShowHello(true)
@@ -58,7 +56,7 @@ const Welcome = () => {
     return () => {
       setShowHello(false)
     }
-  }, [dispatch, history, name, state.user])
+  }, [dispatch, state.user])
 
   return (
     <section className="w-screen py-0 bg-green08" style={{height: showHello ? window.innerHeight : ''}}>
