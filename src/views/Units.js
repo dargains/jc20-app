@@ -76,7 +76,7 @@ const Units = () => {
             </p>
             <div className="text-center text-white">
               <p className="uppercase mb-2">
-                Apartamento <span className="text-green">{unit.title}</span>
+                Apartamento <span className="text-green inline-block w-2">{unit.title}</span>
               </p>
               <span
                 className={cx(
