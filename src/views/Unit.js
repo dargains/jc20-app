@@ -48,12 +48,13 @@ const ImageArea = ({name, coordinates, handleClick}) => {
 const Unit = () => {
   let {id} = useParams();
   const [unit, setUnit] = useState({})
-  const [showImage, setShowImage] = useState(false)
+  const [showFloorImage, setshowFloorImage] = useState(false)
+  const [showRoomImage, setShowRoomImage] = useState(false)
   const [showFloor, setShowFloor] = useState(true)
   const [selectedArea, setSelectedArea] = useState({})
   useEffect(() => {
       db.table('units').get(id, dbUnit => {
-        if (!dbUnit) Axios(`${baseUrl}/units/${id}?fields=*.*`).then(response => {
+        if (!dbUnit) Axios(`${baseUrl}/units/${id}?fields=*.*.*`).then(response => {
           const onlineUnits = response.data.data
           setUnit(onlineUnits)
           setTimeout(() => {
@@ -126,24 +127,24 @@ const Unit = () => {
                       Object.keys(selectedArea).length
                       ? <>
                         <span className="text-xl flex items-center">
-                          {selectedArea.image && <Icon.Image className="mr-2" />} {selectedArea.name}
+                          {selectedArea.image && <Icon.Image className="mr-2" handleClick={() => setShowRoomImage(true)} />} {selectedArea.name}
                         </span>
                         <span className="text-gray-600">{selectedArea.area} m<sup>2</sup></span>
                       </>
                       : <>
                         <span className="text-xs">Clique no ambiente para mais informações</span>
-                        <Icon.Click />
+                        <Icon.Click/>
                       </>
                       
                     }
                   </p>
                 </div>
                 <figure>
-                  <img src={unit.floorplan.data.full_url} alt="planta" useMap={unit.image_areas && `#floorplan${unit.title}`} />
+                  <img src={unit.floorplan.data.full_url} alt="planta" useMap={unit.unit_areas && `#floorplan${unit.title}`} />
                   {
-                    unit.image_areas &&
+                    unit.unit_areas &&
                     <map name={`floorplan${unit.title}`}>
-                      {unit.image_areas.map(area => <ImageArea key={area.name} {...area} handleClick={() => {setSelectedArea(area)}} />)}
+                      {unit.unit_areas.map(area => <ImageArea key={area.name} {...area} handleClick={() => {setSelectedArea(area)}} />)}
                     </map>
                   }
                 </figure>
@@ -168,9 +169,7 @@ const Unit = () => {
                   />
                   <Icon.Search
                     className="text-green00"
-                    handleClick={() => {
-                      setShowImage(true);
-                    }}
+                    handleClick={() => {setshowFloorImage(true)}}
                   />
                 </div>
                 
@@ -298,12 +297,23 @@ const Unit = () => {
           <ImageOverlay
             src={unit.floorplan.data.full_url}
             alt={`Planta - Apartamento ${unit.title}`}
-            showImage={showImage}
+            showImage={showFloorImage}
             spaced
             handleClose={() => {
-              setShowImage(false);
+              setshowFloorImage(false);
             }}
           />
+          {
+            selectedArea.image &&
+            <ImageOverlay
+              src={selectedArea.image.data.full_url}
+              alt={selectedArea.name}
+              showImage={showRoomImage}
+              handleClose={() => {
+                setShowRoomImage(false);
+              }}
+            />
+          }
         </section>
       )}
     </>
