@@ -4,7 +4,6 @@ import ImageOverlay from '../components/ImageOverlay';
 
 const Gallery = () => {
   const [showImage, setShowImage] = useState(false)
-  const [selectedImage, setSelectedImage] = useState({})
   const [selectedItem, setSelectedItem] = useState(0)
   const images = [
     {
@@ -61,7 +60,6 @@ const Gallery = () => {
   ]
   const selectImage = image => {
     setShowImage(true);
-    setSelectedImage(image);
     setSelectedItem(images.indexOf(image))
   }
   return (
