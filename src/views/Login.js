@@ -109,7 +109,7 @@ const Login = () => {
             <Button text="aceder" type="primary" className="mt-10" />
           </form>
           <p className="text-green08 text-sm text-center mt-8">Não tem conta? <Link to={`/signup#${type}`} className="underline">Criar</Link></p>
-          <p className="text-green08 text-sm text-center mt-4">Esqueceu-se da password? <Link to="/restore" className="underline">Restaure</Link></p>
+          <p className="text-green08 text-sm text-center mt-4">Esqueceu-se da password? <Link to="/requestreset" className="underline">Restaure</Link></p>
       </div>
     </section>
   )

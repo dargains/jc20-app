@@ -22,6 +22,8 @@ import SignUp from './views/Signup';
 import ClientRegister from './views/ClientRegister';
 import ClientList from './views/ClientList';
 import EditProfile from './views/EditProfile';
+import RequestReset from './views/RequestReset';
+import PasswordReset from './views/PasswordReset';
 
 // components
 import Menu from './components/Menu';
@@ -89,6 +91,12 @@ function App() {
             </Route>
             <Route path="/signup">
               <SignUp />
+            </Route>
+            <Route path="/requestreset">
+              <RequestReset />
+            </Route>
+            <Route path="/passwordreset">
+              <PasswordReset />
             </Route>
             <Route path="/editprofile">
               <EditProfile />
