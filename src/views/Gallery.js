@@ -5,6 +5,7 @@ import ImageOverlay from '../components/ImageOverlay';
 const Gallery = () => {
   const [showImage, setShowImage] = useState(false)
   const [selectedImage, setSelectedImage] = useState({})
+  const [selectedItem, setSelectedItem] = useState(0)
   const images = [
     {
       src: require("../assets/images/cam-01-fachada.jpg"),
@@ -58,6 +59,11 @@ const Gallery = () => {
       className: 'col-span-2'
     },
   ]
+  const selectImage = image => {
+    setShowImage(true);
+    setSelectedImage(image);
+    setSelectedItem(images.indexOf(image))
+  }
   return (
     <section>
       <Mask />
@@ -66,10 +72,15 @@ const Gallery = () => {
           <span className="text-green">Avenida Living</span><br/> na primeira linha do requinte
         </h1>
         <div className="grid grid-cols-2 gap-2">
-          {images.map(image => <img key={image.src} src={image.src} alt={image.alt} className={image.className} onClick={() => {setShowImage(true); setSelectedImage(image)}} />)}
+          {images.map(image => <img key={image.src} src={image.src} alt={image.alt} className={image.className} onClick={() => selectImage(image)} />)}
         </div>
       </div>
-      <ImageOverlay src={selectedImage.src} alt={selectedImage.alt} showImage={showImage} handleClose={() => {setShowImage(false)}}/>
+      <ImageOverlay
+        images={images}
+        selectedItem={selectedItem}
+        showImage={showImage}
+        handleClose={() => {setShowImage(false)}}
+      />
     </section>
   )
 }

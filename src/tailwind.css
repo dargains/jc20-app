@@ -75,6 +75,9 @@ section {
   object-fit: contain;
   /* height: 100%; */
 }
+.carousel-root {
+  width: 100%;
+}
 .carousel .slide {
   /* max-height: 300px; */
   flex: 1;
