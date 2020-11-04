@@ -104,7 +104,7 @@ const Units = () => {
         !!units.length
         ? <Building
           className="grid mx-auto"
-          style={{ padding: "10% 8% 8%", backgroundImage: `url(${fachada})` }}
+          style={{ padding: "12% 2% 10%", backgroundImage: `url(${fachada})` }}
         >
           {units.map((unit, index) => (
             <AptImage
