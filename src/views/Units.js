@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import useOnClickOutside from '../outsideHook'
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Axios from 'axios'
 import styled from 'styled-components'
 import cx from 'classnames'
@@ -27,7 +27,7 @@ const Units = () => {
   const [unit, setUnit] = useState({})
   const ref = useRef()
   useOnClickOutside(ref, e => {
-    if (e.target.closest(".apt")) return
+    if (e.target.closest(".apt") || e.target.closest('.unit__header')) return
     else setUnit({});
   });
   useEffect(() => {
@@ -55,7 +55,7 @@ const Units = () => {
     }
   }, [])
   const selectUnit = selectedUnit => {
-    if (unit === selectedUnit) goToUnit(unit.id)
+    if (unit === selectedUnit) goToUnit(selectedUnit.id)
     setUnit(selectedUnit)
     
   }
@@ -64,9 +64,12 @@ const Units = () => {
   }
   return (
     <section className="py-0">
-      <div className="h-24 bg-green07 flex items-center justify-between px-4">
+      <div
+        className="unit__header h-24 bg-green07 flex items-center justify-between px-4"
+      >
         {unit.title ? (
-          <div
+          <Link
+          to={`/unit/${unit.id}`}
             className={cx("w-full flex items-center justify-between", {
               "opacity-75": unit.status !== "available",
             })}
@@ -90,7 +93,7 @@ const Units = () => {
                 {getStatus(unit.status)}
               </span>
             </div>
-          </div>
+          </Link>
         ) : (
           <p className="text-2xl text-white uppercase font-display font-medium">
             Escolha o seu <span className="text-green font-light">apartamento</span>
