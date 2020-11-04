@@ -106,9 +106,8 @@ const Unit = () => {
                   </p>
                   <StatusTag status={unit.status} />
                 </div>
-                <div className="text-center text-green08 text-xl">
-                  <p>T{unit.bedrooms}</p>
-                  <p>{unit.extra}</p>
+                <div className="text-center text-green08 text-xl w-20">
+                  <p>T{unit.bedrooms} {unit.extra}</p>
                 </div>
               </div>
             </header>
