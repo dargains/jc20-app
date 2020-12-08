@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 import cx from 'classnames'
-import { baseUrl } from '../api'
+import { itemsUrl } from '../api'
 import { useContext } from 'react'
 import { AppContext } from '../store'
 import { Link, useLocation } from 'react-router-dom'
@@ -69,7 +69,7 @@ const ClientList = () => {
       const headers = {
         Authorization: `Bearer ${state.user.token}`
       }
-      Axios.get(`${baseUrl}/clients`,{headers}).then(response => {
+      Axios.get(`${itemsUrl}/clients`,{headers}).then(response => {
         setList(response.data.data)
       })
     }

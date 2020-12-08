@@ -4,7 +4,7 @@ import Axios from 'axios';
 import cx from "classnames"
 import Icon from './Icon'
 import { AppContext } from '../store.js';
-import { baseUrl } from '../api'
+import { itemsUrl } from '../api'
 import db from '../db'
 
 
@@ -46,7 +46,7 @@ const Menu = () => {
   useEffect(() => {
     if (!Object.keys(content).length) {
       if (window.navigator.onLine) {
-        Axios(`${baseUrl}/menu?fields=*.*`).then(response => {
+        Axios(`${itemsUrl}/menu?fields=*.*`).then(response => {
           const allContent = response.data.data[0].translations;
           setContent(allContent)
           db.content.put({ page: 'Menu', content: allContent })

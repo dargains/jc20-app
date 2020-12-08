@@ -3,7 +3,7 @@ import Mask from '../components/Mask';
 import ImageOverlay from '../components/ImageOverlay';
 import Axios from 'axios';
 import { AppContext } from '../store.js';
-import { baseUrl } from '../api'
+import { itemsUrl } from '../api'
 import db from '../db'
 
 const Gallery = () => {
@@ -78,7 +78,7 @@ const Gallery = () => {
   useEffect(() => {
     if (!Object.keys(content).length) {
       if (window.navigator.onLine) {
-        Axios(`${baseUrl}/page_gallery?fields=*.*`).then(response => {
+        Axios(`${itemsUrl}/page_gallery?fields=*.*`).then(response => {
           const allContent = response.data.data[0].translations;
           setContent(allContent)
           db.content.put({ page: 'Gallery', content: allContent })

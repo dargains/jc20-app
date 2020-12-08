@@ -4,7 +4,7 @@ import Axios from 'axios'
 import styled from 'styled-components'
 import ImageMap from "image-map"
 import cx from 'classnames'
-import { baseUrl } from '../api'
+import { itemsUrl } from '../api'
 import db from '../db'
 import Icon from '../components/Icon';
 import Button from '../components/Button';
@@ -54,7 +54,7 @@ const Unit = () => {
   const [selectedArea, setSelectedArea] = useState({})
   useEffect(() => {
       db.table('units').get(id, dbUnit => {
-        if (!dbUnit) Axios(`${baseUrl}/units/${id}?fields=*.*.*`).then(response => {
+        if (!dbUnit) Axios(`${itemsUrl}/units/${id}?fields=*.*.*`).then(response => {
           const onlineUnits = response.data.data
           setUnit(onlineUnits)
           setTimeout(() => {

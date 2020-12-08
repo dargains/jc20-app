@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import Axios from 'axios'
 import styled from 'styled-components'
 import cx from 'classnames'
-import { baseUrl } from '../api'
+import { itemsUrl } from '../api'
 import db from '../db'
 import fachada from '../assets/images/fachada.jpg'
 
@@ -33,7 +33,7 @@ const Units = () => {
   useEffect(() => {
     if (window.navigator.onLine) {
       console.log('Online. Fetching from CMS...')
-      Axios(`${baseUrl}/units?fields=*.*`).then(response => {
+      Axios(`${itemsUrl}/units?fields=*.*`).then(response => {
         const onlineUnits = response.data.data
         setUnits(onlineUnits)
         onlineUnits.forEach(unit => {

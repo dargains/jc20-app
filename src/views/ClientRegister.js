@@ -2,7 +2,7 @@ import Axios from 'axios';
 import React, { useState } from 'react'
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
-import { baseUrl } from '../api';
+import { itemsUrl } from '../api';
 import Button from '../components/Button';
 import Inputbox from '../components/Inputbox';
 import Mask from '../components/Mask'
@@ -16,14 +16,11 @@ const ClientRegister = () => {
   const [state] = useContext(AppContext)
 
   const onSubmit = async data => {
-    console.log(data);
     const headers = {
       Authorization: `Bearer ${state.user.token}`
     }
-    console.log(headers);
     try {
-      const response = await Axios.post(`${baseUrl}/clients`, data, {headers})
-      console.log(response);
+      await Axios.post(`${itemsUrl}/clients`, data, {headers})
       setEmailSent(true)
     } catch (error) {
       setErrorMessage(error.response.data.error.message)

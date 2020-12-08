@@ -5,7 +5,7 @@ import lifestyleImage from '../assets/images/lifestyle.jpg'
 import mapImage from '../assets/images/map.jpg'
 import { useEffect } from 'react'
 import Axios from 'axios'
-import { baseUrl } from '../api'
+import { itemsUrl } from '../api'
 import db from '../db'
 import { AppContext } from '../store'
 
@@ -31,7 +31,7 @@ const Lifestyle = () => {
     if (!Object.keys(content).length) {
       if (window.navigator.onLine) {
         (async () => {
-          const response = await Axios(`${baseUrl}/lifestyle?fields=*.*.*`)
+          const response = await Axios(`${itemsUrl}/lifestyle?fields=*.*.*`)
           const allContent = response.data.data;
           
           setContent(allContent)

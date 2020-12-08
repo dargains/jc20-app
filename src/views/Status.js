@@ -5,7 +5,7 @@ import Mask from "../components/Mask";
 import { Carousel } from "react-responsive-carousel";
 import Axios from "axios";
 import { AppContext } from '../store.js';
-import { baseUrl } from '../api'
+import { itemsUrl } from '../api'
 import db from '../db'
 import ImageOverlay from "../components/ImageOverlay";
 
@@ -69,9 +69,9 @@ const Status = () => {
     if (!Object.keys(content).length) {
       if (window.navigator.onLine) {
         (async () => {
-          const response = await Axios(`${baseUrl}/status?fields=*.*.*`)
+          const response = await Axios(`${itemsUrl}/status?fields=*.*.*`)
           const allContent = response.data.data[0].translations;
-          // const galleryResponse = await Axios(`${baseUrl}/status_gallery?fields=*.*.*`)
+          // const galleryResponse = await Axios(`${itemsUrl}/status_gallery?fields=*.*.*`)
           // const allGallery = galleryResponse.data.data[0];
           
           setImages(response.data.data[0].images)
