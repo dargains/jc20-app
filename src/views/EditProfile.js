@@ -4,7 +4,7 @@ import Axios from 'axios'
 import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
 import cx from 'classnames'
-import { baseUrl, projectUrl } from '../api'
+import { itemsUrl, projectUrl } from '../api'
 import Button from '../components/Button'
 import Inputbox from '../components/Inputbox'
 import Mask from '../components/Mask'
@@ -22,7 +22,6 @@ const EditProfile = () => {
     delete data.terms
     const userData = {
       first_name: data.name,
-      last_name: state.user.id,
       email: data.email,
       password: data.password,
       role: 5,
@@ -30,18 +29,16 @@ const EditProfile = () => {
     }
     data.agent = type === 'agent'
     try {
-      const response = await Axios.patch(`${projectUrl}/users/${state.user.userId}`, userData, {headers: { Authorization: `Bearer ${state.user.token}` }})
-      const userResponse = await Axios.patch(`${baseUrl}/users/${state.user.id}`, data, {headers: { Authorization: `Bearer ${state.user.token}` }})
+      const response = await Axios.patch(`${projectUrl}/users/${state.user.id}`, userData, {headers: { Authorization: `Bearer ${state.user.token}` }})
+      const userid = await (await Axios(`${itemsUrl}/users?filter[user_id]=${state.user.user_id}`)).data.data[0].id
+      const userResponse = await Axios.patch(`${itemsUrl}/users/${userid}`, data, {headers: { Authorization: `Bearer ${state.user.token}` }})
       setDone(true)
       const payload = {
         ...data,
         ...state.user,
         ...userResponse.data.data,
         ...response.data.data,
-        token: state.user.token,
-        logged: true,
-        userId: response.data.data.id,
-        id: userResponse.data.data.id
+        token: state.user.token
       }
       dispatch({type: 'SET_USER', payload})
     } catch (error) {

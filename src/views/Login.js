@@ -7,7 +7,7 @@ import Mask from '../components/Mask'
 import Inputbox from '../components/Inputbox';
 import styled from 'styled-components';
 import Button from '../components/Button';
-import { baseUrl, projectUrl } from '../api';
+import { itemsUrl, projectUrl } from '../api';
 import Axios from 'axios';
 
 const Login = () => {
@@ -22,16 +22,12 @@ const Login = () => {
     delete data.terms
     try {
       const response = await Axios.post(`${projectUrl}/auth/authenticate`, data)
-      const userResponse = await Axios.get(`${baseUrl}/users/${response.data.data.user.last_name}`, {headers: { Authorization: `Bearer ${response.data.data.token}` }})
+      const userResponse = await Axios.get(`${itemsUrl}/users?filter[user_id]=${response.data.data.user.id}`, {headers: { Authorization: `Bearer ${response.data.data.token}` }})
       
       data = {
-        ...data,
-        ...state.user,
-        ...userResponse.data.data,
+        ...userResponse.data.data[0],
         ...response.data.data.user,
         logged: true,
-        userId: response.data.data.user.id,
-        id: userResponse.data.data.id,
         token: response.data.data.token
       }
 

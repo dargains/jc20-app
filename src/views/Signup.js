@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Axios from 'axios';
 import cx from 'classnames'
 import { useForm } from "react-hook-form";
-import { baseUrl, projectUrl } from '../api';
+import { itemsUrl, projectUrl } from '../api';
 import { useEffect } from 'react';
 import { AppContext } from '../store';
 import Button from '../components/Button'
@@ -24,8 +24,8 @@ const SignUp = () => {
   const type = location.hash.substr(1)
 
   const onSubmit = async data => {
-    if (data.company && (companies.find(c => c.name === data.company).code !== data.code)) {
-      console.log(companies.find(c => c.name === data.company).code, data.code);
+    setErrorMessage('')
+    if (data.company && (companies.find(c => c.name === data.company).code !== data.code.toUpperCase())) {
       setError("code", {
         type: "wrongCode",
         message: "Código inválido"
@@ -35,7 +35,6 @@ const SignUp = () => {
     delete data.terms
     const userData = {
       first_name: data.name,
-      last_name: state.user.id,
       email: data.email,
       password: data.password,
       role: 5,
@@ -44,15 +43,22 @@ const SignUp = () => {
     data.agent = type === 'agent'
     try {
       const response = await Axios.post(`${projectUrl}/users`, userData)
-      await Axios.patch(`${baseUrl}/users/${state.user.id}`, data)
+      data.user_id = response.data.data.id
+      await Axios.post(`${itemsUrl}/users`, data)
+      const auth = await Axios.post(`${projectUrl}/auth/authenticate`, {email: data.email, password: data.password})
+      data.token = auth.data.data.token
       setDone(true)
-      data.userId = state.user.id
       dispatch({type: 'DELETE_USER'})
       data.id = response.data.data.id
       data.logged = true
       dispatch({type: 'SET_USER', payload: data})
     } catch (error) {
-      setErrorMessage(error.response.data.error.message)
+      const msg = (error => {
+        console.log(error);
+          if (error.includes("Duplicate key")) return "email duplicado"
+          return error
+      })(error.response.data.error.message)
+      setErrorMessage(msg)
     }
   }
 
@@ -62,7 +68,7 @@ const SignUp = () => {
         setValue(key, state.user[key])
       }
     }
-    Axios(`${baseUrl}/companies`).then(response => {
+    Axios(`${itemsUrl}/companies`).then(response => {
       setCompanies(response.data.data)
     })
   },[setValue, state.user])
