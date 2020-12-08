@@ -29,6 +29,7 @@ import PasswordReset from './views/PasswordReset';
 import Menu from './components/Menu';
 import Header from './components/Header';
 import Client from './views/Client';
+import PreReservation from './views/PreReservation';
 
 
 function App() {
@@ -110,6 +111,9 @@ function App() {
             </Route>
             <Route path="/client/:id">
               <Client />
+            </Route>
+            <Route path="/prereservation/:id">
+              <PreReservation />
             </Route>
           </Switch>
         </RouteContainer>

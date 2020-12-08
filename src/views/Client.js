@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import React, { useContext, useState } from 'react'
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { itemsUrl } from '../api';
 import Button from '../components/Button';
 import Mask from '../components/Mask';
@@ -36,7 +36,6 @@ const Client = () => {
   nextMonth.setMonth(nextMonth.getMonth() + 1)
   const endDate = nextMonth.getDate() + '/' + (nextMonth.getMonth() + 1) + '/' + nextMonth.getFullYear()
   const hour = thisDate.getHours() + ':' + zeroPrefix(thisDate.getMinutes())
-  const today = new Date()
   
   return (
     <section>
@@ -54,15 +53,22 @@ const Client = () => {
               <p className="text-sm mb-2">Registo {date}, às {hour}</p>
               <p className="text-red text-sm">Válido até {endDate}</p>
               <hr />
-              <p className="text-sm">{client.log} Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus laboriosam id eius similique cum, doloribus animi earum! Aut, porro iure totam sequi fugiat tempore magni, qui non, expedita minima deserunt quas eius numquam distinctio soluta dolor quae. Magni, commodi hic!</p>
+              <p className="text-sm" dangerouslySetInnerHTML={{__html: client.log}} />
             </div>
           : <p>A carregar...</p>
         }
-        
-        <Button text="pré-reserva" type="primary"  className="mt-4"/>
-        <Button text="proposta" type="primary"  className="mt-4"/>
-        <Button text="reserva" type="primary"  className="mt-4"/>
-        <Button text="voltar" type="primary" icon iconDirection="left" className="mt-4"/>
+        <Link to={`/prereservation/${id}`}>
+          <Button text="pré-reserva" type="primary" className="mt-4"/>
+        </Link>
+        <Link to={`/proposal/${id}`}>
+          <Button text="proposta" type="primary" className="mt-4"/>
+        </Link>
+        <Link to={`/reservation/${id}`}>
+          <Button text="reserva" type="primary" className="mt-4"/>
+        </Link>
+        <Link to="/clientlist">
+          <Button text="voltar" type="primary" className="mt-4" icon iconDirection="left"/>
+        </Link>
       </div>
     </section>
   )
