@@ -18,11 +18,11 @@ const Welcome = () => {
     dispatch({ type: 'TOGGLE_HEADER_DOWN', payload: true })
     if (state.user) {
       setName(state.user.name)
-      setTimeout(() => {
-        dispatch({ type: 'TOGGLE_HEADER_DOWN', payload: false })
-        dispatch({ type: 'TOGGLE_MENU', payload: true })
-      }, 3000);
     }
+    setTimeout(() => {
+      dispatch({ type: 'TOGGLE_HEADER_DOWN', payload: false })
+      dispatch({ type: 'TOGGLE_MENU', payload: true })
+    }, 3000);
   }, [dispatch, state.user])
 
   return (
