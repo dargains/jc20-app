@@ -4,7 +4,7 @@ import cx from 'classnames'
 import { itemsUrl } from '../api'
 import { useContext } from 'react'
 import { AppContext } from '../store'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useHistory } from 'react-router-dom'
 import Mask from '../components/Mask'
 import Button from '../components/Button'
 import Icon from '../components/Icon'
@@ -25,7 +25,8 @@ const sortBy = (array, type) => {
   }
 }
 
-const ClientItem = ({created_on, email, name, phone, type}) => {
+const ClientItem = ({id, created_on, email, name, phone, type}) => {
+  const history = useHistory()
   const thisDate = new Date(created_on)
   const date = thisDate.getDate() + '/' + (thisDate.getMonth() + 1) + '/' + thisDate.getFullYear()
   const nextMonth = new Date(thisDate)
@@ -34,12 +35,16 @@ const ClientItem = ({created_on, email, name, phone, type}) => {
   const hour = thisDate.getHours() + ':' + zeroPrefix(thisDate.getMinutes())
   const today = new Date()
   const isHidden = type === 'sup' ? today - nextMonth < 0 : today - nextMonth > 0
+  
   return (
-    <article className={cx("bg-white rounded-lg shadow-lg p-6 text-green08 mb-8 overflow-hidden",
-    {
-      "hidden": isHidden
-    }
-    )}>
+    <article className={cx(
+      "bg-white rounded-lg shadow-lg p-6 text-green08 mb-8 overflow-hidden",
+      {
+        "hidden": isHidden
+      }
+    )}
+    onClick={() => history.push(`/client/${id}`)}
+    >
       <p className="text-xl mb-4 font-bold">{name}</p>
       <p className="mb-4">{email}****@*******</p>
       <p className="mb-8">******{phone}</p>

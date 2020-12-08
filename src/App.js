@@ -28,6 +28,7 @@ import PasswordReset from './views/PasswordReset';
 // components
 import Menu from './components/Menu';
 import Header from './components/Header';
+import Client from './views/Client';
 
 
 function App() {
@@ -106,6 +107,9 @@ function App() {
             </Route>
             <Route path="/clientlist">
               <ClientList />
+            </Route>
+            <Route path="/client/:id">
+              <Client />
             </Route>
           </Switch>
         </RouteContainer>
