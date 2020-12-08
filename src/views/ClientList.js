@@ -83,7 +83,7 @@ const ClientList = () => {
         <h1 className=" font-display text-4xl font-semibold w-2/3 mb-8 text-black">
           Meus <span className="text-green">registos</span>
         </h1>
-        <Link to="/share">
+        <Link to="/clientregister">
           <Button text="novo registo" type="primary" />
         </Link>
         <div className="text-green08 flex items-center justify-end my-6" onClick={toggleOrder}>
