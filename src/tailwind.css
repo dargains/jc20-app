@@ -94,3 +94,6 @@ section {
   width: 6px;
   height: 6px;
 }
+hr {
+  @apply my-4;
+}
