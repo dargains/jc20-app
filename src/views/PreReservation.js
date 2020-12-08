@@ -56,7 +56,7 @@ const PreReservation = () => {
         setClient(response.data.data)
         setValue("name", response.data.data.name)
       })
-      Axios(`${itemsUrl}/units`).then(response => {
+      Axios(`${itemsUrl}/units?filter[status]=available`).then(response => {
         setUnits(response.data.data)
       })
     }
@@ -142,7 +142,7 @@ const PreReservation = () => {
                       })
                     }>
                     <option value="">apartamento</option>
-                    {units.filter(({status}) => status === 'available').map(({id, title}) => <option key={id} value={id}>{title}</option>)}
+                    {units.map(({id, title}) => <option key={id} value={id}>{title}</option>)}
                   </select>
                   {errors.unit && <ErrorMessage>Este campo é obrigatório</ErrorMessage>}
                 </>

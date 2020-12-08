@@ -60,7 +60,7 @@ const Client = () => {
         <Link to={`/prereservation/${id}`}>
           <Button text="pré-reserva" type="primary" className="mt-4"/>
         </Link>
-        <Link to={`/proposal/${id}`}>
+        <Link to={`/tender/${id}`}>
           <Button text="proposta" type="primary" className="mt-4"/>
         </Link>
         <Link to={`/reservation/${id}`}>
