@@ -7,10 +7,10 @@ import { Carousel } from "react-responsive-carousel";
 
 const Slide = ({src, alt}) => {
   return (
-    <div className="flex-1 flex flex-col">
+    <div className="flex flex-col h-full justify-center">
       <img src={src} alt={alt} style={{maxHeight: '70vh'}} />
       <div
-        className="mt-12 text-left text-green08 px-6"
+        className="mt-4 text-left text-white px-6"
         dangerouslySetInnerHTML={{ __html: alt }}
       />
     </div>
@@ -33,7 +33,6 @@ const ImageOverlay = ({src, alt, images = [], selectedItem, showImage, handleClo
               selectedItem={selectedItem}
               swipeable
               emulateTouch
-              dynamicHeight
             >
               {images.map((image) => (
                 <Slide
