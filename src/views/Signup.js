@@ -90,7 +90,7 @@ const SignUp = () => {
             {
               type === 'client'
               ? <p className="text-green08 mb-4">A área pessoal foi criada para facilitar a interação do cliente com a promotora e concentrar em um espaço único as informações sobre a evolução da sua obra.</p>
-              : <p className="text-green08 mb-4">A área pessoal foi criada para facilitar a interação do consultor com a promotora e concentrar em um espaço único as informações e documentos necessários à apresentação e venda.</p>
+              : <p className="text-green08 mb-4">A área pessoal foi criada para facilitar a interação do mediador com a promotora e concentrar em um espaço único as informações e documentos necessários à apresentação e venda.</p>
             }
             {
               type === 'client'

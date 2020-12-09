@@ -9,14 +9,7 @@ import Button from '../components/Button';
 import Inputbox from '../components/Inputbox';
 import Mask from '../components/Mask'
 import { AppContext } from '../store';
-
-const zeroPrefix = (num, digit = 2) => {
-  let zero = ''
-  for (let i = 0; i < digit; i++) {
-    zero += '0'
-  }
-  return (zero + num).slice(-digit)
-}
+import { zeroPrefix } from '../helpers';
 
 const PreReservation = () => {
   const {id} = useParams();
@@ -25,8 +18,8 @@ const PreReservation = () => {
   const [isDone, setIsDone] = useState(false)
   const [expiration, setExpiration] = useState({date:'', hour:''})
   const [state] = useContext(AppContext)
-  const [errorMessage, setErrorMessage] = useState('')
-  const { register, handleSubmit, setError, errors, setValue } = useForm();
+  const [errorMessage] = useState('')
+  const { register, handleSubmit, errors, setValue } = useForm();
 
   const onSubmit = async data => {
     const unitTitle = units.find(u => u.id === parseInt(data.unit)).title
@@ -122,12 +115,9 @@ const PreReservation = () => {
                 placeholder="contribuinte"
                 name="nif"
                 error={errors.nif}
-                register={register({required: true, pattern: /((PT)?([1-2|5-9])[0-9]{8})/})}
+                register={register({required: true})}
               />
-              {errors.nif?.type === "required" &&
-                <ErrorMessage>Este campo é obrigatório</ErrorMessage>}
-              {errors.nif?.type === "pattern" &&
-                <ErrorMessage>NIF inválido</ErrorMessage>}
+              {errors.nif && <ErrorMessage>Este campo é obrigatório</ErrorMessage>}
 
               {
                 !!units.length

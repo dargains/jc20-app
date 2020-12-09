@@ -9,14 +9,7 @@ import Mask from '../components/Mask';
 import Axios from 'axios';
 import { itemsUrl } from '../api';
 import { AppContext } from '../store';
-
-const zeroPrefix = (num, digit = 2) => {
-  let zero = ''
-  for (let i = 0; i < digit; i++) {
-    zero += '0'
-  }
-  return (zero + num).slice(-digit)
-}
+import { zeroPrefix } from '../helpers';
 
 const Tender = () => {
   const {id} = useParams();
@@ -27,9 +20,9 @@ const Tender = () => {
   const [isDone, setIsDone] = useState(false)
   const [isFirst, setIsFirst] = useState(true)
   const [type, setType] = useState("rc")
-  const [errorMessage, setErrorMessage] = useState('')
+  const [errorMessage] = useState('')
   const { register, handleSubmit, errors, setValue } = useForm();
-
+  
   const submitFirstStep = data => {
     data.id = id
     setClient(data)
@@ -136,12 +129,9 @@ const Tender = () => {
                 placeholder="contribuinte"
                 name="nif"
                 error={errors.nif}
-                register={register({required: true, pattern: /((PT)?([1-2|5-9])[0-9]{8})/})}
+                register={register({required: true})}
               />
-              {errors.nif?.type === "required" &&
-                <ErrorMessage>Este campo é obrigatório</ErrorMessage>}
-              {errors.nif?.type === "pattern" &&
-                <ErrorMessage>NIF inválido</ErrorMessage>}
+              {errors.nif && <ErrorMessage>Este campo é obrigatório</ErrorMessage>}
               
 
               <p className="text-red mt-4 text-xs">{errorMessage}</p>
@@ -202,7 +192,7 @@ const Tender = () => {
                   <p className="text-green08 text-sm mt-6 mb-2">Valor do apartamento</p>
                   <div className="flex items-center border rounded-md px-2 bg-transparent w-full py-1 text-green08 border-green08">
                     <input
-                      type="number"
+                      type="text"
                       name="price"
                       error={errors.price}
                       ref={register({required: true})}

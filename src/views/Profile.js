@@ -54,7 +54,7 @@ const Profile = () => {
           </Link>
           <Link to="/login#agent" className="bg-white rounded-xl shadow-lg flex flex-col items-center justify-center pt-8 pb-12 my-8">
             <Icon.Agent height={64} />
-            <p className="text-green08 text-2xl mt-4">Consultor</p>
+            <p className="text-green08 text-2xl mt-4">Mediador</p>
           </Link>
         </div>
       }

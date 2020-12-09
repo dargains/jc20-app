@@ -41,7 +41,7 @@ const Header = () => {
   }, [state.headerDown])
   return (
     <header className={cx(
-      "fixed top-0 bottom-0 pointer-events-none z-20 h-full w-full"
+      "fixed top-0 bottom-0 pointer-events-none z-20 w-full"
       )}>
       <nav className={cx("absolute bottom-0 py-2 bg-green08 flex w-full items-center z-20 justify-between px-4 pointer-events-auto transform transition-transform duration-200",
       {

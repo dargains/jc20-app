@@ -10,14 +10,7 @@ import Axios from 'axios';
 import { itemsUrl, projectUrl } from '../api';
 import Filebox from '../components/Filebox';
 import { AppContext } from '../store';
-
-const zeroPrefix = (num, digit = 2) => {
-  let zero = ''
-  for (let i = 0; i < digit; i++) {
-    zero += '0'
-  }
-  return (zero + num).slice(-digit)
-}
+import { zeroPrefix } from '../helpers';
 
 const Reservation = () => {
   const {id} = useParams();
@@ -25,7 +18,7 @@ const Reservation = () => {
   const [units, setUnits] = useState([])
   const [isDone, setIsDone] = useState(false)
   const [selectedUnit, setSelectedUnit] = useState({})
-  const [errorMessage, setErrorMessage] = useState('')
+  const [errorMessage] = useState('')
   const { register, handleSubmit, errors, setValue } = useForm();
 
   const fileUpload = async file => {
@@ -116,9 +109,12 @@ const Reservation = () => {
               placeholder="contribuinte"
               name="doc_id"
               error={errors.doc_id}
-              register={register}
+              register={register({required: true, pattern: /((PT)?([1-2|5-9])[0-9]{8})/})}
             />
-            {errors.doc_id && <ErrorMessage>Este campo é obrigatório</ErrorMessage>}
+            {errors.doc_id?.type === "required" &&
+              <ErrorMessage>Este campo é obrigatório</ErrorMessage>}
+            {errors.doc_id?.type === "pattern" &&
+              <ErrorMessage>NIF inválido</ErrorMessage>}
 
             <select
               name="civil_status"
@@ -152,7 +148,7 @@ const Reservation = () => {
             <Inputbox
               type="text"
               color="green"
-              placeholder="contribuinte"
+              placeholder="contribuinte do cônjuge"
               name="spouse_doc_id"
               error={errors.spouse_doc_id}
               register={register}
@@ -215,7 +211,7 @@ const Reservation = () => {
                 <p className="text-green08 text-sm mt-6 mb-2">Valor do apartamento</p>
                 <div className="flex items-center border rounded-md px-2 bg-transparent w-full py-1 text-green08 border-green08">
                   <input
-                    type="number"
+                    type="text"
                     name="price"
                     error={errors.price}
                     ref={register({required: true})}

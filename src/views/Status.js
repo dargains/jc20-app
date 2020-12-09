@@ -148,7 +148,6 @@ const Status = () => {
                     key={image.id}
                     {...image}
                     handleClick={({src,alt}) => {
-                      console.log(image);
                       setShowImage(true);
                       setSelectedImage({ src, alt });
                     }}

@@ -49,7 +49,7 @@ const Login = () => {
       <Mask />
       <div className="wrapper">
         <h1 className=" font-display text-4xl font-semibold w-2/3 mb-8">
-          Aceda ao seu <br/><span className="text-green">Perfil</span> de {type === 'client' ? 'cliente' : 'consultor'}
+          Aceda ao seu <br/><span className="text-green">Perfil</span> de {type === 'client' ? 'cliente' : 'mediador'}
         </h1>
         <form onSubmit={handleSubmit(onSubmit)} >
 

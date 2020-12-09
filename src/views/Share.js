@@ -13,7 +13,7 @@ const Share = () => {
   const history = useHistory()
 
   const handleOpenRegister = () => {
-    if (state.user.logged) {
+    if (state.user && state.user.logged) {
       history.push('/clientregister')
     } else {
       setNoLoginError(true)
@@ -50,7 +50,7 @@ const Share = () => {
             <Button text="partilhe" type="primary" handleClick={handleShare} />
           </article>
           <article className="bg-white p-6 rounded-lg shadow-lg mb-6">
-            <p className="text-green08 text-lg mb-8">É <span className="text-green font-bold">consultor imobiliário</span>? Partilhe as informações do Avenida Living com clientes e faça o <span className="text-green font-bold">registo automático</span>: </p>
+            <p className="text-green08 text-lg mb-8">É <span className="text-green font-bold">mediador imobiliário</span>? Partilhe as informações do Avenida Living com clientes e faça o <span className="text-green font-bold">registo automático</span>: </p>
             <Button text="registo" type="primary" handleClick={handleOpenRegister} />
           </article>
         </div>
