@@ -34,9 +34,9 @@ const Welcome = () => {
         dispatch({ type: 'TOGGLE_MENU', payload: true })}}
       >
         <div className="bg-gray-800 bg-opacity-25 absolute w-full h-full pointer-events-none top-0 left-0"></div>
-        <h2 className="font-display font-semibold text-5xl text-white w-2/3">
-          <span className="block text-green">Olá</span>
-          {name}
+        <h2 className="font-display font-semibold text-5xl text-white w-4/5">
+          <span className="block text-green">Olá,</span>
+          {name || 'bem-vindo'}
         </h2>
       </div>
     </section>
