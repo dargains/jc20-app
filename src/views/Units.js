@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import cx from 'classnames'
 import { itemsUrl } from '../api'
 import db from '../db'
-import fachada from '../assets/images/fachada.png'
+import fachada from '../assets/images/fachada.jpg'
 
 const getStatus = status => {
   switch(status) {

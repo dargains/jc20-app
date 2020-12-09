@@ -60,7 +60,7 @@ const Gallery = () => {
       alt: 'Garagem'
     },
     {
-      src: require("../assets/images/fachada.png"),
+      src: require("../assets/images/fachada.jpg"),
       alt: 'Fachada',
       className: 'col-span-2'
     },
