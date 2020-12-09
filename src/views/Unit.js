@@ -125,8 +125,8 @@ const Unit = () => {
                     {
                       Object.keys(selectedArea).length
                       ? <>
-                        <span className="text-xl flex items-center">
-                          {selectedArea.image && <Icon.Image className="mr-2" handleClick={() => setShowRoomImage(true)} />} {selectedArea.name}
+                        <span className="text-xl flex items-center" onClick={() => {selectedArea.image && setShowRoomImage(true)}}>
+                          {selectedArea.image && <Icon.Image className="mr-2" />} {selectedArea.name}
                         </span>
                         <span className="text-gray-600">{selectedArea.area} m<sup>2</sup></span>
                       </>
