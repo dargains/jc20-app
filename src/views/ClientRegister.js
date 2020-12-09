@@ -31,16 +31,22 @@ const ClientRegister = () => {
     <section>
       <Mask />
       <div className="wrapper">
-        <h1 className=" font-display text-4xl font-semibold w-2/3 mb-8 text-black">
-          Registo automático <span className="text-green">de cliente</span>
-        </h1>
+        {
+          emailSent
+          ? <h1 className=" font-display text-4xl font-semibold w-2/3 mb-8 text-black">
+              Seu registo foi feito com <span className="text-green">sucesso</span>
+            </h1>
+          : <h1 className=" font-display text-4xl font-semibold w-2/3 mb-8 text-black">
+              Registo automático <span className="text-green">de cliente</span>
+            </h1>
+        }
+        
         <p className="green05">
           Ao partilhar as informações do Avenida Living, é feito um <span className="text-green font-bold">registo automático do seu cliente</span> com a Rio Capital. Esse registo pode ser consultado a sua área pessoal na área <span className="text-green font-bold">Meus Registos</span>.
         </p>
         {
-          emailSent
-          ? <p>SENT!</p>
-          : <form onSubmit={handleSubmit(onSubmit)} >
+          !emailSent
+          && <form onSubmit={handleSubmit(onSubmit)} >
             <Inputbox
               type="text"
               color="green"
