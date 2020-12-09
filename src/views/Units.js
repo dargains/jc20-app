@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import cx from 'classnames'
 import { itemsUrl } from '../api'
 import db from '../db'
-import fachada from '../assets/images/fachada.jpg'
+import fachada from '../assets/images/fachada.png'
 
 const getStatus = status => {
   switch(status) {
@@ -65,7 +65,7 @@ const Units = () => {
   return (
     <section className="py-0">
       <div
-        className="unit__header h-24 bg-green07 flex items-center justify-between px-4"
+        className="unit__header h-24 fixed z-10 top-0 w-full bg-green07 flex items-center justify-between px-4"
       >
         {unit.title ? (
           <Link
@@ -103,7 +103,7 @@ const Units = () => {
       {
         !!units.length
         ? <Building
-          className="grid mx-auto"
+          className="grid mx-auto mt-24"
           style={{ padding: "12% 2% 10%", backgroundImage: `url(${fachada})` }}
         >
           {units.map((unit, index) => (
@@ -118,14 +118,8 @@ const Units = () => {
             </AptImage>
           ))}
         </Building>
-        : <p className="text-2xl text-center mt-12">A carregar...</p>
+        : <p className="text-2xl text-center mt-32">A carregar...</p>
       }
-      {/* <button
-        className="mt-4 p-2 bg-green text-white"
-        onClick={() => db.delete()}
-      >
-        limpar
-      </button> */}
       <svg height="0" xmlns="http://www.w3.org/2000/svg">
         <filter id="drop-shadow">
           <feGaussianBlur in="SourceAlpha" stdDeviation="6" />
