@@ -28,7 +28,7 @@ const Tender = () => {
   const [isFirst, setIsFirst] = useState(true)
   const [type, setType] = useState("rc")
   const [errorMessage, setErrorMessage] = useState('')
-  const { register, handleSubmit, setError, errors, setValue } = useForm();
+  const { register, handleSubmit, errors, setValue } = useForm();
 
   const submitFirstStep = data => {
     data.id = id
@@ -56,6 +56,7 @@ const Tender = () => {
     await Axios.post(`${itemsUrl}/tenders`, tenderData, {headers})
     await Axios.patch(`${itemsUrl}/clients/${id}`, {log: newLog}, {headers})
     setIsDone(true)
+    // send email
   }
 
   const toggleType = newType => {
@@ -89,7 +90,12 @@ const Tender = () => {
         </h1>
         {
           isDone
-          ? <p>Obrigado pelo envio da proposta! A Rio Capital está a analisá-la em breve entrará em contato.</p>
+          ? <>
+          <p className="mb-12 text-green08">Obrigado pelo envio da proposta! A Rio Capital está a analisá-la em breve entrará em contato.</p>
+          <Link to={`/client/${id}`}>
+            <Button text="registo" type="primary" icon iconDirection="left" />
+          </Link>
+          </>
           : isFirst
           ? <>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum est nam enim laboriosam ut nobis dicta fugiat. Impedit, iste modi.</p>

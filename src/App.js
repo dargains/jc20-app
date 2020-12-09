@@ -31,6 +31,7 @@ import Header from './components/Header';
 import Client from './views/Client';
 import PreReservation from './views/PreReservation';
 import Tender from './views/Tender';
+import Reservation from './views/Reservation';
 
 
 function App() {
@@ -115,6 +116,9 @@ function App() {
             </Route>
             <Route path="/prereservation/:id">
               <PreReservation />
+            </Route>
+            <Route path="/reservation/:id">
+              <Reservation />
             </Route>
             <Route path="/tender/:id">
               <Tender />
