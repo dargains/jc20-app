@@ -35,23 +35,6 @@ const Header = () => {
       history.push('/contacts')
     }
   }
-  
-  // const handleShare = async event => {
-  //   if (navigator.canShare) {
-  //     try {
-  //       await navigator.share({
-  //         title: document.title,
-  //         url: 'https://jc20.graffito.pt'
-  //       })
-  //       console.log('share successful')
-  //     } catch(err) {
-  //       console.log(err)
-  //     }
-      
-  //   } else {
-  //     console.log('não é possível fazer share');
-  //   }
-  // }
 
   useEffect(() => {
     setDown(state.headerDown)
@@ -73,16 +56,16 @@ const Header = () => {
         >
           <Icon.Menu />
         </HeaderIcon>
-        <HeaderIcon name="partilha">
-          <Link to="/share">
+        <Link to="/share">
+          <HeaderIcon name="partilha">
             <Icon.Share />
-          </Link>
-        </HeaderIcon>
-        <HeaderIcon name="perfil">
-          <Link to="/profile">
+          </HeaderIcon>
+        </Link>
+        <Link to="/profile">
+          <HeaderIcon name="perfil">
             <Icon.User />
-          </Link>
-        </HeaderIcon>
+          </HeaderIcon>
+        </Link>
         <div>
           <Conditional if={state.language === "pt"}>
             <HeaderIcon
