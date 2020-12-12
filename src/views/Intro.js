@@ -7,7 +7,6 @@ import Button from '../components/Button'
 const Intro = () => {
   const [state, dispatch] = useContext(AppContext);
   const history = useHistory();
-  console.log(state);
   const chooseLang = lang => {
     dispatch({ type: 'CHANGE_LANGUAGE', payload: lang })
     history.push('/welcome')
