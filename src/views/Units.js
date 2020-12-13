@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react'
 import useOnClickOutside from '../outsideHook'
 import { Link, useHistory } from "react-router-dom";
-import Axios from 'axios'
 import styled from 'styled-components'
+import Axios from 'axios'
 import cx from 'classnames'
 import { itemsUrl } from '../api'
 import db from '../db'
 import fachada from '../assets/images/fachada.jpg'
+import Loading from '../components/Loading'
 
 const getStatus = status => {
   switch(status) {
@@ -118,7 +119,7 @@ const Units = () => {
             </AptImage>
           ))}
         </Building>
-        : <p className="text-2xl text-center mt-32">A carregar...</p>
+        : <Loading />
       }
       <svg height="0" xmlns="http://www.w3.org/2000/svg">
         <filter id="drop-shadow">
