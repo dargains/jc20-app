@@ -40,7 +40,7 @@ const Profile = () => {
             <span className="pl-4 text-2xl text-center flex-1">Editar perfil</span>
           </Link>
           <article className="bg-white text-green08 rounded-lg shadow-lg flex items-center justify-between px-6 py-8 mb-6" onClick={handleLogout}>
-            <Icon.Construction height={64} />
+            <Icon.Logout height={64} />
             <span className="pl-4 text-2xl text-center flex-1">Logout</span>
           </article>
         </div>
