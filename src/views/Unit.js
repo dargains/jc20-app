@@ -12,6 +12,7 @@ import ImageOverlay from '../components/ImageOverlay';
 import StatusTag from '../components/StatusTag'
 import Accordion from '../components/Accordion';
 import Mask from '../components/Mask';
+import Loading from '../components/Loading';
 
 const ContentItens = ({content}) => {
   return (
@@ -93,8 +94,8 @@ const Unit = () => {
   }
   return (
     <>
-      {unit.title && (
-        <section>
+      {unit.title 
+        ? <section>
           <Mask />
           <div className="overflow-hidden">
             {/* HEADER */}
@@ -314,7 +315,8 @@ const Unit = () => {
             />
           }
         </section>
-      )}
+        : <Loading />
+      }
     </>
   );
 }
