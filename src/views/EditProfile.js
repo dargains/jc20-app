@@ -152,7 +152,7 @@ const EditProfile = () => {
               <p className="text-red mt-4 text-xs">{errorMessage}</p>
               <Button text="guardar" type="primary" className="mt-10" />
               <Link to="/profile">
-                <Button text="voltar" type="primary" className="mt-6" />
+                <Button text="voltar" type="primary" className="mt-6" icon iconDirection="left"/>
               </Link>
             </form>
         }
