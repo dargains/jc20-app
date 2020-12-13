@@ -1,6 +1,5 @@
 import React from 'react'
 import Button from '../components/Button'
-import Icon from '../components/Icon'
 import LogoImage from "../assets/images/logo rc.png";
 import SocialMedia from '../components/SocialMedia';
 

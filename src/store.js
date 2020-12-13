@@ -47,6 +47,11 @@ const reducer = (state, action) => {
         ...state,
         language: payload
       }
+    case 'SET_INSTALLPROMPT':
+      return {
+        ...state,
+        installPrompt: payload
+      }
     default:
       throw new Error();
   }
