@@ -20,7 +20,7 @@ const Welcome = () => {
 
   const changeCopy = useCallback(content => {
     const copy = content.find(translation => translation.language === state.language)
-    setCopy({...copy, lang: state.language})
+    setCopy(copy)
   },[state.language])
 
   const timeout = useCallback(() => {
