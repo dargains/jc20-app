@@ -6,6 +6,7 @@ import Icon from '../components/Icon';
 import { useHistory } from 'react-router-dom';
 import { useContext } from 'react';
 import { AppContext } from '../store';
+import { shareMobile } from '../helpers';
 
 const Share = () => {
   const [state] = useContext(AppContext)
@@ -19,24 +20,7 @@ const Share = () => {
       setNoLoginError(true)
     }
   }
-
-  const handleShare = async event => {
-    if (navigator.canShare) {
-      try {
-        await navigator.share({
-          title: document.title,
-          url: 'https://jc20.graffito.pt'
-        })
-        console.log('share successful')
-      } catch(err) {
-        console.log(err)
-      }
-      
-    } else {
-      console.log('não é possível fazer share');
-    }
-  }
-
+  
   return (
     <section>
       <Mask />
@@ -47,7 +31,7 @@ const Share = () => {
         <div>
           <article className="bg-white p-6 rounded-lg shadow-lg mb-6">
             <p className="text-green08 text-lg mb-8">Compartilhe as informações do Avenida Living com <span className="text-green font-bold">amigos e familiares</span>: </p>
-            <Button text="partilhe" type="primary" handleClick={handleShare} />
+            <Button text="partilhe" type="primary" handleClick={shareMobile} />
           </article>
           <article className="bg-white p-6 rounded-lg shadow-lg mb-6">
             <p className="text-green08 text-lg mb-8">É <span className="text-green font-bold">mediador imobiliário</span>? Partilhe as informações do Avenida Living com clientes e faça o <span className="text-green font-bold">registo automático</span>: </p>
