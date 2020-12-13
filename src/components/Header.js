@@ -86,7 +86,7 @@ const Header = () => {
           </Conditional>
         </div>
         <div className="w-12 h-10" onClick={() => setShowDialog(!showDialog)}>
-          <div className="absolute w-32 h-32" style={{ top: -60, left: -40 }}>
+          <div className="absolute w-32 h-32 pointer-events-none" style={{ top: -60, left: -40 }}>
             <img src={whatsappImage} alt="Whatsapp" />
           </div>
         </div>
