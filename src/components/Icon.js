@@ -311,6 +311,23 @@ const Gear = props => {
   )
 }
 
+const Homescreen = props => {
+  return (
+    <SVGBase name="homescreen" {...props}>
+      <g transform="translate(-152 -327)">
+        <g transform="translate(7529 1078)">
+          <path d="M0 0H24V24H0z" fill="none" transform="translate(-7377 -751)"/>
+          <path d="M0 0H20V20H0z" fill="none" transform="translate(-7375 -749)"/>
+          <g transform="translate(-7412.501 -749.002)">
+            <path d="M96.648 4.557L97.9 3.306v9.922a.968.968 0 0 0 1.935 0V3.306l1.251 1.251a.968.968 0 0 0 1.369-1.369l-2.9-2.9q-.038-.036-.075-.067L99.447.2 99.4.165 99.363.14l-.04-.024L99.28.1l-.043-.02-.042-.02-.047-.016-.043-.011-.05-.012-.048-.008-.045-.006h-.191l-.044.006-.05.008-.048.012-.044.011-.045.016-.04.016-.042.019-.048.021-.038.023-.043.026-.041.03-.035.027c-.024.019-.046.04-.068.061l-2.9 2.9a.968.968 0 0 0 1.369 1.369z" transform="translate(-51.446)"/>
+            <path d="M53.872 100h-2.581a.968.968 0 0 0 0 1.935H52.9v9.677H41.936v-9.677h1.613a.968.968 0 1 0 0-1.935h-2.58a.968.968 0 0 0-.968.968v11.613a.968.968 0 0 0 .968.968h12.9a.968.968 0 0 0 .968-.968V100.97a.968.968 0 0 0-.965-.97z" transform="translate(0 -93.548)"/>
+          </g>
+        </g>
+      </g>
+    </SVGBase>
+  )
+}
+
 const Image = props => {
   return (
     <SVGBase name="image" {...props}>
@@ -581,6 +598,7 @@ export default {
   Family,
   Facebook,
   Gear,
+  Homescreen,
   Image,
   Instagram,
   Interna,
