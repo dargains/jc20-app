@@ -46,21 +46,22 @@ const ImageOverlay = ({src, alt, images = [], selectedItem, showImage, handleClo
               ))}
             </Carousel>
               
-          : <TransformWrapper>
-            <TransformComponent>
+          : 
                 <figure
                   className={cx("w-full")}
                   style={{maxHeight: '80vh'}}
                 >
-                  <img
-                    src={src}
-                    alt={alt}
-                    className={cx("h-full object-contain",{"p-4 bg-white": spaced})}
-                  />
+                  <TransformWrapper>
+                    <TransformComponent>
+                      <img
+                        src={src}
+                        alt={alt}
+                        className={cx("h-full object-contain",{"p-4 bg-white": spaced})}
+                      />
+                      </TransformComponent>
+                    </TransformWrapper>
                   <figcaption className="px-4 mt-2 text-xs">{alt}</figcaption>
                 </figure>
-              </TransformComponent>
-            </TransformWrapper>
         }
       </div>
     </aside>
