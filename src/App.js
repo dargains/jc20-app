@@ -1,37 +1,37 @@
-import React, { useEffect } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 import RouteContainer from './RouteContainer';
 import './tailwind.generated.css'
 
-// views
-import Intro from './views/Intro';
-import Welcome from './views/Welcome'
-import About from './views/About'
-import Units from './views/Units';
-import Unit from './views/Unit';
-import Share from './views/Share';
-import Contacts from './views/Contacts';
-import Email from './views/Email';
-import Phone from './views/Phone';
-import Gallery from './views/Gallery';
-import Status from './views/Status';
-import Lifestyle from './views/Lifestyle';
-import Profile from './views/Profile';
-import Login from './views/Login';
-import SignUp from './views/Signup';
-import ClientRegister from './views/ClientRegister';
-import ClientList from './views/ClientList';
-import EditProfile from './views/EditProfile';
-import RequestReset from './views/RequestReset';
-import PasswordReset from './views/PasswordReset';
-
 // components
 import Menu from './components/Menu';
 import Header from './components/Header';
-import Client from './views/Client';
-import PreReservation from './views/PreReservation';
-import Tender from './views/Tender';
-import Reservation from './views/Reservation';
+
+// views
+const Welcome = lazy(() => import('./views/Welcome'))
+const Intro = lazy(() => import('./views/Intro'))
+const About = lazy(() => import('./views/About'))
+const Units = lazy(() => import('./views/Units'))
+const Unit = lazy(() => import('./views/Unit'))
+const Share = lazy(() => import('./views/Share'))
+const Contacts = lazy(() => import('./views/Contacts'))
+const Email = lazy(() => import('./views/Email'))
+const Phone = lazy(() => import('./views/Phone'))
+const Gallery = lazy(() => import('./views/Gallery'))
+const Status = lazy(() => import('./views/Status'))
+const Lifestyle = lazy(() => import('./views/Lifestyle'))
+const Profile = lazy(() => import('./views/Profile'))
+const Login = lazy(() => import('./views/Login'))
+const SignUp = lazy(() => import('./views/SignUp'))
+const ClientRegister = lazy(() => import('./views/ClientRegister'))
+const ClientList = lazy(() => import('./views/ClientList'))
+const EditProfile = lazy(() => import('./views/EditProfile'))
+const RequestReset = lazy(() => import('./views/RequestReset'))
+const PasswordReset = lazy(() => import('./views/PasswordReset'))
+const Client = lazy(() => import('./views/Client'))
+const PreReservation = lazy(() => import('./views/PreReservation'))
+const Tender = lazy(() => import('./views/Tender'))
+const Reservation = lazy(() => import('./views/Reservation'))
 
 
 function App() {
@@ -47,84 +47,86 @@ function App() {
   return (
     <div className="App h-full">
       <Router>
-        <Menu />
-        <Header />
-        <RouteContainer>
-          <Switch>
-            <Route exact path="/">
-              <Intro />
-            </Route>
-            <Route exact path="/welcome">
-              <Welcome />
-            </Route>
-            <Route path="/about">
-              <About />
-            </Route>
-            <Route path="/units">
-              <Units />
-            </Route>
-            <Route path="/unit/:id">
-              <Unit />
-            </Route>
-            <Route path="/share">
-              <Share />
-            </Route>
-            <Route path="/gallery">
-              <Gallery />
-            </Route>
-            <Route path="/status">
-              <Status />
-            </Route>
-            <Route path="/contacts/email">
-              <Email />
-            </Route>
-            <Route path="/contacts/phone">
-              <Phone />
-            </Route>
-            <Route path="/contacts">
-              <Contacts />
-            </Route>
-            <Route path="/lifestyle">
-              <Lifestyle />
-            </Route>
-            <Route path="/profile">
-              <Profile />
-            </Route>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/signup">
-              <SignUp />
-            </Route>
-            <Route path="/requestreset">
-              <RequestReset />
-            </Route>
-            <Route path="/passwordreset">
-              <PasswordReset />
-            </Route>
-            <Route path="/editprofile">
-              <EditProfile />
-            </Route>
-            <Route path="/clientregister">
-              <ClientRegister />
-            </Route>
-            <Route path="/clientlist">
-              <ClientList />
-            </Route>
-            <Route path="/client/:id">
-              <Client />
-            </Route>
-            <Route path="/prereservation/:id">
-              <PreReservation />
-            </Route>
-            <Route path="/reservation/:id">
-              <Reservation />
-            </Route>
-            <Route path="/tender/:id">
-              <Tender />
-            </Route>
-          </Switch>
-        </RouteContainer>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Menu />
+          <Header />
+          <RouteContainer>
+            <Switch>
+              <Route exact path="/">
+                <Intro />
+              </Route>
+              <Route exact path="/welcome">
+                <Welcome />
+              </Route>
+              <Route path="/about">
+                <About />
+              </Route>
+              <Route path="/units">
+                <Units />
+              </Route>
+              <Route path="/unit/:id">
+                <Unit />
+              </Route>
+              <Route path="/share">
+                <Share />
+              </Route>
+              <Route path="/gallery">
+                <Gallery />
+              </Route>
+              <Route path="/status">
+                <Status />
+              </Route>
+              <Route path="/contacts/email">
+                <Email />
+              </Route>
+              <Route path="/contacts/phone">
+                <Phone />
+              </Route>
+              <Route path="/contacts">
+                <Contacts />
+              </Route>
+              <Route path="/lifestyle">
+                <Lifestyle />
+              </Route>
+              <Route path="/profile">
+                <Profile />
+              </Route>
+              <Route path="/login">
+                <Login />
+              </Route>
+              <Route path="/signup">
+                <SignUp />
+              </Route>
+              <Route path="/requestreset">
+                <RequestReset />
+              </Route>
+              <Route path="/passwordreset">
+                <PasswordReset />
+              </Route>
+              <Route path="/editprofile">
+                <EditProfile />
+              </Route>
+              <Route path="/clientregister">
+                <ClientRegister />
+              </Route>
+              <Route path="/clientlist">
+                <ClientList />
+              </Route>
+              <Route path="/client/:id">
+                <Client />
+              </Route>
+              <Route path="/prereservation/:id">
+                <PreReservation />
+              </Route>
+              <Route path="/reservation/:id">
+                <Reservation />
+              </Route>
+              <Route path="/tender/:id">
+                <Tender />
+              </Route>
+            </Switch>
+          </RouteContainer>
+        </Suspense>
       </Router>
     </div>
   );
