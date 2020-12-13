@@ -1,6 +1,19 @@
 export const websiteUrl = 'https://jc20.graffito.pt'
 export const phone = '351912566905'
 
+export const isAndroid = () => navigator.userAgent.toLowerCase().indexOf("android") > -1
+
+export const isIOS = () => [
+  'iPad Simulator',
+  'iPhone Simulator',
+  'iPod Simulator',
+  'iPad',
+  'iPhone',
+  'iPod'
+].includes(navigator.platform)
+// iPad on iOS 13 detection
+|| (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+
 export const shareMobile = async () => {
   if (navigator.canShare) {
     try {
