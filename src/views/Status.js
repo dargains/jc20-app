@@ -61,8 +61,8 @@ const Status = () => {
   const [selectedImage, setSelectedImage] = useState({})
 
   const changeCopy = useCallback(content => {
-    const newCopy = content.find(translation => translation.language === state.language)
-    setCopy(newCopy)
+    const copy = content.find(translation => translation.language === state.language)
+    setCopy(copy)
   },[state.language])
 
   useEffect(() => {
@@ -77,12 +77,12 @@ const Status = () => {
           setImages(response.data.data[0].images)
           
           setContent(allContent)
-          db.content.put({ page: 'Menu', content: allContent })
+          db.content.put({ page: 'Status', content: allContent })
           changeCopy(allContent)
 
         })()
       } else {
-        db.content.get('Menu').then(contentDB => {
+        db.content.get('Status').then(contentDB => {
           setContent(contentDB.content)
           changeCopy(contentDB.content)
         })
@@ -106,9 +106,9 @@ const Status = () => {
     <section className="overflow-hidden">
       <Mask />
       <div className="wrapper">
-        <h1 className="font-display text-4xl font-semibold w-2/3 mb-8">
-          Acompanhe a obra do <br/><span className="text-green">Avenida Living</span>
-        </h1>
+        <h1 className="font-display text-4xl font-semibold w-2/3 mb-8 text-black" dangerouslySetInnerHTML={{
+          __html: copy.title
+        }} />
       </div>
       <div
         className={cx("flex transform transition-all duration-200", {
@@ -129,6 +129,7 @@ const Status = () => {
             iconDirection="right"
             handleClick={changeView}
             className="mt-8"
+            disabled={images.length === 0}
           />
         </div>
         <div className="wrapper w-screen">

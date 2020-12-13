@@ -11,7 +11,7 @@ const Gallery = () => {
   const [content, setContent] = useState({})
   const [copy, setCopy] = useState({copy:{}, language: state.language})
   const [showImage, setShowImage] = useState(false)
-  const [selectedItem, setSelectedItem] = useState(0)
+  const [selectedImage, setSelectedImage] = useState(0)
   const images = [
     {
       src: require("../assets/images/cam-01-fachada.jpg"),
@@ -67,12 +67,12 @@ const Gallery = () => {
   ]
   const selectImage = image => {
     setShowImage(true);
-    setSelectedItem(images.indexOf(image))
+    setSelectedImage(images.indexOf(image))
   }
 
   const changeCopy = useCallback(content => {
     const copy = content.find(translation => translation.language === state.language)
-    setCopy({copy, lang: state.language})
+    setCopy(copy)
   },[state.language])
   
   useEffect(() => {
@@ -105,8 +105,8 @@ const Gallery = () => {
     <section>
       <Mask />
       <div className="wrapper">
-        <h1 className=" font-display text-4xl font-semibold w-2/3 mb-8 text-black"dangerouslySetInnerHTML={{
-          __html: copy.copy.text
+        <h1 className=" font-display text-4xl font-semibold w-2/3 mb-8 text-black" dangerouslySetInnerHTML={{
+          __html: copy.text
         }} />
         <div className="grid grid-cols-2 gap-2">
           {images.map(image => <img key={image.src} src={image.src} alt={image.alt} className={image.className} onClick={() => selectImage(image)} />)}
@@ -114,7 +114,7 @@ const Gallery = () => {
       </div>
       <ImageOverlay
         images={images}
-        selectedItem={selectedItem}
+        selectedImage={selectedImage}
         showImage={showImage}
         handleClose={() => {setShowImage(false)}}
       />

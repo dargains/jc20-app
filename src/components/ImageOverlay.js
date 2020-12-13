@@ -2,13 +2,17 @@ import React from 'react'
 import Icon from './Icon'
 import cx from 'classnames'
 import { Carousel } from "react-responsive-carousel";
-
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch"
 
 
 const Slide = ({src, alt}) => {
   return (
     <div className="flex flex-col h-full justify-center">
-      <img src={src} alt={alt} style={{maxHeight: '70vh'}} />
+      <TransformWrapper>
+        <TransformComponent>
+          <img src={src} alt={alt} style={{maxHeight: '70vh'}} />
+        </TransformComponent>
+      </TransformWrapper>
       <div
         className="mt-4 text-left text-white px-6"
         dangerouslySetInnerHTML={{ __html: alt }}
@@ -34,24 +38,29 @@ const ImageOverlay = ({src, alt, images = [], selectedItem, showImage, handleClo
               swipeable
               emulateTouch
             >
-              {images.map((image) => (
+              {images.map((image, index) => (
                 <Slide
-                  key={image.src}
+                  key={image.src + index}
                   {...image}
                 />
               ))}
             </Carousel>
-          : <figure
-              className={cx("w-full")}
-              style={{maxHeight: '80vh'}}
-            >
-              <img
-                src={src}
-                alt={alt}
-                className={cx("h-full object-contain",{"p-4 bg-white": spaced})}
-              />
-              <figcaption className="px-4 mt-2 text-xs">{alt}</figcaption>
-            </figure>
+              
+          : <TransformWrapper>
+            <TransformComponent>
+                <figure
+                  className={cx("w-full")}
+                  style={{maxHeight: '80vh'}}
+                >
+                  <img
+                    src={src}
+                    alt={alt}
+                    className={cx("h-full object-contain",{"p-4 bg-white": spaced})}
+                  />
+                  <figcaption className="px-4 mt-2 text-xs">{alt}</figcaption>
+                </figure>
+              </TransformComponent>
+            </TransformWrapper>
         }
       </div>
     </aside>
