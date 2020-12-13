@@ -6,6 +6,7 @@ import Icon from './Icon'
 import Button from './Button'
 import Conditional from './Conditional.js';
 import whatsappImage from '../assets/images/whatsapp.png'
+import { phone } from '../helpers.js';
 
 const HeaderIcon = ({ children, name, handleClick, className }) => {
   return (
@@ -30,7 +31,7 @@ const Header = () => {
   }
   const handleContact = () => {
     if (window.innerWidth < 768) {
-      window.location.href = 'https://wa.me/351912566905'
+      window.location.href = `https://wa.me/${phone}`
     } else {
       history.push('/contacts')
     }

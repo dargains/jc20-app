@@ -1,3 +1,23 @@
+export const websiteUrl = 'https://jc20.graffito.pt'
+export const phone = '351912566905'
+
+export const shareMobile = async () => {
+  if (navigator.canShare) {
+    try {
+      await navigator.share({
+        title: document.title,
+        url: websiteUrl
+      })
+      console.log('share successful')
+    } catch(err) {
+      console.log(err)
+    }
+    
+  } else {
+    console.log('não é possível fazer share');
+  }
+}
+
 export const formatNumber = num =>  num
 .toFixed(2) // always two decimal digits
 .replace('.', ',') // replace decimal point character with ,

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import Mask from '../components/Mask'
 import Button from '../components/Button'
 import SocialMedia from '../components/SocialMedia'
+import { phone } from '../helpers'
 
 const Contacts = () => {
   return (
@@ -23,7 +24,7 @@ const Contacts = () => {
         <Link to="/contacts/email">
           <Button type="primary" text="e-mail" className="my-8"/>
         </Link>
-        <a href="https://wa.me/351912566905">
+        <a href={`https://wa.me/${phone}`}>
           <Button type="primary" text="whatsapp" className="my-8"/>
         </a>
         <Link to="/contacts/phone">
