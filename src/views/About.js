@@ -2,6 +2,7 @@ import React from 'react'
 import Button from '../components/Button'
 import Icon from '../components/Icon'
 import LogoImage from "../assets/images/logo rc.png";
+import SocialMedia from '../components/SocialMedia';
 
 const About = () => {
   return (
@@ -39,30 +40,7 @@ const About = () => {
               }
             }
           />
-          <p className="mb-4 text-center">siga-nos em:</p>
-          <div className="flex items-center justify-between mx-auto w-40">
-            <a
-              href="https://facebook.com/jc20"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Icon.Facebook height={40} />
-            </a>
-            <a
-              href="https://instagram.com/jc20"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Icon.Instagram height={40} />
-            </a>
-            <a
-              href="https://linkedin.com/jc20"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Icon.Linkedin height={40} />
-            </a>
-          </div>
+          <SocialMedia color="white" size="md" />
         </div>
       </div>
     </section>

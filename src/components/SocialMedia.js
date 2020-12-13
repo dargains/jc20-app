@@ -26,13 +26,13 @@ const SocialMedia = ({color, size}) => {
           "w-48": size === 'md'
         }
         )}>
-        <a href="https://facebook.com/jc20" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.facebook.com/Rio-Capital-110995827277037" target="_blank" rel="noopener noreferrer">
           <Icon.Facebook height={iconSize}/>
         </a>
-        <a href="https://instagram.com/jc20" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.instagram.com/riocapital.pt/" target="_blank" rel="noopener noreferrer">
           <Icon.Instagram height={iconSize}/>
         </a>
-        <a href="https://linkedin.com/jc20" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.linkedin.com/company/rio-capital-pt/" target="_blank" rel="noopener noreferrer">
           <Icon.Linkedin height={iconSize}/>
         </a>
       </div>

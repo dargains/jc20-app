@@ -23,13 +23,13 @@ const Contacts = () => {
         <Link to="/contacts/email">
           <Button type="primary" text="e-mail" className="my-8"/>
         </Link>
-        <a href="https://wa.me/351925595027?text=oi">
+        <a href="https://wa.me/351912566905">
           <Button type="primary" text="whatsapp" className="my-8"/>
         </a>
         <Link to="/contacts/phone">
           <Button type="primary" text="ligação" className="my-8"/>
         </Link>
-          <SocialMedia color="green" size="sm" />
+        <SocialMedia color="green" size="sm" />
       </div>
     </section>
   )
