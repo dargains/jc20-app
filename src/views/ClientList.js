@@ -65,8 +65,9 @@ const ClientList = () => {
 
   const type = location.hash.substr(1)
 
-  const toggleOrder = () => {
-    setOrder(order === 'date' ? 'alphabetically' : 'date')
+  const toggleOrder = newType => {
+    if (typeof newType !== 'string') newType = order === 'date' ? 'alphabetically' : 'date'
+    setOrder(newType)
   }
 
   useEffect(() => {
@@ -91,19 +92,20 @@ const ClientList = () => {
         <Link to="/clientregister">
           <Button text="novo registo" type="primary" />
         </Link>
-        <div className="text-green08 flex items-center justify-end my-6" onClick={toggleOrder}>
-          <p className="flex items-center text-sm"><Icon.Arrow height={12} />A</p>
+        <div className="text-green08 flex items-center justify-end my-6">
+          <p className="flex items-center text-sm" onClick={() => toggleOrder('alphabetically')}><Icon.Arrow height={12} />A</p>
           <div
-            className="bg-gray-400 rounded-xl w-8 mx-2"
+            className="bg-gray-400 rounded-xl w-10 mx-2"
             style={{height: "1.2rem"}}
+            onClick={toggleOrder}
           >
             <div className={cx("bg-white rounded-full w-4 h-4 transform duration-150 transition-transform",
             {
-              "translate-x-3": order === 'date'
+              "translate-x-5": order === 'date'
             }
             )} style={{top: 2, left: 2}}></div>
           </div>
-          <p className="flex items-center"><Icon.Arrow height={12} /><Icon.Clock height={16}/></p>
+          <p className="flex items-center" onClick={() => toggleOrder('date')}><Icon.Arrow height={12} /><Icon.Clock height={16}/></p>
         </div>
         <div>
           {

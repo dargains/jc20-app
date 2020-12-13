@@ -22,7 +22,7 @@ const Tender = () => {
   const [type, setType] = useState("rc")
   const [errorMessage] = useState('')
   const { register, handleSubmit, errors, setValue } = useForm();
-  
+  console.log(client);
   const submitFirstStep = data => {
     data.id = id
     setClient(data)
@@ -148,13 +148,13 @@ const Tender = () => {
                 onClick={() => toggleType('rc')}
               >Proposta Rio Capital</span>
               <div
-                className="bg-gray-400 rounded-xl w-8 mx-2 flex-shrink-0"
+                className="bg-gray-400 rounded-xl w-10 mx-2 flex-shrink-0"
                 style={{height: "1.2rem"}}
                 onClick={toggleType}
               >
                 <div className={cx("bg-white rounded-full w-4 h-4 transform duration-150 transition-transform",
                 {
-                  "translate-x-3": type === 'custom'
+                  "translate-x-5": type === 'custom'
                 }
                 )} style={{top: 2, left: 2}}></div>
               </div>
