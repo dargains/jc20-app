@@ -2,7 +2,7 @@ import React from 'react'
 import cx from "classnames"
 import styled from 'styled-components'
 
-const Button = ({text, type, icon, iconDirection, handleClick, className}) => {
+const Button = ({text, type, icon, iconDirection, handleClick, disabled, className}) => {
   return (
     <button onClick={handleClick} className={cx(
       "button min-w-175 h-12 px-1 mx-auto rounded-xl border flex items-center justify-between transition-all duration-200",
@@ -10,6 +10,7 @@ const Button = ({text, type, icon, iconDirection, handleClick, className}) => {
         "hover:bg-green08 text-green08 hover:text-white border-green08": type === 'primary',
         "hover:bg-white text-white hover:text-green08 border-white": type === 'secondary',
         "bg-black bg-opacity-50 hover:bg-gray-900 text-white border-white hover:border-gray-900": type === 'tertiary',
+        'opacity-50 pointer-events-none': disabled,
         "flex-row-reverse": iconDirection === 'right'
       },
       className
