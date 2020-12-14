@@ -32,7 +32,7 @@ const Intro = () => {
     <section className="min-w-screen bg-white z-20 p-12 flex flex-col itens-center justify-end bg-cover bg-right" style={{ backgroundImage: `url(${Fachada})`, marginBottom: '-58px', height: window.innerHeight }}>
       <Button text="português" type="tertiary" className="my-2" handleClick={() => chooseLang('pt')} />
       <Button text="english" type="tertiary" className="my-2" handleClick={() => chooseLang('en')} />
-      <div className={cx("w-full h-full bg-white absolute top-0 left-0 duration-300 transition-opacity delay-1000",{"opacity-0": hideLogos})}>
+      <div className={cx("w-full h-full bg-white absolute top-0 left-0 duration-300 transition-opacity delay-1000",{"opacity-0 pointer-events-none": hideLogos})}>
         <figure className="w-32 absolute-center">
           <img src={AL} alt="Avenida Living"/>
         </figure>
