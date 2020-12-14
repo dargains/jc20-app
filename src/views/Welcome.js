@@ -29,7 +29,7 @@ const Welcome = () => {
     setCopy(copy)
   }, [state.language])
 
-  const timeout = () => {
+  const timeout = useCallback(() => {
     if (state.user) {
       setName(state.user.name)
     }
@@ -37,7 +37,7 @@ const Welcome = () => {
       dispatch({ type: 'TOGGLE_HEADER_DOWN', payload: false })
       dispatch({ type: 'TOGGLE_MENU', payload: true })
     }, 3000);
-  }
+  },[dispatch, state.user])
 
   const handleClose = () => {
     setShowDialog(false)
@@ -89,12 +89,13 @@ const Welcome = () => {
       }
     }
     if (isIOS()) setShowDialog(true)
-    if (state.installPrompt) handlePrompt(state.installPrompt)
+    else if (state.installPrompt) handlePrompt(state.installPrompt)
+    else timeout()
     window.addEventListener('beforeinstallprompt', e => {
       e.preventDefault()
       handlePrompt(e)
     })
-  }, [changeCopy, content, copy.lang, dispatch, state.installPrompt, state.language])
+  }, [changeCopy, content, copy.lang, dispatch, state.installPrompt, state.language, timeout])
 
   return (
     <section className="w-screen py-0 bg-green08" style={{height: window.innerHeight}}>
@@ -105,10 +106,14 @@ const Welcome = () => {
         dispatch({ type: 'TOGGLE_MENU', payload: true })}}
       >
         <div className="bg-gray-800 bg-opacity-25 absolute w-full h-full pointer-events-none top-0 left-0"></div>
-        <h2 className="font-display font-semibold text-5xl text-white w-4/5">
-          <span className="block text-green">{copy.hello},</span>
-          {name || copy.welcome}
-        </h2>
+        {
+          copy.welcome
+          &&
+          <h2 className="font-display font-semibold text-5xl text-white w-4/5">
+            <span className="block text-green">{copy.hello},</span>
+            {name || copy.welcome}
+          </h2>
+        }
       </div>
       <aside
         className={cx(

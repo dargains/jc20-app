@@ -6,7 +6,7 @@ import Icon from './Icon'
 import Button from './Button'
 import Conditional from './Conditional.js';
 import whatsappImage from '../assets/images/whatsapp.png'
-import { phone } from '../helpers.js';
+import { isIOS, phone } from '../helpers.js';
 
 const HeaderIcon = ({ children, name, handleClick, className }) => {
   return (
@@ -42,13 +42,13 @@ const Header = () => {
   }, [state.headerDown])
   return (
     <header className={cx(
-      "fixed top-0 bottom-0 pointer-events-none z-20 w-full"
+      "fixed bottom-0 pointer-events-none z-20 w-full"
       )}>
       <nav className={cx("absolute bottom-0 py-2 bg-green08 flex w-full items-center z-20 justify-between px-4 pointer-events-auto transform transition-transform duration-200",
       {
         "translate-y-20": down,
+        "pb-6": isIOS()
       })}
-      style={{height: 58}}
       >
         <HeaderIcon
           name="menu"
