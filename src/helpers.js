@@ -1,5 +1,6 @@
-export const websiteUrl = 'https://jc20.graffito.pt'
+export const websiteUrl = 'https://avenida-living.pt'
 export const phone = '351912566905'
+export const contactEmail = "geral@riocapital.pt"
 
 export const isAndroid = () => navigator.userAgent.toLowerCase().indexOf("android") > -1
 

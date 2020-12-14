@@ -1,2 +1,3 @@
-export const itemsUrl = 'https://graffito.pt/directus/public/jc20/items'
-export const projectUrl = 'https://graffito.pt/directus/public/jc20'
+import {websiteUrl} from './helpers'
+export const itemsUrl = `${websiteUrl}/directus/public/jc20/items`
+export const projectUrl = `${websiteUrl}/directus/public/jc20`

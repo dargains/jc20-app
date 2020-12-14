@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import Axios from 'axios';
 import {projectUrl} from '../api'
 import { AppContext } from '../store';
+import { contactEmail } from '../helpers';
 
 const Phone = () => {
   const [state] = useContext(AppContext);
@@ -37,7 +38,7 @@ const Phone = () => {
     const body = {
       "to": [
         "claudio@riocapital.pt",
-        "geral@riocapital.pt"
+        contactEmail
       ],
       "subject": "[Avenida Living] Pedido de contato telefonico",
       "body": "{{name}} deseja ser contactado em {{day}} as {{hour}} horas no número de telefone {{phone}}",

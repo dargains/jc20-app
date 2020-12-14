@@ -1,8 +1,8 @@
 {
   "name": "jc20-app",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
-  "homepage": "https://jc20.graffito.pt",
+  "homepage": ".",
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^2.3.0",
     "@testing-library/jest-dom": "^4.2.4",
@@ -36,7 +36,7 @@
     "start": "HTTPS=true run-p watch:tailwind start:react",
     "start:react": "react-scripts start",
     "prebuild": "npm run build:tailwind",
-    "build": "react-scripts build",
+    "build": "PUBLIC_URL=/ react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

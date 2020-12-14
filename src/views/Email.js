@@ -10,6 +10,7 @@ import Axios from 'axios';
 import { projectUrl } from '../api';
 import { useEffect } from 'react';
 import { AppContext } from '../store';
+import { contactEmail } from '../helpers';
 
 const Email = () => {
   const [state] = useContext(AppContext);
@@ -20,7 +21,7 @@ const Email = () => {
   const onSubmit = async ({name, email, subject, text}) => {
     const body = {
       "to": [
-        "geral@riocapital.pt"
+        contactEmail
       ],
       "subject": "[Avenida Living] Contato",
       "body": "{{name}} ({{email}}) enviou a seguinte mensagem:<br>{{subject}}<br>{{text}}",
