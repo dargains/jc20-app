@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch"
 import Accordion from '../components/Accordion'
 import Button from '../components/Button'
 import lifestyleImage from '../assets/images/lifestyle.jpg'
-import mapImage from '../assets/images/map.jpg'
-import { useEffect } from 'react'
+import mapImage from '../assets/images/map.svg'
 import Axios from 'axios'
 import { itemsUrl } from '../api'
 import db from '../db'
@@ -60,15 +60,19 @@ const Lifestyle = () => {
         <h1 className=" font-display text-4xl font-semibold w-2/3 mb-8 text-green">
           Saldanha<br/><span className="text-white font-light">life style</span>
         </h1>
-        <div className="-mx-6">
+        <figure className="-mx-6">
           <img src={lifestyleImage} alt="Saldanha"/>
-        </div>
+        </figure>
         <p className="text-white my-8">
         Localizado no elegante bairro das Avenidas Novas, Avenida Living está no coração da cidade, beneficiando de toda a centralidade. Ao seu redor, dispõe de uma vasta oferta de espaços de cultura e lazer, bem como de escolas e hospitais e de diversas zonas que lhe oferecem um contacto imperdível com a natureza.
         </p>
-        <div className="-mx-6">
-          <img src={mapImage} alt="Saldanha"/>
-        </div>
+        <figure className="-mx-6">
+          <TransformWrapper pan={{disabled: true}}>
+            <TransformComponent>
+              <img src={mapImage} alt="Saldanha"/>
+            </TransformComponent>
+          </TransformWrapper>
+        </figure>
 
         <div className="text-center my-12">
 
