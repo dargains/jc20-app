@@ -4,6 +4,7 @@ import { AppContext } from './store.js'
 import db from './db'
 import Axios from 'axios'
 import { projectUrl } from './api.js'
+import { isIOS } from './helpers.js'
 
 const RouteContainer = (props) => {
   const [padding, setPadding] = useState(0)
@@ -29,7 +30,7 @@ const RouteContainer = (props) => {
       })
     } else if (location.pathname === '/') history.push('/welcome')
     if (location.pathname === '/' || location.pathname === '/welcome') setPadding(0)
-    else setPadding(58)
+    else setPadding(isIOS() ? 74 : 58)
     window.scrollTo({top:0, behavior: 'smooth'})
     return () => {
 

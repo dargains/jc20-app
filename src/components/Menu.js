@@ -6,6 +6,7 @@ import Icon from './Icon'
 import { AppContext } from '../store.js';
 import { itemsUrl } from '../api'
 import db from '../db'
+import { isIOS } from '../helpers';
 
 
 const MenuItem = ({ link, label, icon, color }) => {
@@ -74,7 +75,7 @@ const Menu = () => {
         'translate-x-0': state.menuIsOpen,
         'translate-x-full': !state.menuIsOpen
       }
-    )} style={{ paddingBottom: 58 }}>
+    )} style={{ paddingBottom: isIOS() ? 74 : 58 }}>
       {links.linkList.map((link, index) => <MenuItem {...link} color={index + 2} key={link.link} />)}
     </aside>
   )
