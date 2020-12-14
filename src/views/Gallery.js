@@ -14,7 +14,7 @@ const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState(0)
   const images = [
     {
-      src: require("../assets/images/cam-01-fachada.jpg"),
+      src: require("../assets/images/fachada01.jpg"),
       alt: 'fachada'
     },
     {
