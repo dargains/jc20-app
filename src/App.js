@@ -8,21 +8,22 @@ import Menu from './components/Menu';
 import Header from './components/Header';
 
 // views
-const Welcome = lazy(() => import('./views/Welcome'))
-const Intro = lazy(() => import('./views/Intro'))
-const About = lazy(() => import('./views/About'))
-const Units = lazy(() => import('./views/Units'))
-const Unit = lazy(() => import('./views/Unit'))
-const Share = lazy(() => import('./views/Share'))
-const Contacts = lazy(() => import('./views/Contacts'))
-const Email = lazy(() => import('./views/Email'))
-const Phone = lazy(() => import('./views/Phone'))
-const Gallery = lazy(() => import('./views/Gallery'))
-const Status = lazy(() => import('./views/Status'))
-const Lifestyle = lazy(() => import('./views/Lifestyle'))
+import Welcome from './views/Welcome'
+import Intro from './views/Intro'
+import About from './views/About'
+import Units from './views/Units'
+import Unit from './views/Unit'
+import Share from './views/Share'
+import Contacts from './views/Contacts'
+import Email from './views/Email'
+import Phone from './views/Phone'
+import Gallery from './views/Gallery'
+import Status from './views/Status'
+import Lifestyle from './views/Lifestyle'
+import Login from './views/Login'
+import SignUp from './views/SignUp'
+
 const Profile = lazy(() => import('./views/Profile'))
-const Login = lazy(() => import('./views/Login'))
-const SignUp = lazy(() => import('./views/SignUp'))
 const ClientRegister = lazy(() => import('./views/ClientRegister'))
 const ClientList = lazy(() => import('./views/ClientList'))
 const EditProfile = lazy(() => import('./views/EditProfile'))
@@ -32,6 +33,7 @@ const Client = lazy(() => import('./views/Client'))
 const PreReservation = lazy(() => import('./views/PreReservation'))
 const Tender = lazy(() => import('./views/Tender'))
 const Reservation = lazy(() => import('./views/Reservation'))
+const Documents = lazy(() => import('./views/Documents'))
 
 
 function App() {
@@ -123,6 +125,9 @@ function App() {
               </Route>
               <Route path="/tender/:id">
                 <Tender />
+              </Route>
+              <Route path="/documents">
+                <Documents />
               </Route>
             </Switch>
           </RouteContainer>
