@@ -1,50 +1,40 @@
-import React, {useContext, useState} from 'react'
+import React, {useEffect, useContext, useState} from 'react'
 import cx from 'classnames'
 import { useForm } from "react-hook-form";
 import styled from 'styled-components';
+import Loading from '../components/Loading'
 import Button from '../components/Button'
 import Inputbox from '../components/Inputbox';
 import { Link } from 'react-router-dom';
 import SocialMedia from '../components/SocialMedia';
-import Axios from 'axios';
-import { projectUrl } from '../api';
-import { useEffect } from 'react';
 import { AppContext } from '../store';
-import { contactEmail } from '../helpers';
+import { contactEmail, sendEmail } from '../helpers';
 
 const Email = () => {
   const [state] = useContext(AppContext);
-  const [errorMessage, setErrorMessage] = useState('')
+  const [errorMessage] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
   const [emailSent, setEmailSent] = useState(false)
   const { register, handleSubmit, errors, setValue } = useForm();
 
   const onSubmit = async ({name, email, subject, text}) => {
+    setIsLoading(true)
     const body = {
-      "to": [
-        contactEmail
+      to: [
+        'andre.dargains@gmail.com'
       ],
-      "subject": "[Avenida Living] Contato",
-      "body": "{{name}} ({{email}}) enviou a seguinte mensagem:<br>{{subject}}<br>{{text}}",
-      "type": "html",
-      "data": {
+      subject: "[Avenida Living] Contato",
+      body: "{{name}} ({{email}}) enviou a seguinte mensagem:<br>{{subject}}<br>{{text}}",
+      data: {
         name,
         email,
         subject,
         text
       }
     }
-    try {
-      const response = await Axios.post(`${projectUrl}/auth/authenticate`, {
-        email: 'andre.dargains@gmail.com',
-        password: '123qwe'
-      })
-      const { token } = response.data.data
-      const mail = await Axios.post(`${projectUrl}/mail`, body, { headers: { Authorization: `bearer ${token}` } })
-      console.log(mail);
-      setEmailSent(true)
-    } catch (error) {
-      setErrorMessage(error.response.data.error.message)
-    }
+    await sendEmail(body)
+    setEmailSent(true)
+    setIsLoading(false)
   }
   useEffect(() => {
     if (state.user) {
@@ -54,6 +44,7 @@ const Email = () => {
   },[setValue, state.user])
   return (
     <section className="bg-green04">
+    { isLoading && <Loading /> }
       {
         emailSent
         ? <div className="wrapper">

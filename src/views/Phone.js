@@ -2,18 +2,18 @@ import React, {useContext, useEffect, useState} from 'react'
 import { useForm } from "react-hook-form";
 import cx from 'classnames'
 import styled from 'styled-components'
+import Loading from '../components/Loading'
 import Button from '../components/Button'
 import Inputbox from '../components/Inputbox'
 import SocialMedia from '../components/SocialMedia';
 import { Link } from 'react-router-dom';
-import Axios from 'axios';
-import {projectUrl} from '../api'
 import { AppContext } from '../store';
-import { contactEmail } from '../helpers';
+import { contactEmail, sendEmail } from '../helpers';
 
 const Phone = () => {
   const [state] = useContext(AppContext);
-  const [emailMessage, setEmailMessage] = useState('')
+  const [errorMessage] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
   const [emailSent, setEmailSent] = useState(false)
   const [date, setDate] = useState('')
   const { register, handleSubmit, errors, setValue } = useForm()
@@ -35,34 +35,26 @@ const Phone = () => {
     return result
   }
   const onSubmit = async ({name, phone, day, hour}) => {
+    setIsLoading(true)
     const body = {
-      "to": [
+      to: [
         "claudio@riocapital.pt",
         contactEmail
       ],
-      "subject": "[Avenida Living] Pedido de contato telefonico",
-      "body": "{{name}} deseja ser contactado em {{day}} as {{hour}} horas no número de telefone {{phone}}",
-      "type": "html",
-      "data": {
+      subject: "[Avenida Living] Pedido de contato telefonico",
+      body: "{{name}} deseja ser contactado em {{day}} as {{hour}} horas no número de telefone {{phone}}",
+      data: {
         name,
         phone,
         day,
         hour
       }
     }
-    try {
-      const response = await Axios.post(`${projectUrl}/auth/authenticate`, {
-        email: 'andre.dargains@gmail.com',
-        password: '123qwe'
-      })
-      const { token } = response.data.data
-      const mail = await Axios.post(`${projectUrl}/mail`, body, { headers: { Authorization: `bearer ${token}` } })
-      console.log(mail);
-      setDate(`${day} - ${hour}`)
-      setEmailSent(true)
-    } catch (error) {
-      setEmailMessage(error.response.data.error.message)
-    }
+
+    await sendEmail(body)
+    setIsLoading(false)
+    setDate(`${day} - ${hour}`)
+    setEmailSent(true)
   }
   useEffect(() => {
     if (state.user) {
@@ -72,6 +64,7 @@ const Phone = () => {
   },[setValue, state.user])
   return (
     <section className="bg-green04">
+      { isLoading && <Loading /> }
       {
         emailSent
         ? <div className="wrapper">
@@ -167,7 +160,7 @@ const Phone = () => {
                 <option value="19:30">19:30</option>
               </select>
               {errors.hour && <ErrorMessage>Este campo é obrigatório</ErrorMessage>}
-              <p className="text-red mt-4 text-xs">{emailMessage}</p>
+              <p className="text-red mt-4 text-xs">{errorMessage}</p>
               <Button
                 text="enviar"
                 type="secondary"

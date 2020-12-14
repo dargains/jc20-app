@@ -106,7 +106,7 @@ const Gallery = () => {
       <Mask />
       <div className="wrapper">
         <h1 className=" font-display text-4xl font-semibold w-2/3 mb-8 text-black" dangerouslySetInnerHTML={{
-          __html: copy.text
+          __html: copy.title
         }} />
         <div className="grid grid-cols-2 gap-2">
           {images.map(image => <img key={image.src} src={image.src} alt={image.alt} className={image.className} onClick={() => selectImage(image)} />)}

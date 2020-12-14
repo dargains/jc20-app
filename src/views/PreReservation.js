@@ -6,10 +6,11 @@ import Axios from 'axios';
 import cx from 'classnames'
 import { itemsUrl } from '../api';
 import Button from '../components/Button';
+import Loading from '../components/Loading';
 import Inputbox from '../components/Inputbox';
 import Mask from '../components/Mask'
 import { AppContext } from '../store';
-import { zeroPrefix } from '../helpers';
+import { sendEmail, zeroPrefix } from '../helpers';
 
 const PreReservation = () => {
   const {id} = useParams();
@@ -17,11 +18,13 @@ const PreReservation = () => {
   const [units, setUnits] = useState([])
   const [isDone, setIsDone] = useState(false)
   const [expiration, setExpiration] = useState({date:'', hour:''})
+  const [isLoading, setIsLoading] = useState(false)
   const [state] = useContext(AppContext)
   const [errorMessage] = useState('')
   const { register, handleSubmit, errors, setValue } = useForm();
 
   const onSubmit = async data => {
+    setIsLoading(true)
     const unitTitle = units.find(u => u.id === parseInt(data.unit)).title
     const today = new Date()
     const hour = today.getHours() + ':' + zeroPrefix(today.getMinutes())
@@ -37,6 +40,20 @@ const PreReservation = () => {
       day: (today.getDate() + 2) + '/' + today.getMonth(),
       hour
     })
+
+    // send email
+    const email = {
+      to: ['andre.dargains@gmail.com'],
+      subject: '[Avenida Living] Pré-Reserva',
+      body: '{{name}} ({{email}}) pré-reservou o apartamento {{unit}}',
+      data: {
+        name: data.name,
+        email: data.email,
+        unit: unitTitle
+      }
+    }
+    await sendEmail(email)
+    setIsLoading(false)
     setIsDone(true)
   }
   
@@ -58,6 +75,7 @@ const PreReservation = () => {
   return (
     <section>
       <Mask />
+      { isLoading && <Loading /> }
       <div className="wrapper">
         {
           isDone

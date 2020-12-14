@@ -4,13 +4,14 @@ import { Link, useParams } from 'react-router-dom';
 import cx from 'classnames'
 import styled from 'styled-components';
 import Button from '../components/Button';
+import Loading from '../components/Loading';
 import Inputbox from '../components/Inputbox';
 import Mask from '../components/Mask'
 import Axios from 'axios';
 import { itemsUrl, projectUrl } from '../api';
 import Filebox from '../components/Filebox';
 import { AppContext } from '../store';
-import { zeroPrefix } from '../helpers';
+import { sendEmail, zeroPrefix } from '../helpers';
 
 const Reservation = () => {
   const {id} = useParams();
@@ -19,10 +20,10 @@ const Reservation = () => {
   const [isDone, setIsDone] = useState(false)
   const [selectedUnit, setSelectedUnit] = useState({})
   const [errorMessage] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
   const { register, handleSubmit, errors, setValue } = useForm();
 
   const fileUpload = async file => {
-    
     const formData = new FormData();
     formData.append('file',file)
     const headers = {
@@ -33,6 +34,7 @@ const Reservation = () => {
   }
 
   const onSubmit = async data => {
+    setIsLoading(true)
     const today = new Date()
     const hour = today.getHours() + ':' + zeroPrefix(today.getMinutes())
     const date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear()
@@ -41,7 +43,7 @@ const Reservation = () => {
       Authorization: `Bearer ${state.user.token}`
     }
     data.status = 'waiting'
-    console.log(data);
+    
     // file upload
     const reservation_document_info = await fileUpload(data.reservation_document[0])
     const payment_document_info = await fileUpload(data.payment_document[0])
@@ -56,8 +58,20 @@ const Reservation = () => {
     await Axios.post(`${itemsUrl}/reservations`, data, {headers})
     await Axios.patch(`${itemsUrl}/clients/${id}`, {log: newLog}, {headers})
     await Axios.patch(`${itemsUrl}/units/${selectedUnit.id}`, {status: 'reserved'}, {headers})
-    setIsDone(true)
     // send email
+    const email = {
+      to: ['andre.dargains@gmail.com'],
+      subject: '[Avenida Living] Reserva',
+      body: '{{name}} ({{email}}) reservou o apartamento {{unit}}',
+      data: {
+        name: data.name,
+        email: data.email,
+        unit: selectedUnit
+      }
+    }
+    await sendEmail(email)
+    setIsLoading(false)
+    setIsDone(true)
   }
 
   const selectUnit = e => {
@@ -79,6 +93,7 @@ const Reservation = () => {
   return (
     <section>
       <Mask />
+      { isLoading && <Loading /> }
       <div className="wrapper">
         <h1 className="font-display text-4xl font-semibold w-2/3 mb-8 text-black">
           Reserva {isDone && <span>enviada com <span className="text-green">sucesso</span></span>}
