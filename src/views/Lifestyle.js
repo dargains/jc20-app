@@ -11,7 +11,7 @@ import { AppContext } from '../store'
 
 
 const LifestyleItem = ({title, image, text, link}) => <article className="text-white my-12">
-    <h2 className="font-display text-5xl font-medium capitalize -mb-6" style={{zIndex: 1}} >{title}</h2>
+    <h2 className="font-display text-5xl font-medium capitalize -mb-6" style={{zIndex: 1, textShadow: '2px 2px 10px rgba(0,0,0,.3)'}} >{title}</h2>
     <div className="-mx-6">
       <img src={image.data.full_url} alt="Gastronomia"/>
     </div>
@@ -58,7 +58,7 @@ const Lifestyle = () => {
     <section className="bg-green05">
       <div className="wrapper">
         <h1 className=" font-display text-4xl font-semibold w-2/3 mb-8 text-green">
-          Saldanha<br/><span className="text-white font-light">life style</span>
+          Saldanha<br/><span className="text-white">life style</span>
         </h1>
         <figure className="-mx-6">
           <img src={lifestyleImage} alt="Saldanha"/>
