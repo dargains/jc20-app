@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import { AppContext } from '../store.js';
 import cx from 'classnames'
 import Icon from './Icon'
@@ -22,7 +22,8 @@ const Header = () => {
   const [showDialog, setShowDialog] = useState(false)
   const [down, setDown] = useState(false)
   const history = useHistory()
-
+  const location = useLocation()
+  
   const handleToggleLang = lang => {
     dispatch({ type: 'CHANGE_LANGUAGE', payload: lang })
   }
@@ -58,12 +59,12 @@ const Header = () => {
           <Icon.Menu />
         </HeaderIcon>
         <Link to="/share">
-          <HeaderIcon name="partilha">
+          <HeaderIcon name="partilha" className={cx({'opacity-50': location.pathname === "/share" && !state.menuIsOpen})}>
             <Icon.Share />
           </HeaderIcon>
         </Link>
         <Link to="/profile">
-          <HeaderIcon name="perfil">
+          <HeaderIcon name="perfil" className={cx({'opacity-50': location.pathname === "/profile" && !state.menuIsOpen})}>
             <Icon.User />
           </HeaderIcon>
         </Link>
