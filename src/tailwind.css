@@ -65,6 +65,11 @@ section {
   left: 50%;
   transform: translate3d(-50%, -50%, 0);
 }
+.center-horizontal {
+  position: absolute;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+}
 
 .react-slidedown {
   transition-duration: 0.3s;
