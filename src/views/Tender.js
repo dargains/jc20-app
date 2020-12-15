@@ -45,8 +45,8 @@ const Tender = () => {
       status: 'waiting'
     }
     const newLog = (client.log || '') + `<p>Proposta ao apartamento ${selectedUnit.title} feita em ${date} às ${hour}</p>`
-    await Axios.post(`${itemsUrl}/tenders`, tenderData, {headers: state.auth})
-    await Axios.patch(`${itemsUrl}/clients/${id}`, {log: newLog}, {headers: state.auth})
+    await Axios.post(`${itemsUrl}/tenders`, tenderData, state.auth)
+    await Axios.patch(`${itemsUrl}/clients/${id}`, {log: newLog}, state.auth)
 
     // send email
     const email = {

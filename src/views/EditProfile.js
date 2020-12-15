@@ -29,9 +29,9 @@ const EditProfile = () => {
     }
     data.agent = type === 'agent'
     try {
-      const response = await Axios.patch(`${projectUrl}/users/${state.user.id}`, userData, {headers: { Authorization: `Bearer ${state.user.token}` }})
+      const response = await Axios.patch(`${projectUrl}/users/${state.user.id}`, userData, state.auth)
       const userid = await (await Axios(`${itemsUrl}/users?filter[user_id]=${state.user.user_id}`)).data.data[0].id
-      const userResponse = await Axios.patch(`${itemsUrl}/users/${userid}`, data, {headers: { Authorization: `Bearer ${state.user.token}` }})
+      const userResponse = await Axios.patch(`${itemsUrl}/users/${userid}`, data, state.auth)
       setDone(true)
       const payload = {
         ...data,

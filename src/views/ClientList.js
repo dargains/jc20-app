@@ -19,7 +19,7 @@ const zeroPrefix = (num, digit = 2) => {
 
 const sortBy = (array, type) => {
   if (type === 'date') {
-    return array.sort((a, b) => (a.created_on > b.created_on) ? 1 : (a.created_on === b.created_on) ? ((a.name > b.name) ? 1 : -1) : -1 )
+    return array.sort((a, b) => (a.created_on > b.created_on) ? 1 : (a.created_on === b.created_on) ? ((a.name > b.name) ? 1 : -1) : -1 ).reverse()
   } else {
     return array.sort((a, b) => (a.name > b.name) ? 1 : (a.name === b.name) ? ((a.created_on > b.created_on) ? 1 : -1) : -1 )
   }
@@ -72,15 +72,12 @@ const ClientList = () => {
 
   useEffect(() => {
     if (state.user) {
-      const headers = {
-        Authorization: `Bearer ${state.user.token}`
-      }
-      Axios.get(`${itemsUrl}/clients`,{headers}).then(response => {
+      Axios.get(`${itemsUrl}/clients`, state.auth).then(response => {
         setList(response.data.data)
       })
     }
     
-  }, [state.user])
+  }, [state.auth, state.user])
 
   return (
     <section>

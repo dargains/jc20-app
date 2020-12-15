@@ -22,7 +22,7 @@ const Login = () => {
     delete data.terms
     try {
       const response = await Axios.post(`${projectUrl}/auth/authenticate`, data)
-      const userResponse = await Axios.get(`${itemsUrl}/users?filter[user_id]=${response.data.data.user.id}`, {headers: { Authorization: `Bearer ${response.data.data.token}` }})
+      const userResponse = await Axios.get(`${itemsUrl}/users?filter[user_id]=${response.data.data.user.id}`, state.auth)
       
       data = {
         ...userResponse.data.data[0],

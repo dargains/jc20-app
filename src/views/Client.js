@@ -22,14 +22,11 @@ const Client = () => {
 
   useEffect(() => {
     if (state.user) {
-      const headers = {
-        Authorization: `Bearer ${state.user.token}`
-      }
-      Axios(`${itemsUrl}/clients/${id}`, {headers}).then(response => {
+      Axios(`${itemsUrl}/clients/${id}`, state.auth).then(response => {
         setClient(response.data.data)
       })
     }
-  }, [id, state.user])
+  }, [id, state.auth, state.user])
   const thisDate = new Date(client.created_on)
   const date = thisDate.getDate() + '/' + (thisDate.getMonth() + 1) + '/' + thisDate.getFullYear()
   const nextMonth = new Date(thisDate)

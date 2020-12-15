@@ -22,15 +22,12 @@ const ClientRegister = () => {
   const history = useHistory()
 
   const onSubmit = async data => {
-    const headers = {
-      Authorization: `Bearer ${state.user.token}`
-    }
     try {
-      const check = await Axios(`${itemsUrl}/clients?filter[name]=${data.name}`, {headers})
+      const check = await Axios(`${itemsUrl}/clients?filter[name]=${data.name}`, state.auth)
       if (check.data.data.length) {
         setDuplicatedClientError(true)
       } else {
-        await Axios.post(`${itemsUrl}/clients`, data, {headers})
+        await Axios.post(`${itemsUrl}/clients`, data, state.auth)
         // send email
         const email = {
           to: [contactEmail, state.user.email],
