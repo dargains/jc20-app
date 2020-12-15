@@ -1,3 +1,3 @@
-import {websiteUrl} from './helpers'
-export const itemsUrl = `${websiteUrl}/directus/public/jc20/items`
-export const projectUrl = `${websiteUrl}/directus/public/jc20`
+import {cmsUrl} from './helpers'
+export const itemsUrl = `${cmsUrl}/public/jc20/items`
+export const projectUrl = `${cmsUrl}/public/jc20`

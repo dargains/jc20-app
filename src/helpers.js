@@ -2,6 +2,7 @@ import Axios from "axios"
 import { projectUrl } from "./api"
 
 export const websiteUrl = 'https://avenida-living.pt'
+export const cmsUrl = 'https://cms.avenida-living.pt'
 export const phone = '351912566905'
 export const contactEmail = "geral@riocapital.pt"
 
