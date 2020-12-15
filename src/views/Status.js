@@ -129,7 +129,7 @@ const Status = () => {
                 <p className="font-bold">{copy.finish_value}</p>
               </div>
             </div>
-            <div className="px-10 mb-16">
+            <div className="px-10 mb-6">
               <svg viewBox="0 0 36 36">
                 <path
                   d="M18 2.0845
