@@ -18,6 +18,7 @@ const Reservation = () => {
   const [state] = useContext(AppContext)
   const [units, setUnits] = useState([])
   const [isDone, setIsDone] = useState(false)
+  const [client, setClient] = useState({})
   const [selectedUnit, setSelectedUnit] = useState({})
   const [errorMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -26,11 +27,7 @@ const Reservation = () => {
   const fileUpload = async file => {
     const formData = new FormData();
     formData.append('file',file)
-    const headers = {
-      'content-type': 'multipart/form-data',
-      'Authorization': `Bearer ${state.user.token}`
-    }
-    return await Axios.post(`${projectUrl}/files`, formData, {headers})
+    return await Axios.post(`${projectUrl}/files`, formData, state.auth)
   }
 
   const onSubmit = async data => {
@@ -39,9 +36,6 @@ const Reservation = () => {
     const hour = today.getHours() + ':' + zeroPrefix(today.getMinutes())
     const date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear()
     
-    const headers = {
-      Authorization: `Bearer ${state.user.token}`
-    }
     data.status = 'waiting'
     
     // file upload
@@ -53,11 +47,18 @@ const Reservation = () => {
     data.payment_document = payment_document_info.data.data.id
     data.client_document = client_document_info.data.data.id
 
-    const oldLog = await (await Axios(`${itemsUrl}/clients/${id}`, {headers})).data.data.log
-    const newLog = oldLog + `<p>Reserva do apartamento ${selectedUnit.title} feita em ${date} às ${hour}</p>`
-    await Axios.post(`${itemsUrl}/reservations`, data, {headers})
-    await Axios.patch(`${itemsUrl}/clients/${id}`, {log: newLog}, {headers})
-    await Axios.patch(`${itemsUrl}/units/${selectedUnit.id}`, {status: 'reserved'}, {headers})
+    const newLog = (client.log || '') + `<p>Reserva do apartamento ${selectedUnit.title} feita em ${date} às ${hour}</p>`
+    await Axios.post(`${itemsUrl}/reservations`, data, state.auth)
+    const clientInfo = {
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      nif: data.doc_id,
+      address: data.address,
+      log: newLog
+    }
+    await Axios.patch(`${itemsUrl}/clients/${id}`, clientInfo, state.auth)
+    await Axios.patch(`${itemsUrl}/units/${selectedUnit.id}`, {status: 'reserved'}, state.auth)
     // send email
     const email = {
       to: [contactEmail, state.user.email],
@@ -85,10 +86,18 @@ const Reservation = () => {
   }
 
   useEffect(() => {
+    Axios(`${itemsUrl}/clients/${id}`, state.auth).then(response => {
+      const info = response.data.data
+      setClient(info)
+      setValue("name", info.name)
+      setValue("email", info.email)
+      setValue("phone", info.phone)
+      setValue("doc_id", info.nif)
+    })
     Axios(`${itemsUrl}/units?filter[status]=available`).then(response => {
       setUnits(response.data.data)
     })
-  }, [])
+  }, [id, setValue, state.auth])
 
   return (
     <section>

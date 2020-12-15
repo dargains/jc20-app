@@ -31,6 +31,11 @@ const reducer = (state, action) => {
         ...state,
         user: {}
       }
+    case "SET_AUTH":
+      return {
+        ...state,
+        auth: {headers: {Authorization: `Bearer ${state.user.token}`}}
+      }
     case 'CLOSE_MENU':
       return {
         ...state,

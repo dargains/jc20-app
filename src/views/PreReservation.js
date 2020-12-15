@@ -30,12 +30,9 @@ const PreReservation = () => {
     const hour = today.getHours() + ':' + zeroPrefix(today.getMinutes())
     const date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear()
     const log = `<p>Pré-reserva do apartamento ${unitTitle} feita em ${date} às ${hour}</p>`
-    const headers = {
-      Authorization: `Bearer ${state.user.token}`
-    }
-    const newLog = client.log += log
-    await Axios.patch(`${itemsUrl}/clients/${id}`, {log: newLog}, {headers})
-    await Axios.patch(`${itemsUrl}/units/${data.unit}`, {status: 'reserved'}, {headers})
+    const newLog = (client.log || '') + log
+    await Axios.patch(`${itemsUrl}/clients/${id}`, {log: newLog, name: data.name, email: data.email, phone: data.phone, nif: data.nif}, state.auth)
+    await Axios.patch(`${itemsUrl}/units/${data.unit}`, {status: 'reserved'}, state.auth)
     setExpiration({
       day: (today.getDate() + 2) + '/' + today.getMonth(),
       hour
@@ -59,18 +56,18 @@ const PreReservation = () => {
   
   useEffect(() => {
     if (state.user && !client.name) {
-      const headers = {
-        Authorization: `Bearer ${state.user.token}`
-      }
-      Axios(`${itemsUrl}/clients/${id}`, {headers}).then(response => {
+      Axios(`${itemsUrl}/clients/${id}`, state.auth).then(response => {
         setClient(response.data.data)
         setValue("name", response.data.data.name)
+        setValue("email", response.data.data.email)
+        setValue("phone", response.data.data.phone)
+        setValue("nif", response.data.data.nif)
       })
       Axios(`${itemsUrl}/units?filter[status]=available`).then(response => {
         setUnits(response.data.data)
       })
     }
-  }, [client.name, id, setValue, state.user])
+  }, [client.name, id, setValue, state.auth, state.user])
 
   return (
     <section>

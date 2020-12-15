@@ -46,8 +46,8 @@ const ClientItem = ({id, created_on, email, name, phone, type}) => {
     onClick={() => history.push(`/client/${id}`)}
     >
       <p className="text-xl mb-4 font-bold">{name}</p>
-      <p className="mb-4">{email}****@*******</p>
-      <p className="mb-8">******{phone}</p>
+      <p className="mb-4">{email.length > 3 ? email : `${email}****@*******`}</p>
+      <p className="mb-8">{phone.length > 3 ? phone : `******${phone}`}</p>
       <div className="bg-gray-400 -mx-6 -mb-6 px-6 py-2 flex items-center justify-between">
         <p className="text-sm">Registo {date}, às {hour}</p>
         <p className="text-green text-2xs w-12 text-center">Válido até {endDate}</p>

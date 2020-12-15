@@ -48,8 +48,8 @@ const Client = () => {
           client.name
           ? <div className="bg-white rounded-lg shadow-lg p-6 text-green08 mb-8 overflow-hidden">
               <h2 className="text-xl capitalize font-bold mb-6">{client.name}</h2>
-              <p className="text-sm mb-2">{client.email}****@*******</p>
-              <p className="text-sm mb-4">******{client.phone}</p>
+              <p className="text-sm mb-2">{client.email.length > 3 ? client.email : `${client.email}****@*******`}</p>
+              <p className="text-sm mb-4">{client.phone.length > 3 ? client.phone : `******${client.phone}`}</p>
               <p className="text-sm mb-2">Registo {date}, às {hour}</p>
               <p className="text-red text-sm">Válido até {endDate}</p>
               <hr />

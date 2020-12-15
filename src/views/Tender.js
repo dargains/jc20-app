@@ -24,7 +24,7 @@ const Tender = () => {
   const [errorMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const { register, handleSubmit, errors, setValue } = useForm();
-  console.log(client);
+  
   const submitFirstStep = data => {
     data.id = id
     setClient(data)
@@ -36,9 +36,6 @@ const Tender = () => {
     const today = new Date()
     const hour = today.getHours() + ':' + zeroPrefix(today.getMinutes())
     const date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear()
-    const headers = {
-      Authorization: `Bearer ${state.user.token}`
-    }
     const tenderData = {
       price: data.price,
       unit: selectedUnit.id,
@@ -47,10 +44,9 @@ const Tender = () => {
       client: id,
       status: 'waiting'
     }
-    const oldLog = await (await Axios(`${itemsUrl}/clients/${id}`, {headers})).data.data.log
-    const newLog = oldLog + `<p>Proposta ao apartamento ${selectedUnit.title} feita em ${date} às ${hour}</p>`
-    await Axios.post(`${itemsUrl}/tenders`, tenderData, {headers})
-    await Axios.patch(`${itemsUrl}/clients/${id}`, {log: newLog}, {headers})
+    const newLog = (client.log || '') + `<p>Proposta ao apartamento ${selectedUnit.title} feita em ${date} às ${hour}</p>`
+    await Axios.post(`${itemsUrl}/tenders`, tenderData, {headers: state.auth})
+    await Axios.patch(`${itemsUrl}/clients/${id}`, {log: newLog}, {headers: state.auth})
 
     // send email
     const email = {
@@ -86,10 +82,18 @@ const Tender = () => {
   }
 
   useEffect(() => {
+    Axios(`${itemsUrl}/clients/${id}`, state.auth).then(response => {
+      const info = response.data.data
+      setClient(info)
+      setValue("name", info.name)
+      setValue("email", info.email)
+      setValue("phone", info.phone)
+      setValue("nif", info.nif)
+    })
     Axios(`${itemsUrl}/units?filter[status]=available`).then(response => {
       setUnits(response.data.data)
     })
-  }, [])
+  }, [id, setValue, state.auth])
 
   return (
     <section>
@@ -102,11 +106,11 @@ const Tender = () => {
         {
           isDone
           ? <>
-          <p className="mb-12 text-green08">Obrigado pelo envio da proposta! A Rio Capital está a analisá-la em breve entrará em contato.</p>
-          <Link to={`/client/${id}`}>
-            <Button text="registo" type="primary" icon iconDirection="left" />
-          </Link>
-          </>
+              <p className="mb-12 text-green08">Obrigado pelo envio da proposta! A Rio Capital está a analisá-la em breve entrará em contato.</p>
+              <Link to={`/client/${id}`}>
+                <Button text="registo" type="primary" icon iconDirection="left" />
+              </Link>
+            </>
           : isFirst
           ? <>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum est nam enim laboriosam ut nobis dicta fugiat. Impedit, iste modi.</p>
@@ -270,5 +274,6 @@ const ErrorMessage = styled.span`
   color: #fe0a01;
   font-size: 12px;
 `
+
 
 export default Tender

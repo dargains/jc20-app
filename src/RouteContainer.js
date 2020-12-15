@@ -28,6 +28,8 @@ const RouteContainer = (props) => {
           })
         }
       })
+    } else {
+      dispatch({type: 'SET_AUTH'})
     }
     if (location.pathname === '/' || location.pathname === '/welcome') setPadding(0)
     else setPadding(isIOS() ? 74 : 58)
