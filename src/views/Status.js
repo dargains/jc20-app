@@ -56,6 +56,7 @@ const Status = () => {
   const [images, setImages] = useState([]);
   const [content, setContent] = useState({})
   const [copy, setCopy] = useState({itens:[],images:[]})
+  const [percentage, setPercentage] = useState(0)
   const [showPhotos, setShowPhotos] = useState(false)
   const [showImage, setShowImage] = useState(false)
   const [selectedImage, setSelectedImage] = useState({})
@@ -73,7 +74,7 @@ const Status = () => {
           const allContent = response.data.data[0].translations;
           // const galleryResponse = await Axios(`${itemsUrl}/status_gallery?fields=*.*.*`)
           // const allGallery = galleryResponse.data.data[0];
-          
+          setPercentage(response.data.data[0].status_value)
           setImages(response.data.data[0].images)
           
           setContent(allContent)
@@ -118,10 +119,47 @@ const Status = () => {
       >
         <div className="wrapper w-screen">
           <div>
+            <div className="flex items-start justify-between text-green08 mb-6">
+              <div className="text-center">
+                <p>{copy.start_label}</p>
+                <p className="font-bold">{copy.start_value}</p>
+              </div>
+              <div className="text-center">
+                <p>{copy.finish_label}</p>
+                <p className="font-bold">{copy.finish_value}</p>
+              </div>
+            </div>
+            <div className="px-10 mb-16">
+              <svg viewBox="0 0 36 36">
+                <path
+                  d="M18 2.0845
+                    a 15.9155 15.9155 0 0 1 0 31.831
+                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                  fill="none"
+                  stroke="#a3b1af"
+                  strokeWidth="4"
+                />
+                <path
+                  d="M18 2.0845
+                    a 15.9155 15.9155 0 0 1 0 31.831
+                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                  fill="none"
+                  stroke="#32524d"
+                  strokeWidth="4"
+                  strokeDasharray={`${percentage}, 100`}
+                />
+              </svg>
+              <div className="absolute-center text-center">
+                <p className="font-bold font-display text-5xl">{percentage}%</p>
+                <p className="font-bold">Concluída</p>
+              </div>
+            </div>
+          </div>
+          {/* <div>
             {copy.itens.map((item) => (
               <StatusItem key={item.label} {...item} />
             ))}
-          </div>
+          </div> */}
           <Button
             text="Fotografias"
             type="primary"
