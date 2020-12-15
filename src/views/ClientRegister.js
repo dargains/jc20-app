@@ -10,7 +10,7 @@ import Mask from '../components/Mask'
 import Icon from '../components/Icon';
 import { useContext } from 'react';
 import { AppContext } from '../store';
-import { shareMobile } from '../helpers';
+import { contactEmail, sendEmail, shareMobile } from '../helpers';
 import { useHistory } from 'react-router-dom';
 
 const ClientRegister = () => {
@@ -31,6 +31,17 @@ const ClientRegister = () => {
         setDuplicatedClientError(true)
       } else {
         await Axios.post(`${itemsUrl}/clients`, data, {headers})
+        // send email
+        const email = {
+          to: [contactEmail, state.user.email],
+          subject: '[Avenida Living] Pré-Reserva',
+          body: '{{name}} ({{email}}) registado',
+          data: {
+            name: data.name,
+            email: data.email
+          }
+        }
+        await sendEmail(email)
         setEmailSent(true)
         shareMobile()
       }

@@ -11,7 +11,7 @@ import Axios from 'axios';
 import { itemsUrl, projectUrl } from '../api';
 import Filebox from '../components/Filebox';
 import { AppContext } from '../store';
-import { sendEmail, zeroPrefix } from '../helpers';
+import { contactEmail, sendEmail, zeroPrefix } from '../helpers';
 
 const Reservation = () => {
   const {id} = useParams();
@@ -60,7 +60,7 @@ const Reservation = () => {
     await Axios.patch(`${itemsUrl}/units/${selectedUnit.id}`, {status: 'reserved'}, {headers})
     // send email
     const email = {
-      to: ['andre.dargains@gmail.com'],
+      to: [contactEmail, state.user.email],
       subject: '[Avenida Living] Reserva',
       body: '{{name}} ({{email}}) reservou o apartamento {{unit}}',
       data: {

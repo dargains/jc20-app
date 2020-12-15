@@ -10,7 +10,7 @@ import Loading from '../components/Loading';
 import Inputbox from '../components/Inputbox';
 import Mask from '../components/Mask'
 import { AppContext } from '../store';
-import { sendEmail, zeroPrefix } from '../helpers';
+import { contactEmail, sendEmail, zeroPrefix } from '../helpers';
 
 const PreReservation = () => {
   const {id} = useParams();
@@ -43,7 +43,7 @@ const PreReservation = () => {
 
     // send email
     const email = {
-      to: ['andre.dargains@gmail.com'],
+      to: [contactEmail, state.user.email],
       subject: '[Avenida Living] Pré-Reserva',
       body: '{{name}} ({{email}}) pré-reservou o apartamento {{unit}}',
       data: {
