@@ -113,7 +113,7 @@ const Tender = () => {
             </>
           : isFirst
           ? <>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum est nam enim laboriosam ut nobis dicta fugiat. Impedit, iste modi.</p>
+            <p>Registe aqui a sua proposta e ela será avaliada pela Rio Capital.</p>
             <form onSubmit={handleSubmit(submitFirstStep)} >
               <Inputbox
                 type="text"
