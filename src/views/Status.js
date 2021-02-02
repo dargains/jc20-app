@@ -8,7 +8,7 @@ import { AppContext } from '../store.js';
 import { itemsUrl } from '../api'
 import db from '../db'
 import ImageOverlay from "../components/ImageOverlay";
-
+/*
 const StatusItem = ({ label, status }) => {
   const [barStatus, setBarStatus] = useState(0);
   useEffect(() => {
@@ -32,7 +32,7 @@ const StatusItem = ({ label, status }) => {
     </article>
   );
 };
-
+*/
 const Slide = ({handleClick, ...image}) => {
   const slide = image.directus_files_id;
   return (

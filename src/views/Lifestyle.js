@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react'
+import React, { useEffect, useContext, useState, useCallback } from 'react'
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch"
 import Accordion from '../components/Accordion'
 import Button from '../components/Button'
@@ -25,41 +25,45 @@ const LifestyleItem = ({title, image, text, link}) => <article className="text-w
 
 const Lifestyle = () => {
   const [state] = useContext(AppContext)
-  const [content, setContent] = useState([])
+  const [content, setContent] = useState({})
+  const [copy, setCopy] = useState({copy:{}, language: state.language})
+
+  const changeCopy = useCallback(content => {
+    const copy = content.find(translation => translation.language === state.language)
+    setCopy(copy)
+  },[state.language])
 
   useEffect(() => {
     if (!Object.keys(content).length) {
       if (window.navigator.onLine) {
-        (async () => {
-          const response = await Axios(`${itemsUrl}/lifestyle?fields=*.*.*`)
-          const allContent = response.data.data;
-          
+        Axios(`${itemsUrl}/page_lifestyle?fields=*.*.*.*`).then(response => {
+          const allContent = response.data.data[0].translations;
           setContent(allContent)
           db.content.put({ page: 'Lifestyle', content: allContent })
-          // changeCopy(allContent)
-
-        })()
+          changeCopy(allContent)
+        })
       } else {
         db.content.get('Lifestyle').then(contentDB => {
           setContent(contentDB.content)
-          // changeCopy(contentDB.content)
+          changeCopy(contentDB.content)
         })
       }
     } else {
-      // if (state.language !== copy.lang) {
-        // changeCopy(content)
-      // }
+      if (state.language !== copy.lang) {
+        changeCopy(content)
+      }
     }
     return () => {
       
     }
-  }, [content, state.language])
+  }, [changeCopy, content, copy.lang, state.language])
+
   return (
     <section className="bg-green05">
       <div className="wrapper">
-        <h1 className=" font-display text-4xl font-semibold w-2/3 mb-8 text-green">
-          Saldanha<br/><span className="text-white">life style</span>
-        </h1>
+        <h1 className=" font-display text-4xl font-semibold w-2/3 mb-8 text-white" dangerouslySetInnerHTML={{
+          __html: copy.title
+        }} />
         <figure className="-mx-6">
           <img src={lifestyleImage} alt="Saldanha"/>
         </figure>
@@ -137,7 +141,7 @@ const Lifestyle = () => {
             </ol>
           </Accordion>
         </div>
-        {content.map(item => <LifestyleItem key={item.title} {...item} />)}
+        {copy.items && copy.items.map(item => <LifestyleItem key={item.title} {...item} />)}
       </div>
     </section>
   )

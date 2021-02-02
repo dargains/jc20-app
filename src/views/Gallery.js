@@ -7,7 +7,7 @@ import { itemsUrl } from '../api'
 import db from '../db'
 
 const Gallery = () => {
-  const [state] = useContext(AppContext);
+  const [state] = useContext(AppContext)
   const [content, setContent] = useState({})
   const [copy, setCopy] = useState({copy:{}, language: state.language})
   const [showImage, setShowImage] = useState(false)
