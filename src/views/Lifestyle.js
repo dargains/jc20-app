@@ -68,7 +68,7 @@ const Lifestyle = () => {
           <img src={lifestyleImage} alt="Saldanha"/>
         </figure>
         <p className="text-white my-8">
-        Localizado no elegante bairro das Avenidas Novas, Avenida Living está no coração da cidade, beneficiando de toda a centralidade. Ao seu redor, dispõe de uma vasta oferta de espaços de cultura e lazer, bem como de escolas e hospitais e de diversas zonas que lhe oferecem um contacto imperdível com a natureza.
+          {copy.description}
         </p>
         <figure className="-mx-6">
           <TransformWrapper pan={{disabled: true}}>
@@ -92,7 +92,7 @@ const Lifestyle = () => {
         <div>
           <Accordion
             color="white"
-            header="Cultura e lazer"
+            header={state.language === 'pt' ? "Cultura e lazer" : "Culture and leisure"}
           >
             <ol className="text-white py-6 px-4">
               <li className="py-2"><span className="rounded-full bg-purple-900 w-6 h-6 mr-4 inline-flex items-center justify-center text-xs">1</span> Museu Fundação Gulbenkian</li>
@@ -102,7 +102,7 @@ const Lifestyle = () => {
           </Accordion>
           <Accordion
             color="white"
-            header="Shopping"
+            header={state.language === 'pt' ? "Shopping" : "Shopping"}
           >
             <ol className="text-white py-6 px-4">
               <li className="py-2"><span className="rounded-full bg-red w-6 h-6 mr-4 inline-flex items-center justify-center text-xs">4</span> El Corte Inglés</li>
@@ -112,7 +112,7 @@ const Lifestyle = () => {
           </Accordion>
           <Accordion
             color="white"
-            header="Educação"
+            header={state.language === 'pt' ? "Educação" : "Education"}
           >
             <ol className="text-white py-6 px-4">
               <li className="py-2"><span className="rounded-full bg-orange-500 w-6 h-6 mr-4 inline-flex items-center justify-center text-xs">7</span> Universidade Lisboa</li>
@@ -122,7 +122,7 @@ const Lifestyle = () => {
           </Accordion>
           <Accordion
             color="white"
-            header="Desporto e Saúde"
+            header={state.language === 'pt' ? "Desporto e Saúde" : "Sports and Health"}
           >
             <ol className="text-white py-6 px-4">
               <li className="py-2"><span className="rounded-full bg-blue-400 w-6 h-6 mr-4 inline-flex items-center justify-center text-xs">10</span> Estádio Universitário</li>
@@ -132,7 +132,7 @@ const Lifestyle = () => {
           </Accordion>
           <Accordion
             color="white"
-            header="Natureza"
+            header={state.language === 'pt' ? "Natureza" : "Nature"}
           >
             <ol className="text-white py-6 px-4">
               <li className="py-2"><span className="rounded-full bg-green w-6 h-6 mr-4 inline-flex items-center justify-center text-xs">13</span> Monsanto</li>
