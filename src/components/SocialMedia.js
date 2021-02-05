@@ -1,9 +1,22 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import cx from 'classnames'
 import Icon from './Icon'
+import Axios from 'axios'
+import { itemsUrl } from '../api'
+import db from '../db'
+import { AppContext } from '../store'
 
 const SocialMedia = ({color, size}) => {
+  const [state] = useContext(AppContext)
+  const [content, setContent] = useState({})
   const iconSize = size === 'md' ? 40 : 32
+
+  useEffect(() => {
+    Axios(`${itemsUrl}/social_media`).then(response => {
+      setContent(response.data.data[0]);
+    })
+  }, [])
+
   return (
     <div className={cx(
       "w-full text-center",
@@ -17,7 +30,7 @@ const SocialMedia = ({color, size}) => {
           "text-xs": size === 'sm'
         }
       )}>
-        siga-nos em:
+        {state.language === 'pt' ? "siga-nos em:" : "follow us:"}
       </p>
       <div className={cx(
         "flex items-center justify-between mx-auto w-40 mb-12",
@@ -26,13 +39,13 @@ const SocialMedia = ({color, size}) => {
           "w-48": size === 'md'
         }
         )}>
-        <a href="https://www.facebook.com/Rio-Capital-110995827277037" target="_blank" rel="noopener noreferrer">
+        <a href={content.facebook} target="_blank" rel="noopener noreferrer">
           <Icon.Facebook height={iconSize}/>
         </a>
-        <a href="https://www.instagram.com/riocapital.pt/" target="_blank" rel="noopener noreferrer">
+        <a href={content.instagram} target="_blank" rel="noopener noreferrer">
           <Icon.Instagram height={iconSize}/>
         </a>
-        <a href="https://www.linkedin.com/company/rio-capital-pt/" target="_blank" rel="noopener noreferrer">
+        <a href={content.linkedin} target="_blank" rel="noopener noreferrer">
           <Icon.Linkedin height={iconSize}/>
         </a>
       </div>
