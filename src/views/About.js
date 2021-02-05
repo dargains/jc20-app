@@ -1,41 +1,70 @@
-import React from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import Button from '../components/Button'
-import LogoImage from "../assets/images/logo rc.png";
 import SocialMedia from '../components/SocialMedia';
+import Axios from 'axios'
+import { itemsUrl } from '../api'
+import db from '../db'
+import { AppContext } from '../store'
+import styled from 'styled-components';
 
 const About = () => {
+  const [state] = useContext(AppContext)
+  const [content, setContent] = useState({})
+  const [logo, setLogo] = useState('')
+  const [copy, setCopy] = useState({copy:{}, language: state.language})
+
+  const changeCopy = useCallback(content => {
+    const copy = content.find(translation => translation.language === state.language)
+    setCopy(copy)
+  },[state.language])
+
+  useEffect(() => {
+    if (!Object.keys(content).length) {
+      if (window.navigator.onLine) {
+        Axios(`${itemsUrl}/page_about?fields=*.*.*.*`).then(response => {
+          const allContent = response.data.data[0].translations;
+          setContent(allContent)
+          db.content.put({ page: 'About', content: allContent })
+          changeCopy(allContent)
+          setLogo(response.data.data[0].logo.data.full_url)
+        })
+      } else {
+        db.content.get('About').then(contentDB => {
+          setContent(contentDB.content)
+          changeCopy(contentDB.content)
+        })
+      }
+    } else {
+      if (state.language !== copy.lang) {
+        changeCopy(content)
+      }
+    }
+    return () => {
+      
+    }
+  }, [changeCopy, content, copy.lang, state.language])
+
+
   return (
     <section className="pb-0">
       <figure className="w-2/5 mx-auto my-8">
-        <img src={LogoImage} alt="Rio Capital" />
+        <img src={logo} alt="Rio Capital" />
       </figure>
       <div
         className=" rounded-t-xl pt-16 pb-12"
         style={{ backgroundColor: "#2c3e4a" }}
       >
         <div className="wrapper text-white">
-          <p className="mb-4">
-            A Rio Capital é uma empresa privada de investimento imobiliário que
-            desenvolve projetos de raiz, acompanhando todas as fases do projeto
-            até a venda do ativo. Nosso diferencial é a solidez, a capacidade de
-            decisão rápida e de procura de boas oportunidades no mercado e
-            extenso “network” local.
-          </p>
-          <p className="mb-4">
-            Presentemente com aproximadamente 30.000 m2 de construção acima do
-            solo, divididos em 6 projetos, a Rio Capital está concentrada em
-            dois seguimentos estratégicos: “state of the art” ativos
-            residenciais e desenvolvimento de ativos de rendimento tais como
-            hotéis, residências de Estudantes e residências Senior assistidas,
-            todos na região da Grande Lisboa.
-          </p>
+          <Body dangerouslySetInnerHTML={{
+            __html: copy.text
+          }} />
           <Button
-            text="Ir para website"
+            text={copy.button_label}
             type="secondary"
             className="mt-8 mb-12"
             handleClick={
               () => {
-                window.open("https://www.riocapital.pt");
+                window.open(copy.button_link);
               }
             }
           />
@@ -45,5 +74,11 @@ const About = () => {
     </section>
   );
 }
+
+const Body = styled.div`
+  p {
+    margin-bottom: 1rem;
+  }
+`
 
 export default About
