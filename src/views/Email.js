@@ -21,7 +21,7 @@ const Email = () => {
     setIsLoading(true)
     const body = {
       to: [
-        'andre.dargains@gmail.com'
+        contactEmail
       ],
       subject: "[Avenida Living] Contato",
       body: "{{name}} ({{email}}) enviou a seguinte mensagem:<br>{{subject}}<br>{{text}}",
