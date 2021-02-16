@@ -23,6 +23,7 @@ const RouteContainer = (props) => {
             user.token = response.data.data.token
             dispatch({ type: 'SET_USER', payload: user })
           }).catch(() => {
+            console.log('object');
             user.logged = false
             dispatch({ type: 'SET_USER', payload: user})
           })

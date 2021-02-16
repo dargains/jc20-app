@@ -2,8 +2,6 @@ import React, { lazy, Suspense, useEffect } from 'react';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 import RouteContainer from './RouteContainer';
 import './tailwind.generated.css'
-import AL from './assets/images/al logo.svg'
-import RC from './assets/images/rc logo.svg'
 
 // components
 import Menu from './components/Menu';
@@ -24,6 +22,7 @@ import Status from './views/Status'
 import Lifestyle from './views/Lifestyle'
 import Login from './views/Login'
 import SignUp from './views/SignUp'
+import DesktopTEMP from './views/DesktopTEMP';
 
 const Profile = lazy(() => import('./views/Profile'))
 const ClientRegister = lazy(() => import('./views/ClientRegister'))
@@ -138,20 +137,7 @@ function App() {
           </RouteContainer>
         </Suspense>
       </Router>
-      <div className="desktop hidden md:block">
-        <div className="w-screen h-screen bg-white absolute top-0 left-0">
-          <p className="text-3xl text-center mt-48">Estamos em construção</p>
-          <figure className="w-32 absolute-center">
-            <img src={AL} alt="Avenida Living"/>
-          </figure>
-          <div className="center-horizontal bottom-0 flex flex-col items-center">
-            <p className="text-sm mb-8">Promoção / Promoted by</p>
-            <figure className="w-32 mb-10">
-              <img src={RC} alt="Rio Capital"/>
-            </figure>
-          </div>
-        </div>
-      </div>
+      <DesktopTEMP />
     </div>
   );
 }
