@@ -3,10 +3,9 @@ import cx from 'classnames'
 import Icon from './Icon'
 import Axios from 'axios'
 import { itemsUrl } from '../api'
-import db from '../db'
 import { AppContext } from '../store'
 
-const SocialMedia = ({color, size}) => {
+const SocialMedia = ({color='green', size='md'}) => {
   const [state] = useContext(AppContext)
   const [content, setContent] = useState({})
   const iconSize = size === 'md' ? 40 : 32
