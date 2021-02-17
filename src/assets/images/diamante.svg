@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="diamante" width="105.995" height="115.238" viewBox="0 0 105.995 115.238">
+    <defs>
+        <style>
+            .cls-1{fill:#6ad34d}.cls-2{fill:#1b4b43}
+        </style>
+    </defs>
+    <path id="Path_1249" d="M51.951 170.461l6.084-14.869-5.11-8.592h-.092l-9.6 23.475 51.542 59.067-10.29-21.792z" class="cls-1" transform="translate(-41.776 -115.75)"/>
+    <g id="Group_482" transform="translate(0 29.77)">
+        <path id="Path_1250" d="M89.127 225.862a1.453 1.453 0 0 0 2.19 0l51.545-59.072a1.454 1.454 0 0 0 .25-1.506l-9.6-23.489a1.453 1.453 0 0 0-1.345-.9H48.283a1.454 1.454 0 0 0-1.345.9l-9.6 23.488a1.453 1.453 0 0 0 .25 1.506zm26.7-58.575L90.223 221.5l-25.6-54.216zM64.88 164.38l11.393-19.187 11.394 19.187zm27.9 0l11.393-19.187 11.393 19.187zm26.261 2.907h19.53L96 216.073zM106.723 143.8h22.792l-11.4 19.192zm-16.5 19.192L78.826 143.8h22.792zm-27.9 0L50.931 143.8h22.792zm22.118 53.083l-42.565-48.788h19.53zM139.6 164.38h-18.925l11.209-18.88zM48.561 145.5l11.209 18.88H40.844z" class="cls-2" transform="translate(-37.226 -140.892)"/>
+        <path id="Path_1251" d="M0 0h2.907v4.256H0z" class="cls-2" transform="rotate(-14.411 140.06 -135.687)"/>
+        <path id="Path_1252" d="M0 0h2.907v23.3H0z" class="cls-2" transform="rotate(-14.53 170.66 -137.988)"/>
+    </g>
+    <path id="Path_1253" d="M249 18h2.907v16.957H249z" class="cls-1" transform="translate(-197.699 -18)"/>
+    <path id="Path_1254" d="M0 0h2.907v15.923H0z" class="cls-1" transform="rotate(-25.72 25.233 -50.593)"/>
+    <path id="Path_1255" d="M0 0h15.923v2.907H0z" class="cls-1" transform="rotate(-64.28 51.032 -47.595)"/>
+</svg>

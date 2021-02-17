@@ -22,7 +22,7 @@ import Status from './views/Status'
 import Lifestyle from './views/Lifestyle'
 import Login from './views/Login'
 import SignUp from './views/SignUp'
-import DesktopTEMP from './views/DesktopTEMP';
+import DesktopView from './views/DesktopView';
 
 const Profile = lazy(() => import('./views/Profile'))
 const ClientRegister = lazy(() => import('./views/ClientRegister'))
@@ -137,7 +137,7 @@ function App() {
           </RouteContainer>
         </Suspense>
       </Router>
-      <DesktopTEMP />
+      <DesktopView />
     </div>
   );
 }

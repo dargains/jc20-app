@@ -5,7 +5,7 @@ module.exports = {
     screens: {
       sm: "640px",
       md: "768px",
-      lg: "1280px",
+      lg: "1024px",
       xl: "1440px",
       xxl: "1920px"
     },
@@ -47,7 +47,16 @@ module.exports = {
       },
       opacity: {
         90: 90
-      }
+      },
+      animation: {
+        arrow: 'arrow 3s ease-in-out infinite',
+      },
+      keyframes: {
+        arrow: {
+          '0%, 100%': { transform: 'translateY(-10px)' },
+          '50%': { transform: 'translateY(10px)' },
+        }
+       }
     },
   },
   variants: {},
