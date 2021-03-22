@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import Video from '../assets/videos/video.mp4'
+import Video from '../assets/videos/video2.mp4'
 import RC from '../assets/images/rc logo.svg'
 import { Carousel } from 'react-responsive-carousel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
@@ -152,7 +152,7 @@ const DesktopView = () => {
   }
 
   return (
-    <section className="desktop hidden lg:block py-0 overflow-hidden">
+    <section className="desktop hidden md:block py-0 overflow-hidden">
 
       <header className="absolute text-center w-full py-10 z-20">
         <nav>
@@ -164,14 +164,14 @@ const DesktopView = () => {
       
       {/* VIDEO */}
       <section className="p-0 z-10">
-        <video autoPlay muted loop>
+        <video autoPlay muted loop className="w-full">
           <source src={Video} type="video/mp4" />
         </video>
         <div className="w-full h-full absolute top-0 left-0" style={{backgroundImage: "linear-gradient(to bottom, rgba(18, 16, 16, 0.4) 0%, rgba(96, 95, 95, 0.1) 100%)"}}></div>
         <figure className="center-horizontal w-4 animate-arrow" style={{bottom: -30}}>
           <img src={require("../assets/images/arrow.svg")} alt=""/>
         </figure>
-        <figure className="absolute z-10 left-0 pointer-events-none" style={{ bottom: -306, maxWidth: 300, width: '20%' }}>
+        <figure className="absolute z-10 left-0 pointer-events-none" style={{ bottom: -200, maxWidth: 200, width: '20%' }}>
           <img src={require("../assets/images/triangle.svg")} alt=""/>
         </figure>
       </section>
@@ -180,7 +180,7 @@ const DesktopView = () => {
       <section className="p-0 overflow-hidden">
         <div className="wrapper z-10 py-12 xl:py-24">
           <h2 className="font-display uppercase text-4xl font-semibold ml-16 w-1/4 xl:w-1/5">
-            <p className="text-green"><span className="text-black">O melhor para a</span> sua família</p>
+            <p className="text-black">O melhor para a sua família</p>
           </h2>
           <div className="flex flex-wrap items-top w-1/2 mt-16">
             <article className="w-1/2 flex items-center mb-16">
@@ -233,7 +233,7 @@ const DesktopView = () => {
 
       {/* IMAGES */}
       <section id="images">
-        <figure className="absolute z-10 right-0 transform rotate-180 pointer-events-none" style={{ top: -360, maxWidth: 300, width: '20%' }}>
+        <figure className="absolute z-10 right-0 transform rotate-180 pointer-events-none" style={{ top: -360, maxWidth: 200, width: '20%' }}>
           <img src={require("../assets/images/triangle.svg")} alt=""/>
         </figure>
 
@@ -260,7 +260,7 @@ const DesktopView = () => {
             </figure>
           )}
         </Carousel>
-        <figure className="absolute z-10 left-0 pointer-events-none" style={{ bottom: -314, maxWidth: 300, width: '20%' }}>
+        <figure className="absolute z-10 left-0 pointer-events-none" style={{ bottom: -314, maxWidth: 200, width: '20%' }}>
           <img src={require("../assets/images/triangle.svg")} alt=""/>
         </figure>
       </section>
@@ -322,7 +322,7 @@ const DesktopView = () => {
 
       {/* RIO CAPITAL */}
       <section id="riocapital" className="py-0">
-        <figure className="absolute z-10 left-0 pointer-events-none" style={{ top: -140, maxWidth: 300, width: '20%' }}>
+        <figure className="absolute z-10 left-0 pointer-events-none" style={{ top: -140, maxWidth: 200, width: '20%' }}>
           <img src={require("../assets/images/triangle.svg")} alt=""/>
         </figure>
         <figure className="w-64 mx-auto mb-10">
@@ -353,7 +353,7 @@ const DesktopView = () => {
 
       {/* CONTACTS */}
       <section id="contacts" className="bg-green04">
-        <figure className="absolute z-10 right-0 transform rotate-180 pointer-events-none" style={{ top: -200, maxWidth: 300, width: '20%' }}>
+        <figure className="absolute z-10 right-0 transform rotate-180 pointer-events-none" style={{ top: -200, maxWidth: 200, width: '20%' }}>
           <img src={require("../assets/images/triangle.svg")} alt=""/>
         </figure>
         <div className="wrapper py-8">
