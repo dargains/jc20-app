@@ -25,7 +25,7 @@ const SignUp = () => {
 
   const onSubmit = async data => {
     setErrorMessage('')
-    if (data.company && (companies.find(c => c.name === data.company).code !== data.code.toUpperCase())) {
+    if (data.company && (companies.find(c => c.name === data.company).code !== data.code)) {
       setError("code", {
         type: "wrongCode",
         message: "Código inválido"
